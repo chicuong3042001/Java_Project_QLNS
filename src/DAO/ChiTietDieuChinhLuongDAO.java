@@ -24,7 +24,7 @@ public class ChiTietDieuChinhLuongDAO {
     public ChiTietDieuChinhLuongDAO() {
     }
     
-    public ArrayList<ChiTietDieuChinhLuongDTO> getPhongBan() {
+    public ArrayList<ChiTietDieuChinhLuongDTO> getChiTietDieuChinhLuong() {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement("SELECT * FROM Chitietdcl");
@@ -42,7 +42,7 @@ public class ChiTietDieuChinhLuongDAO {
         }
     }
     
-    public boolean addPhongBan(ChiTietDieuChinhLuongDTO chitietdieuchinhluong) {
+    public boolean addChiTietDieuChinhLuong(ChiTietDieuChinhLuongDTO chitietdieuchinhluong) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
@@ -61,7 +61,7 @@ public class ChiTietDieuChinhLuongDAO {
         }
     }
     
-    public boolean deletePhongBan(String id) {
+    public boolean deleteChiTietDieuChinhLuong(String id) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
@@ -79,7 +79,7 @@ public class ChiTietDieuChinhLuongDAO {
         }
     }
     
-    public boolean deletePhongBan(ChiTietDieuChinhLuongDTO chitietdieuchinhluong) {
+    public boolean deleteChiTietDieuChinhLuong(ChiTietDieuChinhLuongDTO chitietdieuchinhluong) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
@@ -97,7 +97,7 @@ public class ChiTietDieuChinhLuongDAO {
         }
     }
     
-    public boolean updateCategory(ChiTietDieuChinhLuongDTO chitietdieuchinhluong) {
+    public boolean updateChiTietDieuChinhLuong(ChiTietDieuChinhLuongDTO chitietdieuchinhluong) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(

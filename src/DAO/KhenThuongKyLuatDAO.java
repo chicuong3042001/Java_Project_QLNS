@@ -24,7 +24,7 @@ public class KhenThuongKyLuatDAO {
     public KhenThuongKyLuatDAO() {
     }
     
-    public ArrayList<KhenThuongKyLuatDTO> getPhongBan() {
+    public ArrayList<KhenThuongKyLuatDTO> getKhenThuongKyLuat() {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement("SELECT * FROM khenthuongkyluat");
@@ -42,7 +42,7 @@ public class KhenThuongKyLuatDAO {
         }
     }
     
-    public boolean addPhongBan(KhenThuongKyLuatDTO khenthuongkyluat) {
+    public boolean addKhenThuongKyLuat(KhenThuongKyLuatDTO khenthuongkyluat) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
@@ -61,7 +61,7 @@ public class KhenThuongKyLuatDAO {
         }
     }
     
-    public boolean deletePhongBan(String id) {
+    public boolean deleteKhenThuongKyLuat(String id) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
@@ -79,7 +79,7 @@ public class KhenThuongKyLuatDAO {
         }
     }
     
-    public boolean deletePhongBan(KhenThuongKyLuatDTO khenthuongkyluat) {
+    public boolean deleteKhenThuongKyLuat(KhenThuongKyLuatDTO khenthuongkyluat) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
@@ -97,7 +97,7 @@ public class KhenThuongKyLuatDAO {
         }
     }
     
-    public boolean updateCategory(KhenThuongKyLuatDTO khenthuongkyluat) {
+    public boolean updateKhenThuongKyLuat(KhenThuongKyLuatDTO khenthuongkyluat) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(

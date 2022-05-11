@@ -24,7 +24,7 @@ public class LuongDAO {
     public LuongDAO() {
     }
     
-    public ArrayList<LuongDTO> getPhongBan() {
+    public ArrayList<LuongDTO> getLuong() {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement("SELECT * FROM luong");
@@ -42,7 +42,7 @@ public class LuongDAO {
         }
     }
     
-    public boolean addPhongBan(LuongDTO luong) {
+    public boolean addLuong(LuongDTO luong) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
@@ -61,7 +61,7 @@ public class LuongDAO {
         }
     }
     
-    public boolean deletePhongBan(String id) {
+    public boolean deleteLuong(String id) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
@@ -79,7 +79,7 @@ public class LuongDAO {
         }
     }
     
-    public boolean deletePhongBan(LuongDTO luong) {
+    public boolean deleteLuong(LuongDTO luong) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
@@ -97,7 +97,7 @@ public class LuongDAO {
         }
     }
     
-    public boolean updateCategory(LuongDTO luong) {
+    public boolean updateLuong(LuongDTO luong) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(

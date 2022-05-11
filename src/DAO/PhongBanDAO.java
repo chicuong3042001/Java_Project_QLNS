@@ -98,7 +98,7 @@ public class PhongBanDAO {
         }
     }
     
-    public boolean updateCategory(PhongBanDTO phongban) {
+    public boolean updatePhongBan(PhongBanDTO phongban) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
@@ -116,4 +116,5 @@ public class PhongBanDAO {
             DBConnection.closeConnection(conn, stmt);
         }
     }
+
 }

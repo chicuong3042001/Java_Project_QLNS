@@ -23,7 +23,7 @@ public class ChucVuDAO {
     public ChucVuDAO() {
     }
 
-    public ArrayList<ChucVuDTO> getPhongBan() {
+    public ArrayList<ChucVuDTO> getChucVu() {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement("SELECT * FROM ChucVu");
@@ -43,7 +43,7 @@ public class ChucVuDAO {
         }
     }
     
-    public boolean addPhongBan(ChucVuDTO chucvu) {
+    public boolean addChucVu(ChucVuDTO chucvu) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
@@ -62,7 +62,7 @@ public class ChucVuDAO {
         }
     }
     
-    public boolean deletePhongBan(String id) {
+    public boolean deleteChucVu(String id) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
@@ -80,11 +80,11 @@ public class ChucVuDAO {
         }
     }
     
-    public boolean deletePhongBan(ChucVuDTO chucvu) {
+    public boolean deleteChucVu(ChucVuDTO chucvu) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "DELETE FROM PhongBan WHERE MaCV = ?");
+                    "DELETE FROM ChucVu WHERE MaCV = ?");
             stmt.setString(1, chucvu.getMaCV());
 
             stmt.executeUpdate();
@@ -98,7 +98,7 @@ public class ChucVuDAO {
         }
     }
     
-    public boolean updateCategory(ChucVuDTO chucvu) {
+    public boolean updateChucVu(ChucVuDTO chucvu) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(

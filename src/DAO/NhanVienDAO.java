@@ -24,7 +24,7 @@ public class NhanVienDAO {
     public NhanVienDAO() {
     }
 
-    public ArrayList<NhanVienDTO> getPhongBan() {
+    public ArrayList<NhanVienDTO> getNhanVien() {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement("SELECT * FROM nhanvien");
@@ -42,7 +42,7 @@ public class NhanVienDAO {
         }
     }
 
-    public boolean addPhongBan(NhanVienDTO nhanvien) {
+    public boolean addNhanVien(NhanVienDTO nhanvien) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
@@ -67,7 +67,7 @@ public class NhanVienDAO {
         }
     }
 
-    public boolean deletePhongBan(String id) {
+    public boolean deleteNhanVien(String id) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
@@ -85,7 +85,7 @@ public class NhanVienDAO {
         }
     }
 
-    public boolean deletePhongBan(NhanVienDTO nhanvien) {
+    public boolean deleteNhanVien(NhanVienDTO nhanvien) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
@@ -103,7 +103,7 @@ public class NhanVienDAO {
         }
     }
 
-    public boolean updateCategory(NhanVienDTO nhanvien) {
+    public boolean updateNhanVien(NhanVienDTO nhanvien) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(

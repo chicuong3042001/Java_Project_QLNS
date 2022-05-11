@@ -24,7 +24,7 @@ public class TrinhDoHocVanDAO {
     public TrinhDoHocVanDAO() {
     }
     
-    public ArrayList<TrinhDoHocVanDTO> getPhongBan() {
+    public ArrayList<TrinhDoHocVanDTO> getTrinhDoHocVan() {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement("SELECT * FROM trinhdohocvan");
@@ -42,7 +42,7 @@ public class TrinhDoHocVanDAO {
         }
     }
     
-    public boolean addPhongBan(TrinhDoHocVanDTO trinhdohocvan) {
+    public boolean addTrinhDoHocVan(TrinhDoHocVanDTO trinhdohocvan) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
@@ -61,7 +61,7 @@ public class TrinhDoHocVanDAO {
         }
     }
     
-    public boolean deletePhongBan(String id) {
+    public boolean deleteTrinhDoHocVan(String id) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
@@ -79,7 +79,7 @@ public class TrinhDoHocVanDAO {
         }
     }
     
-    public boolean deletePhongBan(TrinhDoHocVanDTO trinhdohocvan) {
+    public boolean deleteTrinhDoHocVan(TrinhDoHocVanDTO trinhdohocvan) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
@@ -97,7 +97,7 @@ public class TrinhDoHocVanDAO {
         }
     }
     
-    public boolean updateCategory(TrinhDoHocVanDTO trinhdohocvan) {
+    public boolean updateTrinhDoHocVan(TrinhDoHocVanDTO trinhdohocvan) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
