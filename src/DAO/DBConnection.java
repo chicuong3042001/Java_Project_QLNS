@@ -9,7 +9,7 @@ import java.sql.*;
  * @author chicu
  */
 public class DBConnection {
-    public static Connection getJDBCConnection(){
+    public static Connection getConnection(){
         String url = "jdbc:mysql://localhost:3306/quanlynhansu";
         String user = "root";
         String password = "";

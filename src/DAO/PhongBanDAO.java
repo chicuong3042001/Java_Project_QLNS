@@ -4,6 +4,7 @@
  */
 package DAO;
 
+import DTO.PhongBanDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,5 +23,23 @@ public class PhongBanDAO {
     public PhongBanDAO() {
     }
 
+    public ArrayList<PhongBanDTO> getPhongBan() {
+        try {
+            conn = DBConnection.getConnection();
+            stmt = conn.prepareStatement("SELECT * FROM phongban");
+            ArrayList<PhongBanDTO> phongbanDAO = new ArrayList();
 
+            rs = stmt.executeQuery();
+            while(rs.next()) {
+                phongbanDAO.add(new PhongBanDTO(rs.getString(1), rs.getString(2),rs.getString(3), rs.getString(4)));
+            }
+            return phongbanDAO;
+        }
+        catch(SQLException e) {
+            return null;
+        }
+        finally {
+            DBConnection.closeConnection(conn, stmt, rs);
+        }
+    }
 }
