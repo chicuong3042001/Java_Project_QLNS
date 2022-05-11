@@ -11,16 +11,14 @@ package DTO;
 public class LuongDTO {
     public String MaLuong;
     public String MaNV;
-    public String HeSoLuong;
     public double TienLuong;
 
     public LuongDTO() {
     }
 
-    public LuongDTO(String MaLuong, String MaNV, String HeSoLuong, double TienLuong) {
+    public LuongDTO(String MaLuong, String MaNV, double TienLuong) {
         this.MaLuong = MaLuong;
         this.MaNV = MaNV;
-        this.HeSoLuong = HeSoLuong;
         this.TienLuong = TienLuong;
     }
 
@@ -30,14 +28,6 @@ public class LuongDTO {
 
     public void setMaLuong(String MaLuong) {
         this.MaLuong = MaLuong;
-    }
-
-    public String getHeSoLuong() {
-        return HeSoLuong;
-    }
-
-    public void setHeSoLuong(String HeSoLuong) {
-        this.HeSoLuong = HeSoLuong;
     }
 
     public double getTienLuong() {

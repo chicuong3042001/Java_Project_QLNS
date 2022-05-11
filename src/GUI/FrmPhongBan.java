@@ -100,6 +100,11 @@ public class FrmPhongBan extends javax.swing.JPanel {
         departmentCancelBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/huy.png"))); // NOI18N
         departmentCancelBtn.setText("Hủy");
         departmentCancelBtn.setPreferredSize(new java.awt.Dimension(90, 30));
+        departmentCancelBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                departmentCancelBtnActionPerformed(evt);
+            }
+        });
 
         departmentAddBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/add.png"))); // NOI18N
         departmentAddBtn.setText("Thêm");
@@ -153,7 +158,7 @@ public class FrmPhongBan extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(departmentCancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(departmentSaveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(180, Short.MAX_VALUE))
+                .addContainerGap(177, Short.MAX_VALUE))
         );
 
         departmentTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -338,6 +343,12 @@ public class FrmPhongBan extends javax.swing.JPanel {
             departmentSaveButton.setVisible(false);
         }
     }//GEN-LAST:event_departmentBtnMouseClicked
+
+    private void departmentCancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departmentCancelBtnActionPerformed
+        // TODO add your handling code here:
+        departmentIDField.setText("");
+        departmentNameField.setText("");
+    }//GEN-LAST:event_departmentCancelBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

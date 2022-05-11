@@ -13,15 +13,17 @@ public class ChiTietLuongDTO {
     public double LuongCB;
     public double KhoanCongThem;
     public double KhoanTru;
+    public double HeSoLuong;
 
     public ChiTietLuongDTO() {
     }
 
-    public ChiTietLuongDTO(String MaLuong, double LuongCB, double KhoanCongThem, double KhoanTru) {
+    public ChiTietLuongDTO(String MaLuong, double LuongCB, double KhoanCongThem, double KhoanTru,double HeSoLuong) {
         this.MaLuong = MaLuong;
         this.LuongCB = LuongCB;
         this.KhoanCongThem = KhoanCongThem;
         this.KhoanTru = KhoanTru;
+        this.HeSoLuong = HeSoLuong;
     }
 
     public String getMaLuong() {
@@ -54,6 +56,14 @@ public class ChiTietLuongDTO {
 
     public void setKhoanTru(double KhoanTru) {
         this.KhoanTru = KhoanTru;
+    }
+
+    public double getHeSoLuong() {
+        return HeSoLuong;
+    }
+
+    public void setHeSoLuong(double HeSoLuong) {
+        this.HeSoLuong = HeSoLuong;
     }
     
 }

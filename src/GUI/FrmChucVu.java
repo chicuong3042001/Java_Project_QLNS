@@ -99,6 +99,11 @@ public class FrmChucVu extends javax.swing.JPanel {
         rankCancelBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/huy.png"))); // NOI18N
         rankCancelBtn.setText("Hủy");
         rankCancelBtn.setPreferredSize(new java.awt.Dimension(90, 30));
+        rankCancelBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rankCancelBtnActionPerformed(evt);
+            }
+        });
 
         rankAddBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/add.png"))); // NOI18N
         rankAddBtn.setText("Thêm");
@@ -152,7 +157,7 @@ public class FrmChucVu extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rankCancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rankSaveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(240, Short.MAX_VALUE))
+                .addContainerGap(238, Short.MAX_VALUE))
         );
 
         rankTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -340,6 +345,12 @@ public class FrmChucVu extends javax.swing.JPanel {
         hiddenMenu(false, "Chọn chức vụ: ");
         frmsearch(jPanel2, rankIDField, rankIDLabel);
     }//GEN-LAST:event_rankSearchBtnMouseClicked
+
+    private void rankCancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rankCancelBtnActionPerformed
+        // TODO add your handling code here:
+        rankIDField.setText("");
+        rankNameField.setText("");
+    }//GEN-LAST:event_rankCancelBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
