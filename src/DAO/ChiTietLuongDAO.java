@@ -4,7 +4,7 @@
  */
 package DAO;
 
-import DTO.PhongBanDTO;
+import DTO.ChiTietLuongDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,46 +15,47 @@ import java.util.ArrayList;
  *
  * @author chicu
  */
-public class PhongBanDAO {
+public class ChiTietLuongDAO {
+
     Connection conn = null;
     PreparedStatement stmt = null;
     ResultSet rs = null;
     
-    public PhongBanDAO() {
+    public ChiTietLuongDAO() {
     }
-
-    public ArrayList<PhongBanDTO> getPhongBan() {
+    
+    public ArrayList<ChiTietLuongDTO> getPhongBan() {
         try {
             conn = DBConnection.getConnection();
-            stmt = conn.prepareStatement("SELECT * FROM phongban");
-            ArrayList<PhongBanDTO> phongbanDAO = new ArrayList();
-
+            stmt = conn.prepareStatement("SELECT * FROM Chitietluong");
+            ArrayList<ChiTietLuongDTO> chitietluong = new ArrayList();
             rs = stmt.executeQuery();
-            while(rs.next()) {
-                phongbanDAO.add(new PhongBanDTO(rs.getString(1), rs.getString(2),rs.getString(3), rs.getString(4)));
+            
+            while (rs.next()) {
+                chitietluong.add(new ChiTietLuongDTO(rs.getString(1), rs.getDouble(2), rs.getDouble(3), rs.getDouble(4), rs.getDouble(5)));
             }
-            return phongbanDAO;
-        }
-        catch(SQLException e) {
+            return chitietluong;
+        } catch (SQLException e) {
             return null;
-        }
-        finally {
+        } finally {
             DBConnection.closeConnection(conn, stmt, rs);
         }
     }
     
-    public boolean addPhongBan(PhongBanDTO phongban) {
+    public boolean addPhongBan(ChiTietLuongDTO chitietluong) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "INSERT INTO PhongBan (MaPB, TenPB, SoDienThoai) VALUES (?, ?, ?)");
-            stmt.setString(1, phongban.getMaPB());
-            stmt.setString(2, phongban.getTenPB());
-            stmt.setString(3, phongban.getSoDienThoai());
+                    "INSERT INTO Chitietluong (MaLuong, LuongCB, KhoanCongThem, KhoanTru, HeSoLuong) VALUES (?, ?, ?, ?, ?)");
+            stmt.setString(1, chitietluong.getMaLuong());
+            stmt.setDouble(2, chitietluong.getLuongCB());
+            stmt.setDouble(3, chitietluong.getKhoanCongThem());
+            stmt.setDouble(4, chitietluong.getKhoanTru());
+            stmt.setDouble(5, chitietluong.getHeSoLuong());
             stmt.executeUpdate();
-
+            
             return true;
-
+            
         } catch (SQLException e) {
             return false;
         } finally {
@@ -66,13 +67,13 @@ public class PhongBanDAO {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "DELETE FROM PhongBan WHERE MaPB = ?");
+                    "DELETE FROM Chitietluong WHERE MaLuong = ?");
             stmt.setString(1, id);
-
+            
             stmt.executeUpdate();
-
+            
             return true;
-
+            
         } catch (SQLException e) {
             return false;
         } finally {
@@ -80,17 +81,17 @@ public class PhongBanDAO {
         }
     }
     
-    public boolean deletePhongBan(PhongBanDTO phongban) {
+    public boolean deletePhongBan(ChiTietLuongDTO chitietluong) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "DELETE FROM PhongBan WHERE MaPB = ?");
-            stmt.setString(1, phongban.getMaPB());
-
+                    "DELETE FROM Chitietdcl WHERE MaLuong = ?");
+            stmt.setString(1, chitietluong.getMaLuong());
+            
             stmt.executeUpdate();
-
+            
             return true;
-
+            
         } catch (SQLException e) {
             return false;
         } finally {
@@ -98,18 +99,20 @@ public class PhongBanDAO {
         }
     }
     
-    public boolean updateCategory(PhongBanDTO phongban) {
+    public boolean updateCategory(ChiTietLuongDTO chitietluong) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "UPDATE PhongBan SET TenPB = ?, SoDienThoai = ? WHERE MaPB = ?");
-            stmt.setString(1, phongban.getTenPB());
-            stmt.setString(2, phongban.getSoDienThoai());
-            stmt.setString(3, phongban.getMaPB());
+                    "UPDATE Chitietluong SET LuongCB = ?, KhoanCongThem = ?, KhoanTru = ?, HeSoLuong = ? WHERE MaLuong = ?");
+            stmt.setDouble(1, chitietluong.getLuongCB());
+            stmt.setDouble(2, chitietluong.getKhoanCongThem());
+            stmt.setDouble(3, chitietluong.getKhoanTru());
+            stmt.setDouble(4, chitietluong.getHeSoLuong());
+            stmt.setString(5, chitietluong.getMaLuong());
             stmt.executeUpdate();
-
+            
             return true;
-
+            
         } catch (SQLException e) {
             return false;
         } finally {

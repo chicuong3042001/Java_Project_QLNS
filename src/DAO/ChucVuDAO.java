@@ -4,7 +4,7 @@
  */
 package DAO;
 
-import DTO.PhongBanDTO;
+import DTO.ChucVuDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,25 +15,25 @@ import java.util.ArrayList;
  *
  * @author chicu
  */
-public class PhongBanDAO {
+public class ChucVuDAO {
     Connection conn = null;
     PreparedStatement stmt = null;
     ResultSet rs = null;
     
-    public PhongBanDAO() {
+    public ChucVuDAO() {
     }
 
-    public ArrayList<PhongBanDTO> getPhongBan() {
+    public ArrayList<ChucVuDTO> getPhongBan() {
         try {
             conn = DBConnection.getConnection();
-            stmt = conn.prepareStatement("SELECT * FROM phongban");
-            ArrayList<PhongBanDTO> phongbanDAO = new ArrayList();
+            stmt = conn.prepareStatement("SELECT * FROM ChucVu");
+            ArrayList<ChucVuDTO> chucvuDAO = new ArrayList();
 
             rs = stmt.executeQuery();
             while(rs.next()) {
-                phongbanDAO.add(new PhongBanDTO(rs.getString(1), rs.getString(2),rs.getString(3), rs.getString(4)));
+                chucvuDAO.add(new ChucVuDTO(rs.getString(1), rs.getString(2),rs.getString(3), rs.getString(4)));
             }
-            return phongbanDAO;
+            return chucvuDAO;
         }
         catch(SQLException e) {
             return null;
@@ -43,14 +43,14 @@ public class PhongBanDAO {
         }
     }
     
-    public boolean addPhongBan(PhongBanDTO phongban) {
+    public boolean addPhongBan(ChucVuDTO chucvu) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "INSERT INTO PhongBan (MaPB, TenPB, SoDienThoai) VALUES (?, ?, ?)");
-            stmt.setString(1, phongban.getMaPB());
-            stmt.setString(2, phongban.getTenPB());
-            stmt.setString(3, phongban.getSoDienThoai());
+                    "INSERT INTO ChucVu (MaCV, TenCV, GhiChu) VALUES (?, ?, ?)");
+            stmt.setString(1, chucvu.getMaCV());
+            stmt.setString(2, chucvu.getTenCV());
+            stmt.setString(3, chucvu.getGhiChu());
             stmt.executeUpdate();
 
             return true;
@@ -66,7 +66,7 @@ public class PhongBanDAO {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "DELETE FROM PhongBan WHERE MaPB = ?");
+                    "DELETE FROM ChucVu WHERE MaCV = ?");
             stmt.setString(1, id);
 
             stmt.executeUpdate();
@@ -80,12 +80,12 @@ public class PhongBanDAO {
         }
     }
     
-    public boolean deletePhongBan(PhongBanDTO phongban) {
+    public boolean deletePhongBan(ChucVuDTO chucvu) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "DELETE FROM PhongBan WHERE MaPB = ?");
-            stmt.setString(1, phongban.getMaPB());
+                    "DELETE FROM PhongBan WHERE MaCV = ?");
+            stmt.setString(1, chucvu.getMaCV());
 
             stmt.executeUpdate();
 
@@ -98,14 +98,14 @@ public class PhongBanDAO {
         }
     }
     
-    public boolean updateCategory(PhongBanDTO phongban) {
+    public boolean updateCategory(ChucVuDTO chucvu) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "UPDATE PhongBan SET TenPB = ?, SoDienThoai = ? WHERE MaPB = ?");
-            stmt.setString(1, phongban.getTenPB());
-            stmt.setString(2, phongban.getSoDienThoai());
-            stmt.setString(3, phongban.getMaPB());
+                    "UPDATE ChucVu SET TenCV = ?, GhiChu = ? WHERE MaCV = ?");
+            stmt.setString(1, chucvu.getTenCV());
+            stmt.setString(2, chucvu.getGhiChu());
+            stmt.setString(3, chucvu.getMaCV());
             stmt.executeUpdate();
 
             return true;

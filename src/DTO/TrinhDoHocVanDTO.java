@@ -9,9 +9,9 @@ package DTO;
  * @author chicu
  */
 public class TrinhDoHocVanDTO {
-    public String MaTDHV;
-    public String MaNV;
-    public String TenTDHV;
+    private String MaTDHV;
+    private String MaNV;
+    private String TenTDHV;
 
     public TrinhDoHocVanDTO() {
     }
@@ -36,6 +36,14 @@ public class TrinhDoHocVanDTO {
 
     public void setTenTDHV(String TenTDHV) {
         this.TenTDHV = TenTDHV;
+    }
+
+    public String getMaNV() {
+        return MaNV;
+    }
+
+    public void setMaNV(String MaNV) {
+        this.MaNV = MaNV;
     }
     
     

@@ -4,16 +4,16 @@
  */
 package DTO;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
  * @author chicu
  */
 public class ChiTietDieuChinhLuongDTO {
-    public String MaDCL;
-    public Date NgayDieuChinh;
-    public double HeSoLuongMoi;
+    private String MaDCL;
+    private Date NgayDieuChinh;
+    private double HeSoLuongMoi;
 
     public ChiTietDieuChinhLuongDTO() {
     }
@@ -35,7 +35,7 @@ public class ChiTietDieuChinhLuongDTO {
     public Date getNgayDieuChinh() {
         return NgayDieuChinh;
     }
-
+    
     public void setNgayDieuChinh(Date NgayDieuChinh) {
         this.NgayDieuChinh = NgayDieuChinh;
     }

@@ -9,10 +9,10 @@ package DTO;
  * @author chicu
  */
 public class PhongBanDTO {
-    public String MaPB;
-    public String MaNV;
-    public String TenPB;
-    public String SoDienThoai;
+    private String MaPB;
+    private String MaNV;
+    private String TenPB;
+    private String SoDienThoai;
 
     public PhongBanDTO() {
     }

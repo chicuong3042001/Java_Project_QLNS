@@ -9,10 +9,10 @@ package DTO;
  * @author chicu
  */
 public class ChucVuDTO {
-    public String MaCV;
-    public String MaNV;
-    public String TenCV;
-    public String GhiChu;
+    private String MaCV;
+    private String MaNV;
+    private String TenCV;
+    private String GhiChu;
 
     public ChucVuDTO() {
     }

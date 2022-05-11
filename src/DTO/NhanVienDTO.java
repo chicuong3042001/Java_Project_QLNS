@@ -9,15 +9,15 @@ package DTO;
  * @author chicu
  */
 public class NhanVienDTO {
-    public String MaNV;
-    public String HinhNV;
-    public String TenNV;
-    public String NgaySinh;
-    public String GioiTinh;
-    public String DiaChi;
-    public String SoCMND;
-    public String SoDienThoai;
-    public String Email;
+    private String MaNV;
+    private String HinhNV;
+    private String TenNV;
+    private String NgaySinh;
+    private String GioiTinh;
+    private String DiaChi;
+    private String SoCMND;
+    private String SoDienThoai;
+    private String Email;
 
     public NhanVienDTO() {
     }

@@ -9,9 +9,9 @@ package DTO;
  * @author chicu
  */
 public class LuongDTO {
-    public String MaLuong;
-    public String MaNV;
-    public double TienLuong;
+    private String MaLuong;
+    private String MaNV;
+    private double TienLuong;
 
     public LuongDTO() {
     }
@@ -37,5 +37,15 @@ public class LuongDTO {
     public void setTienLuong(double TienLuong) {
         this.TienLuong = TienLuong;
     }
+
+    public String getMaNV() {
+        return MaNV;
+    }
+
+    public void setMaNV(String MaNV) {
+        this.MaNV = MaNV;
+    }
+    
+    
     
 }

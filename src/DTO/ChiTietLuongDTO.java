@@ -9,11 +9,11 @@ package DTO;
  * @author chicu
  */
 public class ChiTietLuongDTO {
-    public String MaLuong;
-    public double LuongCB;
-    public double KhoanCongThem;
-    public double KhoanTru;
-    public double HeSoLuong;
+    private String MaLuong;
+    private double LuongCB;
+    private double KhoanCongThem;
+    private double KhoanTru;
+    private double HeSoLuong;
 
     public ChiTietLuongDTO() {
     }

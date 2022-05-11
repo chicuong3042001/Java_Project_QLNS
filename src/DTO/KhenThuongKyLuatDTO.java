@@ -9,9 +9,9 @@ package DTO;
  * @author chicu
  */
 public class KhenThuongKyLuatDTO {
-    public String MaKTKL;
-    public String MaNV;
-    public double SoTien;
+    private String MaKTKL;
+    private String MaNV;
+    private double SoTien;
 
     public KhenThuongKyLuatDTO() {
     }
@@ -36,6 +36,14 @@ public class KhenThuongKyLuatDTO {
 
     public void setSoTien(double SoTien) {
         this.SoTien = SoTien;
+    }
+
+    public String getMaNV() {
+        return MaNV;
+    }
+
+    public void setMaNV(String MaNV) {
+        this.MaNV = MaNV;
     }
     
     

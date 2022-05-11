@@ -4,18 +4,18 @@
  */
 package DTO;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
  * @author chicu
  */
 public class ChiTietKhenThuongKyLuatDTO {
-    public String MaKTKL;
-    public double SoTien;
-    public Date NgayQuyetDinh;
-    public String LoaiQuyetDinh;
-    public String NoiDung;
+    private String MaKTKL;
+    private double SoTien;
+    private Date NgayQuyetDinh;
+    private String LoaiQuyetDinh;
+    private String NoiDung;
 
     public ChiTietKhenThuongKyLuatDTO() {
     }

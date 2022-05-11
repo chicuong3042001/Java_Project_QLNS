@@ -9,9 +9,9 @@ package DTO;
  * @author chicu
  */
 public class DieuChinhLuongDTO {
-    public String MaDCL;
-    public String MaNV;
-    public double HeSoLuongMoi;
+    private String MaDCL;
+    private String MaNV;
+    private double HeSoLuongMoi;
 
     public DieuChinhLuongDTO() {
     }
@@ -36,6 +36,14 @@ public class DieuChinhLuongDTO {
 
     public void setHeSoLuongMoi(double HeSoLuongMoi) {
         this.HeSoLuongMoi = HeSoLuongMoi;
+    }
+
+    public String getMaNV() {
+        return MaNV;
+    }
+
+    public void setMaNV(String MaNV) {
+        this.MaNV = MaNV;
     }
     
     
