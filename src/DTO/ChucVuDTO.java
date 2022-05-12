@@ -58,13 +58,14 @@ public class ChucVuDTO {
         this.MaNV = MaNV;
     }
     
-    public ArrayList<Boolean> getSelection() {
+    public Object[] getSelection() {
         ArrayList<Boolean> result = new ArrayList();
         result.add(this.MaNV != null);
         result.add(this.TenCV != null);
         result.add(this.GhiChu != null);
 
-        return result;
+        Object[] result2 = result.toArray();
+        return result2;
     }
     
 }

@@ -110,7 +110,7 @@ public class NhanVienDTO {
         this.Email = Email;
     }
 
-    public ArrayList<Boolean> getSelection() {
+    public Object[] getSelection() {
         ArrayList<Boolean> result = new ArrayList();
         result.add(this.HinhNV != null);
         result.add(this.TenNV != null);
@@ -121,6 +121,7 @@ public class NhanVienDTO {
         result.add(this.SoDienThoai != null);
         result.add(this.Email != null);
 
-        return result;
+        Object[] result2 = result.toArray();
+        return result2;
     }
 }

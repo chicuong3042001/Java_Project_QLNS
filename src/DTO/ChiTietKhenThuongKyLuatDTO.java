@@ -70,13 +70,14 @@ public class ChiTietKhenThuongKyLuatDTO {
         this.NoiDung = NoiDung;
     }
 
-    public ArrayList<Boolean> getSelection() {
+    public Object[] getSelection() {
         ArrayList<Boolean> result = new ArrayList();
         result.add(Double.isNaN(this.SoTien));
         result.add(this.NgayQuyetDinh != null);
         result.add(this.LoaiQuyetDinh != null);
         result.add(this.NoiDung != null);
 
-        return result;
+        Object[] result2 = result.toArray();
+        return result2;
     }
 }

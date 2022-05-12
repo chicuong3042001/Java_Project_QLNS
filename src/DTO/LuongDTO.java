@@ -48,12 +48,13 @@ public class LuongDTO {
         this.MaNV = MaNV;
     }
     
-    public ArrayList<Boolean> getSelection() {
+    public Object[] getSelection() {
         ArrayList<Boolean> result = new ArrayList();
         result.add(this.MaNV != null);
         result.add(Double.isNaN(this.TienLuong));
 
-        return result;
+        Object[] result2 = result.toArray();
+        return result2;
     }
     
 }

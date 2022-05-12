@@ -49,10 +49,12 @@ public class ChiTietDieuChinhLuongDTO {
         this.HeSoLuongMoi = HeSoLuongMoi;
     }
     
-    public ArrayList<Boolean> getSelection() {
+    public Object[] getSelection() {
         ArrayList<Boolean> result = new ArrayList();
         result.add(this.NgayDieuChinh != null);
         result.add(Double.isNaN(this.HeSoLuongMoi));
-        return result;
+        
+        Object[] result2 = result.toArray();
+        return result2;
     }
 }

@@ -68,13 +68,14 @@ public class ChiTietLuongDTO {
         this.HeSoLuong = HeSoLuong;
     }
     
-    public ArrayList<Boolean> getSelection() {
+    public Object[] getSelection() {
         ArrayList<Boolean> result = new ArrayList();
         result.add(Double.isNaN(this.LuongCB));
         result.add(Double.isNaN(this.KhoanCongThem));
         result.add(Double.isNaN(this.KhoanTru));
         result.add(Double.isNaN(this.HeSoLuong));
 
-        return result;
+        Object[] result2 = result.toArray();
+        return result2;
     }
 }
