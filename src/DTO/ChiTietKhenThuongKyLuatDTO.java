@@ -5,12 +5,14 @@
 package DTO;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  *
  * @author chicu
  */
 public class ChiTietKhenThuongKyLuatDTO {
+
     private String MaKTKL;
     private double SoTien;
     private Date NgayQuyetDinh;
@@ -67,5 +69,14 @@ public class ChiTietKhenThuongKyLuatDTO {
     public void setNoiDung(String NoiDung) {
         this.NoiDung = NoiDung;
     }
-    
+
+    public ArrayList<Boolean> getSelection() {
+        ArrayList<Boolean> result = new ArrayList();
+        result.add(Double.isNaN(this.SoTien));
+        result.add(this.NgayQuyetDinh != null);
+        result.add(this.LoaiQuyetDinh != null);
+        result.add(this.NoiDung != null);
+
+        return result;
+    }
 }

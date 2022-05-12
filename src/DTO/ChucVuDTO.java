@@ -4,6 +4,8 @@
  */
 package DTO;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author chicu
@@ -48,5 +50,13 @@ public class ChucVuDTO {
         this.GhiChu = GhiChu;
     }
     
+    public ArrayList<Boolean> getSelection() {
+        ArrayList<Boolean> result = new ArrayList();
+        result.add(this.MaNV != null);
+        result.add(this.TenCV != null);
+        result.add(this.GhiChu != null);
+
+        return result;
+    }
     
 }

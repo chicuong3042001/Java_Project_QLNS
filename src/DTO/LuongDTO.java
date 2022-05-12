@@ -4,6 +4,8 @@
  */
 package DTO;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author chicu
@@ -46,6 +48,12 @@ public class LuongDTO {
         this.MaNV = MaNV;
     }
     
-    
+    public ArrayList<Boolean> getSelection() {
+        ArrayList<Boolean> result = new ArrayList();
+        result.add(this.MaNV != null);
+        result.add(Double.isNaN(this.TienLuong));
+
+        return result;
+    }
     
 }

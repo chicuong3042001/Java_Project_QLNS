@@ -4,6 +4,8 @@
  */
 package DTO;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author chicu
@@ -48,5 +50,12 @@ public class PhongBanDTO {
         this.SoDienThoai = SoDienThoai;
     }
     
-    
+    public ArrayList<Boolean> getSelection() {
+        ArrayList<Boolean> result = new ArrayList();
+        result.add(this.MaNV != null);
+        result.add(this.TenPB != null);
+        result.add(this.SoDienThoai != null);
+
+        return result;
+    }
 }

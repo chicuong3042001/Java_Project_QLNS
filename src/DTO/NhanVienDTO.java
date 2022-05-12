@@ -4,11 +4,14 @@
  */
 package DTO;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author chicu
  */
 public class NhanVienDTO {
+
     private String MaNV;
     private String HinhNV;
     private String TenNV;
@@ -22,7 +25,8 @@ public class NhanVienDTO {
     public NhanVienDTO() {
     }
 
-    public NhanVienDTO(String MaNV, String HinhNV, String TenNV, String NgaySinh, String GioiTinh, String DiaChi, String SoCMND, String SoDienThoai, String Email) {
+    public NhanVienDTO(String MaNV, String HinhNV, String TenNV, String NgaySinh, String GioiTinh, String DiaChi, String SoCMND,
+            String SoDienThoai, String Email) {
         this.MaNV = MaNV;
         this.HinhNV = HinhNV;
         this.TenNV = TenNV;
@@ -105,6 +109,18 @@ public class NhanVienDTO {
     public void setEmail(String Email) {
         this.Email = Email;
     }
-    
-                
+
+    public ArrayList<Boolean> getSelection() {
+        ArrayList<Boolean> result = new ArrayList();
+        result.add(this.HinhNV != null);
+        result.add(this.TenNV != null);
+        result.add(this.NgaySinh != null);
+        result.add(this.GioiTinh != null);
+        result.add(this.DiaChi != null);
+        result.add(this.SoCMND != null);
+        result.add(this.SoDienThoai != null);
+        result.add(this.Email != null);
+
+        return result;
+    }
 }

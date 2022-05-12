@@ -4,6 +4,8 @@
  */
 package DTO;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author chicu
@@ -66,4 +68,13 @@ public class ChiTietLuongDTO {
         this.HeSoLuong = HeSoLuong;
     }
     
+    public ArrayList<Boolean> getSelection() {
+        ArrayList<Boolean> result = new ArrayList();
+        result.add(Double.isNaN(this.LuongCB));
+        result.add(Double.isNaN(this.KhoanCongThem));
+        result.add(Double.isNaN(this.KhoanTru));
+        result.add(Double.isNaN(this.HeSoLuong));
+
+        return result;
+    }
 }

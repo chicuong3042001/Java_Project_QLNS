@@ -4,11 +4,14 @@
  */
 package DTO;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author chicu
  */
 public class DieuChinhLuongDTO {
+
     private String MaDCL;
     private String MaNV;
     private double HeSoLuongMoi;
@@ -45,6 +48,12 @@ public class DieuChinhLuongDTO {
     public void setMaNV(String MaNV) {
         this.MaNV = MaNV;
     }
-    
-    
+
+    public ArrayList<Boolean> getSelection() {
+        ArrayList<Boolean> result = new ArrayList();
+        result.add(this.MaNV != null);
+        result.add(Double.isNaN(this.HeSoLuongMoi));
+
+        return result;
+    }
 }

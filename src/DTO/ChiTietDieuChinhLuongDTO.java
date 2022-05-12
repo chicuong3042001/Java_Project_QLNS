@@ -5,6 +5,7 @@
 package DTO;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  *
@@ -48,4 +49,10 @@ public class ChiTietDieuChinhLuongDTO {
         this.HeSoLuongMoi = HeSoLuongMoi;
     }
     
+    public ArrayList<Boolean> getSelection() {
+        ArrayList<Boolean> result = new ArrayList();
+        result.add(this.NgayDieuChinh != null);
+        result.add(Double.isNaN(this.HeSoLuongMoi));
+        return result;
+    }
 }
