@@ -20,17 +20,17 @@ public class TrinhDoHocVanDAO {
     Connection conn = null;
     PreparedStatement stmt = null;
     ResultSet rs = null;
-    
+
     public TrinhDoHocVanDAO() {
     }
-    
+
     public ArrayList<TrinhDoHocVanDTO> getTrinhDoHocVan() {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement("SELECT * FROM trinhdohocvan");
             ArrayList<TrinhDoHocVanDTO> trinhdohocvan = new ArrayList();
             rs = stmt.executeQuery();
-            
+
             while (rs.next()) {
                 trinhdohocvan.add(new TrinhDoHocVanDTO(rs.getString(1), rs.getString(2), rs.getString(3)));
             }
@@ -41,7 +41,7 @@ public class TrinhDoHocVanDAO {
             DBConnection.closeConnection(conn, stmt, rs);
         }
     }
-    
+
     public boolean addTrinhDoHocVan(TrinhDoHocVanDTO trinhdohocvan) {
         try {
             conn = DBConnection.getConnection();
@@ -51,71 +51,73 @@ public class TrinhDoHocVanDAO {
             stmt.setString(2, trinhdohocvan.getMaNV());
             stmt.setString(3, trinhdohocvan.getTenTDHV());
             stmt.executeUpdate();
-            
+
             return true;
-            
+
         } catch (SQLException e) {
             return false;
         } finally {
             DBConnection.closeConnection(conn, stmt);
         }
     }
-    
+
     public boolean deleteTrinhDoHocVan(String id) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
                     "DELETE FROM trinhdohocvan WHERE MaTDHV = ?");
             stmt.setString(1, id);
-            
+
             stmt.executeUpdate();
-            
+
             return true;
-            
+
         } catch (SQLException e) {
             return false;
         } finally {
             DBConnection.closeConnection(conn, stmt);
         }
     }
-    
+
     public boolean deleteTrinhDoHocVan(TrinhDoHocVanDTO trinhdohocvan) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
                     "DELETE FROM trinhdohocvan WHERE MaTDHV = ?");
             stmt.setString(1, trinhdohocvan.getMaTDHV());
-            
+
             stmt.executeUpdate();
-            
+
             return true;
-            
+
         } catch (SQLException e) {
             return false;
         } finally {
             DBConnection.closeConnection(conn, stmt);
         }
     }
-    
-    public boolean updateTrinhDoHocVan(TrinhDoHocVanDTO trinhdohocvan, ArrayList<Boolean> selection) {
+
+    public boolean updateTrinhDoHocVan(TrinhDoHocVanDTO trinhdohocvan, Object[] selection) {
         try {
-                        String table = "";
-            for (boolean select : selection) {
-                if (select) {
-                    switch (selection.indexOf(select) + 1) {
-                        case 1 -> table += "MaNV = ? ";
-                        case 2 -> table += "HeSoLuongMoi = ? ";
+            String table = "";
+            for (int i = 0; i < selection.length; i++) {
+                if ((boolean)selection[i]) {
+                    switch (i + 1) {
+                        case 1 ->
+                            table += "MaNV = ? ";
+                        case 2 ->
+                            table += "HeSoLuongMoi = ? ";
                     }
                 }
             }
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
                     "UPDATE trinhdohocvan SET " + table + "WHERE MaTDHV = ?");
-            
+
             int index = 1;
-            for (boolean select : selection) {
-                if (select) {
-                    switch (selection.indexOf(select) + 1) {
+            for (int i = 0; i < selection.length; i++) {
+                if ((boolean)selection[i]) {
+                    switch (i + 1) {
                         case 1 ->
                             stmt.setString(index++, trinhdohocvan.getMaNV());
                         case 2 ->
@@ -123,12 +125,12 @@ public class TrinhDoHocVanDAO {
                     }
                 }
             }
-                     
+
             stmt.setString(index++, trinhdohocvan.getMaTDHV());
             stmt.executeUpdate();
-            
+
             return true;
-            
+
         } catch (SQLException e) {
             return false;
         } finally {

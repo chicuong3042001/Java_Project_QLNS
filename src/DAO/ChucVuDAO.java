@@ -97,13 +97,12 @@ public class ChucVuDAO {
         }
     }
 
-    public boolean updateChucVu(ChucVuDTO chucvu, ArrayList<Boolean> selection) {
+    public boolean updateChucVu(ChucVuDTO chucvu, Object[] selection) {
         try {
             String table = "";
-            
-            Object[] array = selection.toArray();
-            for (int i = 0; i < array.length; i++) {
-                if ((boolean)array[i]) {
+
+            for (int i = 0; i < selection.length; i++) {
+                if ((boolean) selection[i]) {
                     switch (i + 1) {
                         case 1 ->
                             table += "MaNV = ? ,";
@@ -114,10 +113,8 @@ public class ChucVuDAO {
                     }
                 }
             }
-            char a = 'a';
-          
-            table = table - String.valueOf(table.charAt(table.length() - 1));
-                   
+            table = table.substring(0, table.length() - 1);
+
             String sql = "UPDATE ChucVu SET " + table + "WHERE MaCV = ?";
 
             conn = DBConnection.getConnection();
@@ -127,11 +124,11 @@ public class ChucVuDAO {
             System.out.println(sql);
 
             int index = 1;
-            for (boolean select : selection) {
-                if (select) {
-                    switch (selection.indexOf(select) + 1) {
+            for (int i = 0; i < selection.length; i++) {
+                if ((boolean) selection[i]) {
+                    switch (i + 1) {
                         case 1 ->
-                            stmt.setString(index++, chucvu.getMaCV());
+                            stmt.setString(index++, chucvu.getMaNV());
                         case 2 ->
                             stmt.setString(index++, chucvu.getTenCV());
                         case 3 ->

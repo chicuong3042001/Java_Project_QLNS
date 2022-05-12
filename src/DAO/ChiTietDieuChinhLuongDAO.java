@@ -97,12 +97,12 @@ public class ChiTietDieuChinhLuongDAO {
         }
     }
 
-    public boolean updateChiTietDieuChinhLuong(ChiTietDieuChinhLuongDTO chitietdieuchinhluong, ArrayList<Boolean> selection) {
+    public boolean updateChiTietDieuChinhLuong(ChiTietDieuChinhLuongDTO chitietdieuchinhluong, Object[] selection) {
         try {
             String table = "";
-            for (boolean select : selection) {
-                if (select) {
-                    switch (selection.indexOf(select) + 1) {
+            for (int i = 0; i < selection.length; i++) {
+                if ((boolean)selection[i]) {
+                    switch (i + 1) {
                         case 1 -> table += "NgayDieuChinh = ? ";
                         case 2 -> table += "HeSoLuongMoi = ? ";
                     }
@@ -113,9 +113,9 @@ public class ChiTietDieuChinhLuongDAO {
             stmt = conn.prepareStatement("UPDATE Chitietdcl SET" + table + " WHERE MaDCL = ?");
             
             int index = 1;
-            for (boolean select : selection) {
-                if (select) {
-                    switch (selection.indexOf(select) + 1) {
+            for (int i = 0; i < selection.length; i++) {
+                if ((boolean)selection[i]) {
+                    switch (i + 1) {
                         case 1 -> stmt.setDate(index++, chitietdieuchinhluong.getNgayDieuChinh());
                         case 2 -> stmt.setDouble(index++, chitietdieuchinhluong.getHeSoLuongMoi());
                     }

@@ -97,12 +97,12 @@ public class PhongBanDAO {
         }
     }
 
-    public boolean updatePhongBan(PhongBanDTO phongban, ArrayList<Boolean> selection) {
+    public boolean updatePhongBan(PhongBanDTO phongban, Object[] selection) {
         try {
             String table = "";
-            for (boolean select : selection) {
-                if (select) {
-                    switch (selection.indexOf(select) + 1) {
+            for (int i = 0; i < selection.length; i++) {
+                if ((boolean) selection[i]) {
+                    switch (i + 1) {
                         case 1 ->
                             table += "TenPB = ? ";
                         case 2 ->
@@ -113,11 +113,11 @@ public class PhongBanDAO {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
                     "UPDATE PhongBan SET " + table + "WHERE MaPB = ?");
-            
+
             int index = 1;
-            for (boolean select : selection) {
-                if (select) {
-                    switch (selection.indexOf(select) + 1) {
+            for (int i = 0; i < selection.length; i++) {
+                if ((boolean) selection[i]) {
+                    switch (i + 1) {
                         case 1 ->
                             stmt.setString(index++, phongban.getTenPB());
                         case 2 ->
@@ -125,7 +125,7 @@ public class PhongBanDAO {
                     }
                 }
             }
-                        
+
             stmt.setString(index, phongban.getMaPB());
             stmt.executeUpdate();
 

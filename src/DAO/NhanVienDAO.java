@@ -104,12 +104,12 @@ public class NhanVienDAO {
         }
     }
 
-    public boolean updateNhanVien(NhanVienDTO nhanvien, ArrayList<Boolean> selection) {
+    public boolean updateNhanVien(NhanVienDTO nhanvien, Object[] selection) {
         try {
             String table = "";
-            for (boolean select : selection) {
-                if (select) {
-                    switch (selection.indexOf(select) + 1) {
+            for (int i = 0; i < selection.length; i++) {
+                if ((boolean) selection[i]) {
+                    switch (i + 1) {
                         case 1 ->
                             table += "HinhNV = ? ";
                         case 2 ->
@@ -132,11 +132,11 @@ public class NhanVienDAO {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
                     "UPDATE nhanvien SET " + table + "WHERE MaNV = ?");
-            
+
             int index = 1;
-            for (boolean select : selection) {
-                if (select) {
-                    switch (selection.indexOf(select) + 1) {
+            for (int i = 0; i < selection.length; i++) {
+                if ((boolean) selection[i]) {
+                    switch (i + 1) {
                         case 1 ->
                             stmt.setString(index++, nhanvien.getHinhNV());
                         case 2 ->
