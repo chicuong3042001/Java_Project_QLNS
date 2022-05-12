@@ -97,14 +97,34 @@ public class TrinhDoHocVanDAO {
         }
     }
     
-    public boolean updateTrinhDoHocVan(TrinhDoHocVanDTO trinhdohocvan) {
+    public boolean updateTrinhDoHocVan(TrinhDoHocVanDTO trinhdohocvan, ArrayList<Boolean> selection) {
         try {
+                        String table = "";
+            for (boolean select : selection) {
+                if (select) {
+                    switch (selection.indexOf(select) + 1) {
+                        case 1 -> table += "MaNV = ? ";
+                        case 2 -> table += "HeSoLuongMoi = ? ";
+                    }
+                }
+            }
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "UPDATE trinhdohocvan SET MaNV = ?, HeSoLuongMoi = ? WHERE MaTDHV = ?");
-            stmt.setString(1, trinhdohocvan.getMaNV());
-            stmt.setString(2, trinhdohocvan.getTenTDHV());
-            stmt.setString(3, trinhdohocvan.getMaTDHV());
+                    "UPDATE trinhdohocvan SET " + table + "WHERE MaTDHV = ?");
+            
+            int index = 1;
+            for (boolean select : selection) {
+                if (select) {
+                    switch (selection.indexOf(select) + 1) {
+                        case 1 ->
+                            stmt.setString(index++, trinhdohocvan.getMaNV());
+                        case 2 ->
+                            stmt.setString(index++, trinhdohocvan.getTenTDHV());
+                    }
+                }
+            }
+                     
+            stmt.setString(index++, trinhdohocvan.getMaTDHV());
             stmt.executeUpdate();
             
             return true;

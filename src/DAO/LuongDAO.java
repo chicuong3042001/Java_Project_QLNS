@@ -97,14 +97,36 @@ public class LuongDAO {
         }
     }
     
-    public boolean updateLuong(LuongDTO luong) {
+    public boolean updateLuong(LuongDTO luong, ArrayList<Boolean> selection) {
         try {
+            String table = "";
+            for (boolean select : selection) {
+                if (select) {
+                    switch (selection.indexOf(select) + 1) {
+                        case 1 ->
+                            table += "MaNV = ? ";
+                        case 2 ->
+                            table += "HeSoLuongMoi = ? ";
+                    }
+                }
+            }
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "UPDATE luong SET MaNV = ?, HeSoLuongMoi = ? WHERE MaLuong = ?");
-            stmt.setString(1, luong.getMaNV());
-            stmt.setDouble(2, luong.getTienLuong());
-            stmt.setString(3, luong.getMaLuong());
+                    "UPDATE luong SET " + table + "WHERE MaLuong = ?");
+            
+            int index = 1;
+            for (boolean select : selection) {
+                if (select) {
+                    switch (selection.indexOf(select) + 1) {
+                        case 1 ->
+                            stmt.setString(index++, luong.getMaNV());
+                        case 2 ->
+                            stmt.setDouble(index++, luong.getTienLuong());
+                    }
+                }
+            }
+            
+            stmt.setString(index, luong.getMaLuong());
             stmt.executeUpdate();
             
             return true;

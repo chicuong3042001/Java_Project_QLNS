@@ -97,14 +97,33 @@ public class DieuChinhLuongDAO {
         }
     }
     
-    public boolean updateDieuChinhLuong(DieuChinhLuongDTO dieuchinhluong) {
+    public boolean updateDieuChinhLuong(DieuChinhLuongDTO dieuchinhluong, ArrayList<Boolean> selection) {
         try {
+            String table = "";
+            for (boolean select : selection) {
+                if (select) {
+                    switch (selection.indexOf(select) + 1) {
+                        case 1 ->
+                            table += "MaNV = ? ";
+                        case 2 ->
+                            table += "HeSoLuong = ? ";
+                    }
+                }
+            }
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "UPDATE hesoluong SET MaNV = ?, HeSoLuongMoi = ? WHERE MaDCL = ?");
-            stmt.setString(1, dieuchinhluong.getMaNV());
-            stmt.setDouble(2, dieuchinhluong.getHeSoLuongMoi());
-            stmt.setString(3, dieuchinhluong.getMaDCL());
+                    "UPDATE dieuchinhluong SET " + table + "WHERE MaDCL = ?");
+            
+            int index = 1;
+            for (boolean select : selection) {
+                if (select) {
+                    switch (selection.indexOf(select) + 1) {
+                        case 1 -> stmt.setString(index++, dieuchinhluong.getMaNV());
+                        case 2 -> stmt.setDouble(index++, dieuchinhluong.getHeSoLuongMoi());                    }
+                }
+            }             
+            
+            stmt.setString(index++, dieuchinhluong.getMaDCL());
             stmt.executeUpdate();
             
             return true;

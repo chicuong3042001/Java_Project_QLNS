@@ -97,14 +97,34 @@ public class KhenThuongKyLuatDAO {
         }
     }
     
-    public boolean updateKhenThuongKyLuat(KhenThuongKyLuatDTO khenthuongkyluat) {
+    public boolean updateKhenThuongKyLuat(KhenThuongKyLuatDTO khenthuongkyluat, ArrayList<Boolean> selection) {
         try {
+            String table = "";
+            for (boolean select : selection) {
+                if (select) {
+                    switch (selection.indexOf(select) + 1) {
+                        case 1 ->
+                            table += "MaNV = ? ";
+                        case 2 ->
+                            table += "SoTien = ? ";
+                    }
+                }
+            }
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "UPDATE hesoluong SET MaNV = ?, HeSoLuongMoi = ? WHERE MaKTKL = ?");
-            stmt.setString(1, khenthuongkyluat.getMaNV());
-            stmt.setDouble(2, khenthuongkyluat.getSoTien());
-            stmt.setString(3, khenthuongkyluat.getMaKTKL());
+                    "UPDATE khenthuongkyluat SET " + table + "WHERE MaKTKL = ?");
+            
+            int index = 1;
+            for (boolean select : selection) {
+                if (select) {
+                    switch (selection.indexOf(select) + 1) {
+                        case 1 -> stmt.setString(index++, khenthuongkyluat.getMaNV());
+                        case 2 -> stmt.setDouble(index++, khenthuongkyluat.getSoTien());
+                    }
+                }
+            }
+   
+            stmt.setString(index, khenthuongkyluat.getMaKTKL());
             stmt.executeUpdate();
             
             return true;

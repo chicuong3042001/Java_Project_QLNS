@@ -98,14 +98,32 @@ public class ChucVuDAO {
         }
     }
     
-    public boolean updateChucVu(ChucVuDTO chucvu) {
+    public boolean updateChucVu(ChucVuDTO chucvu, ArrayList<Boolean> selection) {
         try {
+            String table = "";
+            for (boolean select : selection) {
+                if (select) {
+                    switch (selection.indexOf(select) + 1) {
+                        case 1 -> table += "TenCV = ? ";
+                        case 2 -> table += "GhiChu = ? ";
+                    }
+                }
+            }
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "UPDATE ChucVu SET TenCV = ?, GhiChu = ? WHERE MaCV = ?");
-            stmt.setString(1, chucvu.getTenCV());
-            stmt.setString(2, chucvu.getGhiChu());
-            stmt.setString(3, chucvu.getMaCV());
+                    "UPDATE ChucVu SET " + table + "WHERE MaCV = ?");
+            
+            int index = 1;
+            for (boolean select : selection) {
+                if (select) {
+                    switch (selection.indexOf(select) + 1) {
+                        case 1 -> stmt.setString(index++, chucvu.getTenCV());
+                        case 2 -> stmt.setString(index++, chucvu.getGhiChu());
+                    }
+                }
+            }           
+            
+            stmt.setString(index, chucvu.getMaCV());
             stmt.executeUpdate();
 
             return true;

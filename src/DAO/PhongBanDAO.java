@@ -16,10 +16,11 @@ import java.util.ArrayList;
  * @author chicu
  */
 public class PhongBanDAO {
+
     Connection conn = null;
     PreparedStatement stmt = null;
     ResultSet rs = null;
-    
+
     public PhongBanDAO() {
     }
 
@@ -30,19 +31,17 @@ public class PhongBanDAO {
             ArrayList<PhongBanDTO> phongbanDAO = new ArrayList();
 
             rs = stmt.executeQuery();
-            while(rs.next()) {
-                phongbanDAO.add(new PhongBanDTO(rs.getString(1), rs.getString(2),rs.getString(3), rs.getString(4)));
+            while (rs.next()) {
+                phongbanDAO.add(new PhongBanDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)));
             }
             return phongbanDAO;
-        }
-        catch(SQLException e) {
+        } catch (SQLException e) {
             return null;
-        }
-        finally {
+        } finally {
             DBConnection.closeConnection(conn, stmt, rs);
         }
     }
-    
+
     public boolean addPhongBan(PhongBanDTO phongban) {
         try {
             conn = DBConnection.getConnection();
@@ -61,7 +60,7 @@ public class PhongBanDAO {
             DBConnection.closeConnection(conn, stmt);
         }
     }
-    
+
     public boolean deletePhongBan(String id) {
         try {
             conn = DBConnection.getConnection();
@@ -79,7 +78,7 @@ public class PhongBanDAO {
             DBConnection.closeConnection(conn, stmt);
         }
     }
-    
+
     public boolean deletePhongBan(PhongBanDTO phongban) {
         try {
             conn = DBConnection.getConnection();
@@ -97,15 +96,37 @@ public class PhongBanDAO {
             DBConnection.closeConnection(conn, stmt);
         }
     }
-    
-    public boolean updatePhongBan(PhongBanDTO phongban) {
+
+    public boolean updatePhongBan(PhongBanDTO phongban, ArrayList<Boolean> selection) {
         try {
+            String table = "";
+            for (boolean select : selection) {
+                if (select) {
+                    switch (selection.indexOf(select) + 1) {
+                        case 1 ->
+                            table += "TenPB = ? ";
+                        case 2 ->
+                            table += "SoDienThoai = ? ";
+                    }
+                }
+            }
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "UPDATE PhongBan SET TenPB = ?, SoDienThoai = ? WHERE MaPB = ?");
-            stmt.setString(1, phongban.getTenPB());
-            stmt.setString(2, phongban.getSoDienThoai());
-            stmt.setString(3, phongban.getMaPB());
+                    "UPDATE PhongBan SET " + table + "WHERE MaPB = ?");
+            
+            int index = 1;
+            for (boolean select : selection) {
+                if (select) {
+                    switch (selection.indexOf(select) + 1) {
+                        case 1 ->
+                            stmt.setString(index++, phongban.getTenPB());
+                        case 2 ->
+                            stmt.setString(index++, phongban.getSoDienThoai());
+                    }
+                }
+            }
+                        
+            stmt.setString(index, phongban.getMaPB());
             stmt.executeUpdate();
 
             return true;

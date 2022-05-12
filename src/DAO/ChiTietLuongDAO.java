@@ -99,16 +99,37 @@ public class ChiTietLuongDAO {
         }
     }
     
-    public boolean updateChiTietLuong(ChiTietLuongDTO chitietluong) {
+    public boolean updateChiTietLuong(ChiTietLuongDTO chitietluong, ArrayList<Boolean> selection) {
         try {
+            String table = "";
+            for (boolean select : selection) {
+                if (select) {
+                    switch (selection.indexOf(select) + 1) {
+                        case 1 -> table += "LuongCB = ? ";
+                        case 2 -> table += "KhoanCongThem = ? ";
+                        case 3 -> table += "KhoanTru = ? ";
+                        case 4 -> table += "HeSoLuong = ? ";
+                    }
+                }
+            }
+            
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "UPDATE Chitietluong SET LuongCB = ?, KhoanCongThem = ?, KhoanTru = ?, HeSoLuong = ? WHERE MaLuong = ?");
-            stmt.setDouble(1, chitietluong.getLuongCB());
-            stmt.setDouble(2, chitietluong.getKhoanCongThem());
-            stmt.setDouble(3, chitietluong.getKhoanTru());
-            stmt.setDouble(4, chitietluong.getHeSoLuong());
-            stmt.setString(5, chitietluong.getMaLuong());
+                    "UPDATE Chitietluong SET " + table + "WHERE MaLuong = ?");
+            
+            int index = 1;
+            for (boolean select : selection) {
+                if (select) {
+                    switch (selection.indexOf(select) + 1) {
+                        case 1 -> stmt.setDouble(index++, chitietluong.getLuongCB());
+                        case 2 -> stmt.setDouble(index++, chitietluong.getKhoanCongThem());
+                        case 3 -> stmt.setDouble(index++, chitietluong.getKhoanTru());
+                        case 4 -> stmt.setDouble(index++, chitietluong.getHeSoLuong());
+                    }
+                }
+            }
+                 
+            stmt.setString(index, chitietluong.getMaLuong());
             stmt.executeUpdate();
             
             return true;

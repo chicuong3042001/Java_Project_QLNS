@@ -20,17 +20,17 @@ public class ChiTietDieuChinhLuongDAO {
     Connection conn = null;
     PreparedStatement stmt = null;
     ResultSet rs = null;
-    
+
     public ChiTietDieuChinhLuongDAO() {
     }
-    
+
     public ArrayList<ChiTietDieuChinhLuongDTO> getChiTietDieuChinhLuong() {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement("SELECT * FROM Chitietdcl");
             ArrayList<ChiTietDieuChinhLuongDTO> chitietdieuchinhluong = new ArrayList();
             rs = stmt.executeQuery();
-            
+
             while (rs.next()) {
                 chitietdieuchinhluong.add(new ChiTietDieuChinhLuongDTO(rs.getString(1), rs.getDate(2), rs.getDouble(3)));
             }
@@ -41,7 +41,7 @@ public class ChiTietDieuChinhLuongDAO {
             DBConnection.closeConnection(conn, stmt, rs);
         }
     }
-    
+
     public boolean addChiTietDieuChinhLuong(ChiTietDieuChinhLuongDTO chitietdieuchinhluong) {
         try {
             conn = DBConnection.getConnection();
@@ -51,64 +51,82 @@ public class ChiTietDieuChinhLuongDAO {
             stmt.setDate(2, chitietdieuchinhluong.getNgayDieuChinh());
             stmt.setDouble(3, chitietdieuchinhluong.getHeSoLuongMoi());
             stmt.executeUpdate();
-            
+
             return true;
-            
+
         } catch (SQLException e) {
             return false;
         } finally {
             DBConnection.closeConnection(conn, stmt);
         }
     }
-    
+
     public boolean deleteChiTietDieuChinhLuong(String id) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
                     "DELETE FROM Chitietdcl WHERE MaDCL = ?");
             stmt.setString(1, id);
-            
+
             stmt.executeUpdate();
-            
+
             return true;
-            
+
         } catch (SQLException e) {
             return false;
         } finally {
             DBConnection.closeConnection(conn, stmt);
         }
     }
-    
+
     public boolean deleteChiTietDieuChinhLuong(ChiTietDieuChinhLuongDTO chitietdieuchinhluong) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
                     "DELETE FROM Chitietdcl WHERE MaCV = ?");
             stmt.setString(1, chitietdieuchinhluong.getMaDCL());
-            
+
             stmt.executeUpdate();
-            
+
             return true;
-            
+
         } catch (SQLException e) {
             return false;
         } finally {
             DBConnection.closeConnection(conn, stmt);
         }
     }
-    
-    public boolean updateChiTietDieuChinhLuong(ChiTietDieuChinhLuongDTO chitietdieuchinhluong) {
+
+    public boolean updateChiTietDieuChinhLuong(ChiTietDieuChinhLuongDTO chitietdieuchinhluong, ArrayList<Boolean> selection) {
         try {
+            String table = "";
+            for (boolean select : selection) {
+                if (select) {
+                    switch (selection.indexOf(select) + 1) {
+                        case 1 -> table += "NgayDieuChinh = ? ";
+                        case 2 -> table += "HeSoLuongMoi = ? ";
+                    }
+                }
+            }
+
             conn = DBConnection.getConnection();
-            stmt = conn.prepareStatement(
-                    "UPDATE Chitietdcl SET NgayDieuChinh = ?, HeSoLuongMoi = ? WHERE MaDCL = ?");
-            stmt.setDate(1, chitietdieuchinhluong.getNgayDieuChinh());
-            stmt.setDouble(2, chitietdieuchinhluong.getHeSoLuongMoi());
-            stmt.setString(3, chitietdieuchinhluong.getMaDCL());
+            stmt = conn.prepareStatement("UPDATE Chitietdcl SET" + table + " WHERE MaDCL = ?");
+            
+            int index = 1;
+            for (boolean select : selection) {
+                if (select) {
+                    switch (selection.indexOf(select) + 1) {
+                        case 1 -> stmt.setDate(index++, chitietdieuchinhluong.getNgayDieuChinh());
+                        case 2 -> stmt.setDouble(index++, chitietdieuchinhluong.getHeSoLuongMoi());
+                    }
+                }
+            }
+                
+            stmt.setString(index, chitietdieuchinhluong.getMaDCL());
             stmt.executeUpdate();
-            
+
             return true;
-            
+
         } catch (SQLException e) {
             return false;
         } finally {

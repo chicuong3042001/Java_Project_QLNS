@@ -32,7 +32,8 @@ public class ChiTietKhenThuongKyLuatDAO {
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                chitietkhenthuongkyluat.add(new ChiTietKhenThuongKyLuatDTO(rs.getString(1), rs.getDouble(2), rs.getDate(3), rs.getString(4), rs.getString(5)));
+                chitietkhenthuongkyluat.add(new ChiTietKhenThuongKyLuatDTO(rs.getString(1), rs.getDouble(2), rs.getDate(3), rs.
+                        getString(4), rs.getString(5)));
             }
             return chitietkhenthuongkyluat;
         } catch (SQLException e) {
@@ -99,16 +100,37 @@ public class ChiTietKhenThuongKyLuatDAO {
         }
     }
 
-    public boolean updateChiTietKhenThuongKyLuat(ChiTietKhenThuongKyLuatDTO chitietkhenthuongkiluat) {
+    public boolean updateChiTietKhenThuongKyLuat(ChiTietKhenThuongKyLuatDTO chitietkhenthuongkiluat, ArrayList<Boolean> selection) {
         try {
+            String table = "";
+            for (boolean select : selection) {
+                if (select) {
+                    switch (selection.indexOf(select) + 1) {
+                        case 1 -> table += "SoTien = ? ";
+                        case 2 -> table += "NgayQuyetDinh = ? ";
+                        case 3 -> table += "LoaiQuyetDinh = ? ";
+                        case 4 -> table += "NoiDung = ? ";
+                    }
+                }
+            }
+
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "UPDATE Chitietdcl SET SoTien = ?, NgayQuyetDinh = ?, LoaiQuyetDinh = ?, NoiDung = ? WHERE MaKTKL = ?");
-            stmt.setDouble(1, chitietkhenthuongkiluat.getSoTien());
-            stmt.setDate(2, chitietkhenthuongkiluat.getNgayQuyetDinh());
-            stmt.setString(3, chitietkhenthuongkiluat.getLoaiQuyetDinh());
-            stmt.setString(4, chitietkhenthuongkiluat.getNoiDung());
-            stmt.setString(5, chitietkhenthuongkiluat.getMaKTKL());
+                    "UPDATE Chitietdcl SET " + table + "WHERE MaKTKL = ?");
+            
+            int index = 1;
+            for (boolean select : selection) {
+                if (select) {
+                    switch (selection.indexOf(select) + 1) {
+                        case 1 -> stmt.setDouble(index++, chitietkhenthuongkiluat.getSoTien());
+                        case 2 -> stmt.setDate(index++, chitietkhenthuongkiluat.getNgayQuyetDinh());
+                        case 3 -> stmt.setString(index++, chitietkhenthuongkiluat.getLoaiQuyetDinh());
+                        case 4 -> stmt.setString(index++, chitietkhenthuongkiluat.getNoiDung());
+                    }
+                }
+            }
+             
+            stmt.setString(index, chitietkhenthuongkiluat.getMaKTKL());
             stmt.executeUpdate();
 
             return true;

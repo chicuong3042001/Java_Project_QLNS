@@ -32,7 +32,8 @@ public class NhanVienDAO {
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                nhanvien.add(new NhanVienDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9)));
+                nhanvien.add(new NhanVienDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
+                        rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9)));
             }
             return nhanvien;
         } catch (SQLException e) {
@@ -103,21 +104,61 @@ public class NhanVienDAO {
         }
     }
 
-    public boolean updateNhanVien(NhanVienDTO nhanvien) {
+    public boolean updateNhanVien(NhanVienDTO nhanvien, ArrayList<Boolean> selection) {
         try {
+            String table = "";
+            for (boolean select : selection) {
+                if (select) {
+                    switch (selection.indexOf(select) + 1) {
+                        case 1 ->
+                            table += "HinhNV = ? ";
+                        case 2 ->
+                            table += "TenNV = ? ";
+                        case 3 ->
+                            table += "NgaySinh = ? ";
+                        case 4 ->
+                            table += "GioiTinh = ? ";
+                        case 5 ->
+                            table += "DiaChi = ? ";
+                        case 6 ->
+                            table += "SoCMND = ? ";
+                        case 7 ->
+                            table += "SoDienThoai = ? ";
+                        case 8 ->
+                            table += "Email = ? ";
+                    }
+                }
+            }
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "UPDATE nhanvien SET HinhNV = ?, TenNV = ?, NgaySinh = ?, GioiTinh = ?, DiaChi = ?, SoCMND = ?, SoDienThoai = ?, Email = ? WHERE MaNV = ?");
-            stmt.setString(1, nhanvien.getHinhNV());
-            stmt.setString(2, nhanvien.getTenNV());
-            stmt.setString(3, nhanvien.getNgaySinh());
-            stmt.setString(4, nhanvien.getGioiTinh());
-            stmt.setString(5, nhanvien.getDiaChi());
-            stmt.setString(6, nhanvien.getSoCMND());
-            stmt.setString(7, nhanvien.getSoDienThoai());
-            stmt.setString(8, nhanvien.getEmail());
-            stmt.setString(9, nhanvien.getMaNV());
+                    "UPDATE nhanvien SET " + table + "WHERE MaNV = ?");
+            
+            int index = 1;
+            for (boolean select : selection) {
+                if (select) {
+                    switch (selection.indexOf(select) + 1) {
+                        case 1 ->
+                            stmt.setString(index++, nhanvien.getHinhNV());
+                        case 2 ->
+                            stmt.setString(index++, nhanvien.getTenNV());
+                        case 3 ->
+                            stmt.setString(index++, nhanvien.getNgaySinh());
+                        case 4 ->
+                            stmt.setString(index++, nhanvien.getGioiTinh());
+                        case 5 ->
+                            stmt.setString(index++, nhanvien.getDiaChi());
+                        case 6 ->
+                            stmt.setString(index++, nhanvien.getSoCMND());
+                        case 7 ->
+                            stmt.setString(index++, nhanvien.getSoDienThoai());
+                        case 8 ->
+                            stmt.setString(index++, nhanvien.getEmail());
+                    }
+                }
+            }
+            stmt.setString(index++, nhanvien.getHinhNV());
 
+            stmt.setString(index, nhanvien.getMaNV());
             stmt.executeUpdate();
 
             return true;
