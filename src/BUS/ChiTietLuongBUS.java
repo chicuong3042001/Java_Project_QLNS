@@ -6,6 +6,7 @@ package BUS;
 
 import DAO.ChiTietLuongDAO;
 import DTO.ChiTietLuongDTO;
+import Exception.DuplicatedException;
 import java.util.ArrayList;
 
 /**
@@ -22,7 +23,14 @@ public class ChiTietLuongBUS {
         return chitietluongdao.getChiTietLuong();
     }
     
-    public boolean addChiTietLuong(ChiTietLuongDTO chitietluong) {
+    public boolean addChiTietLuong(ChiTietLuongDTO chitietluong) throws DuplicatedException {
+        ArrayList<ChiTietLuongDTO> list = chitietluongdao.getChiTietLuong();
+        
+        for(ChiTietLuongDTO item : list) {
+            if(item.getMaLuong().equals(chitietluong.getMaLuong())) {
+                throw new DuplicatedException("Mã lương bị trùng ");
+            }
+        }
         return chitietluongdao.addChiTietLuong(chitietluong);
     }
     

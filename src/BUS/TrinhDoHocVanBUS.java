@@ -6,6 +6,7 @@ package BUS;
 
 import DAO.TrinhDoHocVanDAO;
 import DTO.TrinhDoHocVanDTO;
+import Exception.DuplicatedException;
 import java.util.ArrayList;
 
 /**
@@ -22,7 +23,14 @@ public class TrinhDoHocVanBUS {
         return TrinhDoHocVandao.getTrinhDoHocVan();
     }
     
-    public boolean addTrinhDoHocVan(TrinhDoHocVanDTO TrinhDoHocVan) {
+    public boolean addTrinhDoHocVan(TrinhDoHocVanDTO TrinhDoHocVan) throws DuplicatedException {
+        ArrayList<TrinhDoHocVanDTO> list = TrinhDoHocVandao.getTrinhDoHocVan();
+        
+        for(TrinhDoHocVanDTO item : list) {
+            if(item.getMaNV().equals(TrinhDoHocVan.getMaNV()) && item.getMaTDHV().equals(TrinhDoHocVan.getMaTDHV())) {
+                throw new DuplicatedException("Mã trình độ và mã nhân viên bị trùng ");
+            }
+        }
         return TrinhDoHocVandao.addTrinhDoHocVan(TrinhDoHocVan);
     }
     

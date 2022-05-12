@@ -6,6 +6,7 @@ package BUS;
 
 import DAO.ChucVuDAO;
 import DTO.ChucVuDTO;
+import Exception.DuplicatedException;
 import java.util.ArrayList;
 
 /**
@@ -22,7 +23,14 @@ public class ChucVuBUS {
         return chucvudao.getChucVu();
     }
     
-    public boolean addChucVu(ChucVuDTO chucvu) {
+    public boolean addChucVu(ChucVuDTO chucvu) throws DuplicatedException {
+        ArrayList<ChucVuDTO> list = chucvudao.getChucVu();
+        
+        for(ChucVuDTO item : list) {
+            if(item.getMaNV().equals(chucvu.getMaNV()) && item.getMaCV().equals(chucvu.getMaCV())) {
+                throw new DuplicatedException("Mã chức vụ và mã nhân viên bị trùng ");
+            }
+        }
         return chucvudao.addChucVu(chucvu);
     }
     

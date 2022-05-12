@@ -6,6 +6,7 @@ package BUS;
 
 import DAO.KhenThuongKyLuatDAO;
 import DTO.KhenThuongKyLuatDTO;
+import Exception.DuplicatedException;
 import java.util.ArrayList;
 
 /**
@@ -22,7 +23,14 @@ public class KhenThuongKyLuatBUS {
         return khenthuongkyluatdao.getKhenThuongKyLuat();
     }
     
-    public boolean addKhenThuongKyLuat(KhenThuongKyLuatDTO khenthuongkyluat) {
+    public boolean addKhenThuongKyLuat(KhenThuongKyLuatDTO khenthuongkyluat) throws DuplicatedException {
+        ArrayList<KhenThuongKyLuatDTO> list = khenthuongkyluatdao.getKhenThuongKyLuat();
+        
+        for(KhenThuongKyLuatDTO item : list) {
+            if(item.getMaNV().equals(khenthuongkyluat.getMaNV()) && item.getMaKTKL().equals(khenthuongkyluat.getMaKTKL())) {
+                throw new DuplicatedException("Mã khen thưởng kỷ luật và mã nhân viên bị trùng ");
+            }
+        }
         return khenthuongkyluatdao.addKhenThuongKyLuat(khenthuongkyluat);
     }
     

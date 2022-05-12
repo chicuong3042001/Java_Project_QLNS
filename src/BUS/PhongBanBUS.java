@@ -6,6 +6,7 @@ package BUS;
 
 import DAO.PhongBanDAO;
 import DTO.PhongBanDTO;
+import Exception.DuplicatedException;
 import java.util.ArrayList;
 
 /**
@@ -22,7 +23,14 @@ public class PhongBanBUS {
         return phongbandao.getPhongBan();
     }
     
-    public boolean addPhongBan(PhongBanDTO phongban) {
+    public boolean addPhongBan(PhongBanDTO phongban) throws DuplicatedException {
+        ArrayList<PhongBanDTO> list = phongbandao.getPhongBan();
+        
+        for(PhongBanDTO item : list) {
+            if(item.getMaPB().equals(phongban.getMaPB())) {
+                throw new DuplicatedException("Mã phòng ban và mã nhân viên bị trùng ");
+            }
+        }
         return phongbandao.addPhongBan(phongban);
     }
     

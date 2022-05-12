@@ -6,6 +6,7 @@ package BUS;
 
 import DAO.NhanVienDAO;
 import DTO.NhanVienDTO;
+import Exception.DuplicatedException;
 import java.util.ArrayList;
 
 /**
@@ -22,7 +23,14 @@ public class NhanVienBUS {
         return NhanViendao.getNhanVien();
     }
     
-    public boolean addNhanVien(NhanVienDTO NhanVien) {
+    public boolean addNhanVien(NhanVienDTO NhanVien) throws DuplicatedException {
+        ArrayList<NhanVienDTO> list = NhanViendao.getNhanVien();
+        
+        for(NhanVienDTO item : list) {
+            if(item.getMaNV().equals(NhanVien.getMaNV())) {
+                throw new DuplicatedException("Mã nhân viên bị trùng ");
+            }
+        }
         return NhanViendao.addNhanVien(NhanVien);
     }
     

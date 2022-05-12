@@ -6,6 +6,7 @@ package BUS;
 
 import DAO.LuongDAO;
 import DTO.LuongDTO;
+import Exception.DuplicatedException;
 import java.util.ArrayList;
 
 /**
@@ -22,7 +23,14 @@ public class LuongBUS {
         return luongdao.getLuong();
     }
     
-    public boolean addLuong(LuongDTO luong) {
+    public boolean addLuong(LuongDTO luong) throws DuplicatedException {
+        ArrayList<LuongDTO> list = luongdao.getLuong();
+        
+        for(LuongDTO item : list) {
+            if(item.getMaNV().equals(luong.getMaNV()) && item.getMaLuong().equals(luong.getMaLuong())) {
+                throw new DuplicatedException("Mã lương và mã nhân viên bị trùng ");
+            }
+        }
         return luongdao.addLuong(luong);
     }
     

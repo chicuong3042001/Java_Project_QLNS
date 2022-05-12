@@ -6,6 +6,7 @@ package BUS;
 
 import DAO.ChiTietDieuChinhLuongDAO;
 import DTO.ChiTietDieuChinhLuongDTO;
+import Exception.DuplicatedException;
 import java.util.ArrayList;
 
 /**
@@ -22,7 +23,14 @@ public class ChiTietDieuChinhLuongBUS {
         return chitietdieuchinhluongdao.getChiTietDieuChinhLuong();
     }
     
-    public boolean addChiTietDieuChinhLuong(ChiTietDieuChinhLuongDTO chitietdieuchinhluong) {
+    public boolean addChiTietDieuChinhLuong(ChiTietDieuChinhLuongDTO chitietdieuchinhluong) throws DuplicatedException {
+        ArrayList<ChiTietDieuChinhLuongDTO> list = chitietdieuchinhluongdao.getChiTietDieuChinhLuong();
+        
+        for(ChiTietDieuChinhLuongDTO item : list) {
+            if(item.getMaDCL().equals(chitietdieuchinhluong.getMaDCL())) {
+                throw new DuplicatedException("Mã điều chỉnh lương bị trùng ");
+            }
+        }
         return chitietdieuchinhluongdao.addChiTietDieuChinhLuong(chitietdieuchinhluong);
     }
     
