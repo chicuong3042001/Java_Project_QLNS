@@ -49,6 +49,14 @@ public class ChucVuDTO {
     public void setGhiChu(String GhiChu) {
         this.GhiChu = GhiChu;
     }
+
+    public String getMaNV() {
+        return MaNV;
+    }
+
+    public void setMaNV(String MaNV) {
+        this.MaNV = MaNV;
+    }
     
     public ArrayList<Boolean> getSelection() {
         ArrayList<Boolean> result = new ArrayList();

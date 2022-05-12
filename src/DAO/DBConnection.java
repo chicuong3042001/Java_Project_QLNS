@@ -10,7 +10,7 @@ import java.sql.*;
  */
 public class DBConnection {
     public static Connection getConnection(){
-        String url = "jdbc:mysql://localhost:3306/quanlynhansu";
+        String url = "jdbc:mysql://localhost:3307/quanlynhansu";
         String user = "root";
         String password = "";
         try {

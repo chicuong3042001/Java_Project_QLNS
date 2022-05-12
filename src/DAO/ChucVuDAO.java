@@ -16,10 +16,11 @@ import java.util.ArrayList;
  * @author chicu
  */
 public class ChucVuDAO {
+
     Connection conn = null;
     PreparedStatement stmt = null;
     ResultSet rs = null;
-    
+
     public ChucVuDAO() {
     }
 
@@ -30,19 +31,17 @@ public class ChucVuDAO {
             ArrayList<ChucVuDTO> chucvuDAO = new ArrayList();
 
             rs = stmt.executeQuery();
-            while(rs.next()) {
-                chucvuDAO.add(new ChucVuDTO(rs.getString(1), rs.getString(2),rs.getString(3), rs.getString(4)));
+            while (rs.next()) {
+                chucvuDAO.add(new ChucVuDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)));
             }
             return chucvuDAO;
-        }
-        catch(SQLException e) {
+        } catch (SQLException e) {
             return null;
-        }
-        finally {
+        } finally {
             DBConnection.closeConnection(conn, stmt, rs);
         }
     }
-    
+
     public boolean addChucVu(ChucVuDTO chucvu) {
         try {
             conn = DBConnection.getConnection();
@@ -61,7 +60,7 @@ public class ChucVuDAO {
             DBConnection.closeConnection(conn, stmt);
         }
     }
-    
+
     public boolean deleteChucVu(String id) {
         try {
             conn = DBConnection.getConnection();
@@ -79,7 +78,7 @@ public class ChucVuDAO {
             DBConnection.closeConnection(conn, stmt);
         }
     }
-    
+
     public boolean deleteChucVu(ChucVuDTO chucvu) {
         try {
             conn = DBConnection.getConnection();
@@ -97,32 +96,50 @@ public class ChucVuDAO {
             DBConnection.closeConnection(conn, stmt);
         }
     }
-    
+
     public boolean updateChucVu(ChucVuDTO chucvu, ArrayList<Boolean> selection) {
         try {
             String table = "";
-            for (boolean select : selection) {
-                if (select) {
-                    switch (selection.indexOf(select) + 1) {
-                        case 1 -> table += "TenCV = ? ";
-                        case 2 -> table += "GhiChu = ? ";
+            
+            Object[] array = selection.toArray();
+            for (int i = 0; i < array.length; i++) {
+                if ((boolean)array[i]) {
+                    switch (i + 1) {
+                        case 1 ->
+                            table += "MaNV = ? ,";
+                        case 2 ->
+                            table += "TenCV = ? ,";
+                        case 3 ->
+                            table += "GhiChu = ? ,";
                     }
                 }
             }
+            char a = 'a';
+          
+            table = table - String.valueOf(table.charAt(table.length() - 1));
+                   
+            String sql = "UPDATE ChucVu SET " + table + "WHERE MaCV = ?";
+
             conn = DBConnection.getConnection();
-            stmt = conn.prepareStatement(
-                    "UPDATE ChucVu SET " + table + "WHERE MaCV = ?");
-            
+            stmt = conn.prepareStatement(sql
+            );
+
+            System.out.println(sql);
+
             int index = 1;
             for (boolean select : selection) {
                 if (select) {
                     switch (selection.indexOf(select) + 1) {
-                        case 1 -> stmt.setString(index++, chucvu.getTenCV());
-                        case 2 -> stmt.setString(index++, chucvu.getGhiChu());
+                        case 1 ->
+                            stmt.setString(index++, chucvu.getMaCV());
+                        case 2 ->
+                            stmt.setString(index++, chucvu.getTenCV());
+                        case 3 ->
+                            stmt.setString(index++, chucvu.getGhiChu());
                     }
                 }
-            }           
-            
+            }
+
             stmt.setString(index, chucvu.getMaCV());
             stmt.executeUpdate();
 
