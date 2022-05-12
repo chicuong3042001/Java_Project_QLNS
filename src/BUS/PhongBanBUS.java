@@ -35,10 +35,6 @@ public class PhongBanBUS {
     }
     
     public boolean updatePhongBan(PhongBanDTO phongban) {
-        if("".equals(phongban.getSoDienThoai()))
-            phongban.setSoDienThoai("SoDienThoai");
-        if("".equals(phongban.getTenPB()))
-            phongban.setTenPB("TenPB");
-        return phongbandao.updatePhongBan(phongban);
+        return phongbandao.updatePhongBan(phongban, phongban.getSelection());
     }
 }
