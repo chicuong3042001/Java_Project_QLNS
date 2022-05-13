@@ -97,36 +97,38 @@ public class DieuChinhLuongDAO {
         }
     }
 
-    public boolean updateDieuChinhLuong(DieuChinhLuongDTO dieuchinhluong, Object[] selection) {
+    public boolean updateDieuChinhLuong(DieuChinhLuongDTO dieuchinhluong) {
         try {
+            Object[] selection = dieuchinhluong.getSelection();
+            
             String table = "";
             for (int i = 0; i < selection.length; i++) {
                 if ((boolean) selection[i]) {
                     switch (i + 1) {
                         case 1 ->
-                            table += "MaNV = ? ";
-                        case 2 ->
-                            table += "HeSoLuong = ? ";
+                            table += "HeSoLuong = ? ,";
                     }
                 }
             }
+            table = table.substring(0, table.length() - 1);
+
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "UPDATE dieuchinhluong SET " + table + "WHERE MaDCL = ?");
+                    "UPDATE dieuchinhluong SET " + table + "WHERE MaDCL = ? AND MaNV = ?");
 
             int index = 1;
             for (int i = 0; i < selection.length; i++) {
                 if ((boolean) selection[i]) {
                     switch (i + 1) {
                         case 1 ->
-                            stmt.setString(index++, dieuchinhluong.getMaNV());
-                        case 2 ->
                             stmt.setDouble(index++, dieuchinhluong.getHeSoLuongMoi());
                     }
                 }
             }
 
             stmt.setString(index++, dieuchinhluong.getMaDCL());
+            stmt.setString(index++, dieuchinhluong.getMaNV());
+
             stmt.executeUpdate();
 
             return true;

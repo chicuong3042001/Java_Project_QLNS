@@ -97,17 +97,19 @@ public class ChiTietDieuChinhLuongDAO {
         }
     }
 
-    public boolean updateChiTietDieuChinhLuong(ChiTietDieuChinhLuongDTO chitietdieuchinhluong, Object[] selection) {
+    public boolean updateChiTietDieuChinhLuong(ChiTietDieuChinhLuongDTO chitietdieuchinhluong) {
         try {
+            Object[] selection = chitietdieuchinhluong.getSelection();
             String table = "";
             for (int i = 0; i < selection.length; i++) {
                 if ((boolean)selection[i]) {
                     switch (i + 1) {
-                        case 1 -> table += "NgayDieuChinh = ? ";
-                        case 2 -> table += "HeSoLuongMoi = ? ";
+                        case 1 -> table += "NgayDieuChinh = ? ,";
+                        case 2 -> table += "HeSoLuongMoi = ? ,";
                     }
                 }
             }
+            table = table.substring(0, table.length() - 1);
 
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement("UPDATE Chitietdcl SET" + table + " WHERE MaDCL = ?");

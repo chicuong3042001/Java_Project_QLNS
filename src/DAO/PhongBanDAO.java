@@ -97,19 +97,23 @@ public class PhongBanDAO {
         }
     }
 
-    public boolean updatePhongBan(PhongBanDTO phongban, Object[] selection) {
+    public boolean updatePhongBan(PhongBanDTO phongban) {
         try {
+            Object[] selection = phongban.getSelection();
+
             String table = "";
             for (int i = 0; i < selection.length; i++) {
                 if ((boolean) selection[i]) {
                     switch (i + 1) {
                         case 1 ->
-                            table += "TenPB = ? ";
+                            table += "TenPB = ? ,";
                         case 2 ->
-                            table += "SoDienThoai = ? ";
+                            table += "SoDienThoai = ? ,";
                     }
                 }
             }
+            table = table.substring(0, table.length() - 1);
+
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
                     "UPDATE PhongBan SET " + table + "WHERE MaPB = ?");

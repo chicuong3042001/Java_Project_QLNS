@@ -97,36 +97,36 @@ public class TrinhDoHocVanDAO {
         }
     }
 
-    public boolean updateTrinhDoHocVan(TrinhDoHocVanDTO trinhdohocvan, Object[] selection) {
+    public boolean updateTrinhDoHocVan(TrinhDoHocVanDTO trinhdohocvan) {
         try {
+            Object[] selection = trinhdohocvan.getSelection();
+            
             String table = "";
             for (int i = 0; i < selection.length; i++) {
                 if ((boolean)selection[i]) {
                     switch (i + 1) {
                         case 1 ->
-                            table += "MaNV = ? ";
-                        case 2 ->
-                            table += "HeSoLuongMoi = ? ";
+                            table += "TenTDHV = ? ,";
                     }
                 }
             }
+            table = table.substring(0, table.length() - 1);
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "UPDATE trinhdohocvan SET " + table + "WHERE MaTDHV = ?");
+                    "UPDATE trinhdohocvan SET " + table + "WHERE MaTDHV = ? AND MaNV");
 
             int index = 1;
             for (int i = 0; i < selection.length; i++) {
                 if ((boolean)selection[i]) {
                     switch (i + 1) {
                         case 1 ->
-                            stmt.setString(index++, trinhdohocvan.getMaNV());
-                        case 2 ->
                             stmt.setString(index++, trinhdohocvan.getTenTDHV());
                     }
                 }
             }
 
             stmt.setString(index++, trinhdohocvan.getMaTDHV());
+            stmt.setString(index++, trinhdohocvan.getMaNV());
             stmt.executeUpdate();
 
             return true;

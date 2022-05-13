@@ -176,8 +176,9 @@ public class NhanVienDAO {
         }
     }
 
-    public boolean updateNhanVien(NhanVienDTO nhanvien, Object[] selection) {
+    public boolean updateNhanVien(NhanVienDTO nhanvien) {
         try {
+            Object[] selection = nhanvien.getSelection();
             String table = "";
             for (int i = 0; i < selection.length; i++) {
                 if ((boolean) selection[i]) {

@@ -97,36 +97,37 @@ public class LuongDAO {
         }
     }
 
-    public boolean updateLuong(LuongDTO luong, Object[] selection) {
+    public boolean updateLuong(LuongDTO luong) {
         try {
+            Object[] selection = luong.getSelection();
+            
             String table = "";
             for (int i = 0; i < selection.length; i++) {
                 if ((boolean) selection[i]) {
                     switch (i + 1) {
                         case 1 ->
-                            table += "MaNV = ? ";
-                        case 2 ->
-                            table += "HeSoLuongMoi = ? ";
+                            table += "TienLuong = ? ,";
                     }
                 }
             }
+            table = table.substring(0, table.length() - 1);
+
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "UPDATE luong SET " + table + "WHERE MaLuong = ?");
+                    "UPDATE luong SET " + table + "WHERE MaLuong = ? AND MaNV");
 
             int index = 1;
             for (int i = 0; i < selection.length; i++) {
                 if ((boolean) selection[i]) {
                     switch (i + 1) {
                         case 1 ->
-                            stmt.setString(index++, luong.getMaNV());
-                        case 2 ->
                             stmt.setDouble(index++, luong.getTienLuong());
                     }
                 }
             }
 
-            stmt.setString(index, luong.getMaLuong());
+            stmt.setString(index++, luong.getMaLuong());
+            stmt.setString(index++, luong.getMaNV());
             stmt.executeUpdate();
 
             return true;

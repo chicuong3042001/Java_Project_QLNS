@@ -100,23 +100,25 @@ public class ChiTietKhenThuongKyLuatDAO {
         }
     }
 
-    public boolean updateChiTietKhenThuongKyLuat(ChiTietKhenThuongKyLuatDTO chitietkhenthuongkiluat, Object[] selection) {
+    public boolean updateChiTietKhenThuongKyLuat(ChiTietKhenThuongKyLuatDTO chitietkhenthuongkiluat) {
         try {
+            Object[] selection = chitietkhenthuongkiluat.getSelection();
             String table = "";
             for (int i = 0; i < selection.length; i++) {
                 if ((boolean) selection[i]) {
                     switch (i + 1) {
                         case 1 ->
-                            table += "SoTien = ? ";
+                            table += "SoTien = ? ,";
                         case 2 ->
-                            table += "NgayQuyetDinh = ? ";
+                            table += "NgayQuyetDinh = ? ,";
                         case 3 ->
-                            table += "LoaiQuyetDinh = ? ";
+                            table += "LoaiQuyetDinh = ? ,";
                         case 4 ->
-                            table += "NoiDung = ? ";
+                            table += "NoiDung = ? ,";
                     }
                 }
             }
+            table = table.substring(0, table.length() - 1);
 
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(

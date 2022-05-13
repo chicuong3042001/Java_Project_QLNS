@@ -97,36 +97,37 @@ public class KhenThuongKyLuatDAO {
         }
     }
 
-    public boolean updateKhenThuongKyLuat(KhenThuongKyLuatDTO khenthuongkyluat, Object[] selection) {
+    public boolean updateKhenThuongKyLuat(KhenThuongKyLuatDTO khenthuongkyluat) {
         try {
+            Object[] selection = khenthuongkyluat.getSelection();
+            
             String table = "";
             for (int i = 0; i < selection.length; i++) {
                 if ((boolean) selection[i]) {
                     switch (i + 1) {
                         case 1 ->
-                            table += "MaNV = ? ";
-                        case 2 ->
-                            table += "SoTien = ? ";
+                            table += "SoTien = ? ,";
                     }
                 }
             }
+            table = table.substring(0, table.length() - 1);
+
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "UPDATE khenthuongkyluat SET " + table + "WHERE MaKTKL = ?");
+                    "UPDATE khenthuongkyluat SET " + table + "WHERE MaKTKL = ? AND MaNV");
 
             int index = 1;
             for (int i = 0; i < selection.length; i++) {
                 if ((boolean) selection[i]) {
                     switch (i + 1) {
                         case 1 ->
-                            stmt.setString(index++, khenthuongkyluat.getMaNV());
-                        case 2 ->
                             stmt.setDouble(index++, khenthuongkyluat.getSoTien());
                     }
                 }
             }
 
-            stmt.setString(index, khenthuongkyluat.getMaKTKL());
+            stmt.setString(index++, khenthuongkyluat.getMaKTKL());
+            stmt.setString(index++, khenthuongkyluat.getMaNV());
             stmt.executeUpdate();
 
             return true;
