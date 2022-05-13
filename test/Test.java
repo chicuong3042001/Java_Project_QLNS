@@ -47,10 +47,7 @@ public class Test {
     public static void checkImport() {
         try {
             NhanVienExcel excel = new NhanVienExcel();
-            ArrayList<NhanVienDTO> nhanvien = excel.importNhanVien();
-            for(NhanVienDTO item : nhanvien) {
-                System.out.println(item.toString());
-            }
+            excel.importNhanVien("NhanSu.xlsx");
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         } catch (IOException e) {
@@ -59,6 +56,18 @@ public class Test {
         }
     }
 
+    public static void checkExport() {
+        try {
+            NhanVienExcel excel = new NhanVienExcel();
+            excel.exportNhanVien("NhanSu.xlsx");
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+
+        }
+    }
+    
     public static void main(String[] arg) {
         checkImport();
     }
