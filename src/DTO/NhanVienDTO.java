@@ -5,6 +5,7 @@
 package DTO;
 
 import java.util.ArrayList;
+import java.sql.Date;
 
 /**
  *
@@ -64,6 +65,10 @@ public class NhanVienDTO {
 
     public String getNgaySinh() {
         return NgaySinh;
+    }
+    
+    public Date getNgaySinhSQL() {
+        return Date.valueOf(NgaySinh);
     }
 
     public void setNgaySinh(String NgaySinh) {

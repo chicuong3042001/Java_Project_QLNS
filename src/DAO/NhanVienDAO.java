@@ -51,14 +51,14 @@ public class NhanVienDAO {
             stmt.setString(1, nhanvien.getMaNV());
             stmt.setString(2, nhanvien.getHinhNV());
             stmt.setString(3, nhanvien.getTenNV());
-            stmt.setString(4, nhanvien.getNgaySinh());
+            stmt.setDate(4, nhanvien.getNgaySinhSQL());
             stmt.setString(5, nhanvien.getGioiTinh());
             stmt.setString(6, nhanvien.getDiaChi());
             stmt.setString(7, nhanvien.getSoCMND());
             stmt.setString(8, nhanvien.getSoDienThoai());
             stmt.setString(9, nhanvien.getEmail());
             stmt.executeUpdate();
-
+         
             return true;
 
         } catch (SQLException e) {
