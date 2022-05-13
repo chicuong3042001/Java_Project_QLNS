@@ -43,7 +43,7 @@ public class KhenThuongKyLuatBUS {
     }
     
     public boolean updateKhenThuongKyLuat(KhenThuongKyLuatDTO khenthuongkyluat) {
-        return khenthuongkyluatdao.updateKhenThuongKyLuat(khenthuongkyluat, khenthuongkyluat.getSelection());
+        return khenthuongkyluatdao.updateKhenThuongKyLuat(khenthuongkyluat);
     }
 
 }

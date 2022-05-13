@@ -43,7 +43,7 @@ public class DieuChinhLuongBUS {
     }
     
     public boolean updateDieuChinhLuong(DieuChinhLuongDTO dieuchinhluong) {
-        return dieuchinhluongdao.updateDieuChinhLuong(dieuchinhluong, dieuchinhluong.getSelection());
+        return dieuchinhluongdao.updateDieuChinhLuong(dieuchinhluong);
     }
 
 }

@@ -44,7 +44,7 @@ public class ChucVuBUS {
     }
 
     public boolean updateChucVu(ChucVuDTO chucvu) {
-        return chucvudao.updateChucVu(chucvu, chucvu.getSelection());
+        return chucvudao.updateChucVu(chucvu);
     }
 
 }

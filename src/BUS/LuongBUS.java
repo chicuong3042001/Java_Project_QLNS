@@ -43,7 +43,7 @@ public class LuongBUS {
     }
     
     public boolean updateLuong(LuongDTO luong) {
-        return luongdao.updateLuong(luong, luong.getSelection());
+        return luongdao.updateLuong(luong);
     }
 
 }

@@ -43,6 +43,6 @@ public class PhongBanBUS {
     }
     
     public boolean updatePhongBan(PhongBanDTO phongban) {
-        return phongbandao.updatePhongBan(phongban, phongban.getSelection());
+        return phongbandao.updatePhongBan(phongban);
     }
 }

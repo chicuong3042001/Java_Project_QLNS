@@ -47,7 +47,7 @@ public class NhanVienBUS {
     }
     
     public boolean updateNhanVien(NhanVienDTO NhanVien) {
-        return NhanViendao.updateNhanVien(NhanVien, NhanVien.getSelection());
+        return NhanViendao.updateNhanVien(NhanVien);
     }
 
 }

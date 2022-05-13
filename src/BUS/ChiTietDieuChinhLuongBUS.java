@@ -43,7 +43,7 @@ public class ChiTietDieuChinhLuongBUS {
     }
     
     public boolean updateChiTietDieuChinhLuong(ChiTietDieuChinhLuongDTO chitietdieuchinhluong) {
-        return chitietdieuchinhluongdao.updateChiTietDieuChinhLuong(chitietdieuchinhluong, chitietdieuchinhluong.getSelection());
+        return chitietdieuchinhluongdao.updateChiTietDieuChinhLuong(chitietdieuchinhluong);
     }
 
 }

@@ -43,7 +43,7 @@ public class TrinhDoHocVanBUS {
     }
     
     public boolean updateTrinhDoHocVan(TrinhDoHocVanDTO TrinhDoHocVan) {
-        return TrinhDoHocVandao.updateTrinhDoHocVan(TrinhDoHocVan, TrinhDoHocVan.getSelection());
+        return TrinhDoHocVandao.updateTrinhDoHocVan(TrinhDoHocVan);
     }
 
 }
