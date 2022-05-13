@@ -50,7 +50,6 @@ public class TrinhDoHocVanDTO {
     
     public Object[] getSelection() {
         ArrayList<Boolean> result = new ArrayList();
-        result.add(this.MaNV != null);
         result.add(this.TenTDHV != null);
 
         Object[] result2 = result.toArray();

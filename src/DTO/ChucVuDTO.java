@@ -60,7 +60,6 @@ public class ChucVuDTO {
     
     public Object[] getSelection() {
         ArrayList<Boolean> result = new ArrayList();
-        result.add(this.MaNV != null);
         result.add(this.TenCV != null);
         result.add(this.GhiChu != null);
 
