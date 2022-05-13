@@ -22,6 +22,10 @@ public class NhanVienBUS {
     public ArrayList<NhanVienDTO> getNhanVien() {
         return NhanViendao.getNhanVien();
     }
+    //Tìm kiếm nâng cao
+    public ArrayList<NhanVienDTO> getNhanVien(NhanVienDTO data) {
+        return NhanViendao.getNhanVien(data);
+    }
     
     public boolean addNhanVien(NhanVienDTO NhanVien) throws DuplicatedException {
         ArrayList<NhanVienDTO> list = NhanViendao.getNhanVien();
