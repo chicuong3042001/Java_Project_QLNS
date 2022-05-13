@@ -1,7 +1,13 @@
 
-import DAO.ChucVuDAO;
+import BUS.ChucVuBUS;
 import DTO.ChucVuDTO;
+import DTO.NhanVienDTO;
+import Excel.NhanVienExcel;
+import Exception.DuplicatedException;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
+
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -13,23 +19,47 @@ import java.util.ArrayList;
  */
 public class Test {
 
-    public static void main(String[] arg) {
-        ChucVuDAO chucvudao = new ChucVuDAO();
-        ChucVuDTO chucvudto = new ChucVuDTO("001", "0001", "Giam doc", "");
-        chucvudao.addChucVu(chucvudto);
+    public static void checkDAO() {
+        try {
+            ChucVuBUS chucvudao = new ChucVuBUS();
+            ChucVuDTO chucvudto = new ChucVuDTO("001", "0001", "Giam doc", "Lienhung");
+            boolean add = chucvudao.addChucVu(chucvudto);
+            System.out.println(add);
+            ChucVuDTO updatedto = new ChucVuDTO();
+            updatedto.setMaCV("001");
+            updatedto.setMaNV("0001");
+            updatedto.setGhiChu("LienHung12");
+            updatedto.setTenCV("GiamDoc212");
 
-        ChucVuDTO updatedto = new ChucVuDTO();
-        updatedto.setMaCV("001");
-        updatedto.setMaNV("0002");
-        updatedto.setGhiChu("LienHu2");
-        updatedto.setTenCV("GiamDoc2");
-        
-        boolean updateChucVu = chucvudao.updateChucVu(updatedto,updatedto.getSelection());
+            boolean updateChucVu = chucvudao.updateChucVu(updatedto);
 
-        ArrayList<ChucVuDTO> chucvu = chucvudao.getChucVu();
-        
-        for (ChucVuDTO a : chucvu) {
-            System.out.println(a.getMaCV() + "\t" + a.getTenCV()+ "\t" + a.getGhiChu());
+            System.out.println(updateChucVu);
+            ArrayList<ChucVuDTO> chucvu = chucvudao.getChucVu();
+
+            for (ChucVuDTO a : chucvu) {
+                System.out.println(a.getMaCV() + "\t" + a.getTenCV() + "\t" + a.getGhiChu());
+            }
+        } catch (DuplicatedException ex) {
+            System.out.println(ex.getMessage());
         }
+    }
+
+    public static void checkImport() {
+        try {
+            NhanVienExcel excel = new NhanVienExcel();
+            ArrayList<NhanVienDTO> nhanvien = excel.importNhanVien();
+            for(NhanVienDTO item : nhanvien) {
+                System.out.println(item.toString());
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+
+        }
+    }
+
+    public static void main(String[] arg) {
+        checkImport();
     }
 }

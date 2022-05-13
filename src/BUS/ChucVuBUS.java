@@ -14,34 +14,35 @@ import java.util.ArrayList;
  * @author chicu
  */
 public class ChucVuBUS {
+
     ChucVuDAO chucvudao = new ChucVuDAO();
-    
+
     public ChucVuBUS() {
     }
-    
+
     public ArrayList<ChucVuDTO> getChucVu() {
         return chucvudao.getChucVu();
     }
-    
+
     public boolean addChucVu(ChucVuDTO chucvu) throws DuplicatedException {
         ArrayList<ChucVuDTO> list = chucvudao.getChucVu();
-        
-        for(ChucVuDTO item : list) {
-            if(item.getMaNV().equals(chucvu.getMaNV()) && item.getMaCV().equals(chucvu.getMaCV())) {
+
+        for (ChucVuDTO item : list) {
+            if (item.getMaNV().equals(chucvu.getMaNV()) && item.getMaCV().equals(chucvu.getMaCV())) {
                 throw new DuplicatedException("Mã chức vụ và mã nhân viên bị trùng ");
             }
         }
         return chucvudao.addChucVu(chucvu);
     }
-    
+
     public boolean deleteChucVu(String id) {
         return chucvudao.deleteChucVu(id);
     }
-    
+
     public boolean deleteChucVu(ChucVuDTO chucvu) {
         return chucvudao.deleteChucVu(chucvu);
     }
-    
+
     public boolean updateChucVu(ChucVuDTO chucvu) {
         return chucvudao.updateChucVu(chucvu, chucvu.getSelection());
     }

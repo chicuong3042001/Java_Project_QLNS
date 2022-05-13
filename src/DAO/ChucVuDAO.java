@@ -46,10 +46,11 @@ public class ChucVuDAO {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "INSERT INTO ChucVu (MaCV, TenCV, GhiChu) VALUES (?, ?, ?)");
+                    "INSERT INTO ChucVu (MaCV, MaNV, TenCV, GhiChu) VALUES (?, ?, ?, ?)");
             stmt.setString(1, chucvu.getMaCV());
-            stmt.setString(2, chucvu.getTenCV());
-            stmt.setString(3, chucvu.getGhiChu());
+            stmt.setString(2, chucvu.getMaNV());
+            stmt.setString(3, chucvu.getTenCV());
+            stmt.setString(4, chucvu.getGhiChu());
             stmt.executeUpdate();
 
             return true;
@@ -121,7 +122,6 @@ public class ChucVuDAO {
             stmt = conn.prepareStatement(sql
             );
 
-            System.out.println(sql);
 
             int index = 1;
             for (int i = 0; i < selection.length; i++) {

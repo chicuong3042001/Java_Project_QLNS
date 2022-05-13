@@ -110,6 +110,13 @@ public class NhanVienDTO {
         this.Email = Email;
     }
 
+    @Override
+    public String toString() {
+        return "NhanVienDTO{" + "MaNV=" + MaNV + ", HinhNV=" + HinhNV + ", TenNV=" + TenNV + ", NgaySinh=" + NgaySinh + ", GioiTinh=" + GioiTinh + ", DiaChi=" + DiaChi + ", SoCMND=" + SoCMND + ", SoDienThoai=" + SoDienThoai + ", Email=" + Email + '}';
+    }
+
+    
+    
     public Object[] getSelection() {
         ArrayList<Boolean> result = new ArrayList();
         result.add(this.HinhNV != null);

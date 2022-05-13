@@ -108,6 +108,11 @@ public class FrmChucVu extends javax.swing.JPanel {
         rankAddBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/add.png"))); // NOI18N
         rankAddBtn.setText("Thêm");
         rankAddBtn.setPreferredSize(new java.awt.Dimension(90, 30));
+        rankAddBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rankAddBtnActionPerformed(evt);
+            }
+        });
 
         rankNameLabel.setText("Tên chức vụ:");
 
@@ -157,7 +162,7 @@ public class FrmChucVu extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rankCancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rankSaveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(238, Short.MAX_VALUE))
+                .addContainerGap(240, Short.MAX_VALUE))
         );
 
         rankTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -351,6 +356,10 @@ public class FrmChucVu extends javax.swing.JPanel {
         rankIDField.setText("");
         rankNameField.setText("");
     }//GEN-LAST:event_rankCancelBtnActionPerformed
+
+    private void rankAddBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rankAddBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rankAddBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
