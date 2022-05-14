@@ -1,6 +1,5 @@
 CREATE TABLE `chucvu` (
   `MaCV` varchar(255) PRIMARY KEY,
-  `MaNV` varchar(255),
   `TenCV` varchar(255),
   `GhiChu` varchar(255)
 );
@@ -35,19 +34,20 @@ CREATE TABLE `nhanvien` (
   `DiaChi` varchar(255),
   `SoCMND` varchar(255),
   `SoDienThoai` varchar(255),
-  `Email` varchar(255)
+  `Email` varchar(255),
+  `MaPB` varchar(255),
+  `MaCV` varchar(255),
+  `MaTDHV` varchar(255)
 );
 
 CREATE TABLE `phongban` (
   `MaPB` varchar(255) PRIMARY KEY,
-  `MaNV` varchar(255),
   `TenPB` varchar(255),
   `SoDienThoai` varchar(255)
 );
 
 CREATE TABLE `trinhdohv` (
   `MaTDHV` varchar(255) PRIMARY KEY,
-  `MaNV` varchar(255),
   `TenTDHV` varchar(255)
 );
 
@@ -81,12 +81,12 @@ ALTER TABLE `chitietluong` ADD FOREIGN KEY (`MaLuong`) REFERENCES `luong` (`MaLu
 
 ALTER TABLE `luong` ADD FOREIGN KEY (`MaNV`) REFERENCES `nhanvien` (`MaNV`);
 
-ALTER TABLE `chucvu` ADD FOREIGN KEY (`MaNV`) REFERENCES `nhanvien` (`MaNV`);
-
-ALTER TABLE `phongban` ADD FOREIGN KEY (`MaNV`) REFERENCES `nhanvien` (`MaNV`);
-
-ALTER TABLE `trinhdohv` ADD FOREIGN KEY (`MaNV`) REFERENCES `nhanvien` (`MaNV`);
-
 ALTER TABLE `dieuchinhluong` ADD FOREIGN KEY (`MaNV`) REFERENCES `nhanvien` (`MaNV`);
 
 ALTER TABLE `khenthuongkyluat` ADD FOREIGN KEY (`MaNV`) REFERENCES `nhanvien` (`MaNV`);
+
+ALTER TABLE `nhanvien` ADD FOREIGN KEY (`MaCV`) REFERENCES `chucvu` (`MaCV`);
+
+ALTER TABLE `nhanvien` ADD FOREIGN KEY (`MaPB`) REFERENCES `phongban` (`MaPB`);
+
+ALTER TABLE `nhanvien` ADD FOREIGN KEY (`MaTDHV`) REFERENCES `trinhdohv` (`MaTDHV`);
