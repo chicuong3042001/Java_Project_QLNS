@@ -28,7 +28,7 @@ public class PhongBanBUS {
         
         for(PhongBanDTO item : list) {
             if(item.getMaPB().equals(phongban.getMaPB())) {
-                throw new DuplicatedException("Mã phòng ban và mã nhân viên bị trùng ");
+                throw new DuplicatedException("Mã phòng ban bị trùng ");
             }
         }
         return phongbandao.addPhongBan(phongban);

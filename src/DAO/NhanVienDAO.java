@@ -33,8 +33,10 @@ public class NhanVienDAO {
 
             ArrayList<NhanVienDTO> nhanvien = new ArrayList();
             while (rs.next()) {
-                nhanvien.add(new NhanVienDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-                        rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9)));
+                nhanvien.add(new NhanVienDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.
+                        getString(5),
+                        rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.
+                        getString(11), rs.getString(12)));
             }
             return nhanvien;
         } catch (SQLException e) {
@@ -44,10 +46,10 @@ public class NhanVienDAO {
         }
     }
 
-    public ArrayList<NhanVienDTO> getNhanVien(NhanVienDTO data) {
+    public ArrayList<NhanVienDTO> getNhanVien(NhanVienDTO nhanvien) {
         try {
             String table = "";
-            Object[] selection = data.getSelection();
+            Object[] selection = nhanvien.getSelection();
             for (int i = 0; i < selection.length; i++) {
                 if ((boolean) selection[i]) {
                     switch (i + 1) {
@@ -67,6 +69,12 @@ public class NhanVienDAO {
                             table += "SoDienThoai = ? ,";
                         case 8 ->
                             table += "Email = ? ,";
+                        case 9 ->
+                            table += "MaPB = ? ,";
+                        case 10 ->
+                            table += "MaCV = ? ,";
+                        case 11 ->
+                            table += "MaTDHV = ? ,";
                     }
                 }
             }
@@ -80,34 +88,42 @@ public class NhanVienDAO {
                 if ((boolean) selection[i]) {
                     switch (i + 1) {
                         case 1 ->
-                            stmt.setString(index++, data.getHinhNV());
+                            stmt.setString(index++, nhanvien.getHinhNV());
                         case 2 ->
-                            stmt.setString(index++, data.getTenNV());
+                            stmt.setString(index++, nhanvien.getTenNV());
                         case 3 ->
-                            stmt.setDate(index++, data.getNgaySinhSQL());
+                            stmt.setDate(index++, nhanvien.getNgaySinhSQL());
                         case 4 ->
-                            stmt.setString(index++, data.getGioiTinh());
+                            stmt.setString(index++, nhanvien.getGioiTinh());
                         case 5 ->
-                            stmt.setString(index++, data.getDiaChi());
+                            stmt.setString(index++, nhanvien.getDiaChi());
                         case 6 ->
-                            stmt.setString(index++, data.getSoCMND());
+                            stmt.setString(index++, nhanvien.getSoCMND());
                         case 7 ->
-                            stmt.setString(index++, data.getSoDienThoai());
+                            stmt.setString(index++, nhanvien.getSoDienThoai());
                         case 8 ->
-                            stmt.setString(index++, data.getEmail());
+                            stmt.setString(index++, nhanvien.getEmail());
+                        case 9 ->
+                            stmt.setString(index++, nhanvien.getMaPB());
+                        case 10 ->
+                            stmt.setString(index++, nhanvien.getMaCV());
+                        case 11 ->
+                            stmt.setString(index++, nhanvien.getMaTDHV());
                     }
                 }
             }
 
             rs = stmt.executeQuery();
 
-            ArrayList<NhanVienDTO> nhanvien = new ArrayList();
+            ArrayList<NhanVienDTO> list = new ArrayList();
             while (rs.next()) {
-                nhanvien.add(new NhanVienDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-                        rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9)));
+                list.add(new NhanVienDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.
+                        getString(5),
+                        rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.
+                        getString(11), rs.getString(12)));
             }
 
-            return nhanvien;
+            return list;
         } catch (SQLException e) {
             return null;
         } finally {
@@ -119,7 +135,7 @@ public class NhanVienDAO {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "INSERT INTO nhanvien (MaNV, HinhNV, TenNV, NgaySinh, GioiTinh, DiaChi, SoCMND, SoDienThoai, Email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    "INSERT INTO nhanvien (MaNV, HinhNV, TenNV, NgaySinh, GioiTinh, DiaChi, SoCMND, SoDienThoai, Email, MaPB, MaCV, MaTDHV) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             stmt.setString(1, nhanvien.getMaNV());
             stmt.setString(2, nhanvien.getHinhNV());
             stmt.setString(3, nhanvien.getTenNV());
@@ -129,11 +145,15 @@ public class NhanVienDAO {
             stmt.setString(7, nhanvien.getSoCMND());
             stmt.setString(8, nhanvien.getSoDienThoai());
             stmt.setString(9, nhanvien.getEmail());
+            stmt.setString(10, nhanvien.getMaPB());
+            stmt.setString(11, nhanvien.getMaCV());
+            stmt.setString(12, nhanvien.getMaTDHV());
             stmt.executeUpdate();
 
             return true;
 
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
             return false;
         } finally {
             DBConnection.closeConnection(conn, stmt);
@@ -199,6 +219,12 @@ public class NhanVienDAO {
                             table += "SoDienThoai = ? ,";
                         case 8 ->
                             table += "Email = ? ,";
+                        case 9 ->
+                            table += "MaPB = ? ,";
+                        case 10 ->
+                            table += "MaCV = ? ,";
+                        case 11 ->
+                            table += "MaTDHV = ? ,";
                     }
                 }
             }
@@ -228,6 +254,12 @@ public class NhanVienDAO {
                             stmt.setString(index++, nhanvien.getSoDienThoai());
                         case 8 ->
                             stmt.setString(index++, nhanvien.getEmail());
+                        case 9 ->
+                            stmt.setString(index++, nhanvien.getMaPB());
+                        case 10 ->
+                            stmt.setString(index++, nhanvien.getMaCV());
+                        case 11 ->
+                            stmt.setString(index++, nhanvien.getMaTDHV());
                     }
                 }
             }

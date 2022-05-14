@@ -27,7 +27,7 @@ public class TrinhDoHocVanBUS {
         ArrayList<TrinhDoHocVanDTO> list = TrinhDoHocVandao.getTrinhDoHocVan();
         
         for(TrinhDoHocVanDTO item : list) {
-            if(item.getMaNV().equals(TrinhDoHocVan.getMaNV()) && item.getMaTDHV().equals(TrinhDoHocVan.getMaTDHV())) {
+            if(item.getMaTDHV().equals(TrinhDoHocVan.getMaTDHV())) {
                 throw new DuplicatedException("Mã trình độ và mã nhân viên bị trùng ");
             }
         }

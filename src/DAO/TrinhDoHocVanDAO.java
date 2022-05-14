@@ -32,7 +32,7 @@ public class TrinhDoHocVanDAO {
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                trinhdohocvan.add(new TrinhDoHocVanDTO(rs.getString(1), rs.getString(2), rs.getString(3)));
+                trinhdohocvan.add(new TrinhDoHocVanDTO(rs.getString(1), rs.getString(2)));
             }
             return trinhdohocvan;
         } catch (SQLException e) {
@@ -46,9 +46,8 @@ public class TrinhDoHocVanDAO {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "INSERT INTO trinhdohocvan (MaTDHV, MaNV, TenTDHV) VALUES (?, ?, ?)");
+                    "INSERT INTO trinhdohocvan (MaTDHV, TenTDHV) VALUES (?, ?, ?)");
             stmt.setString(1, trinhdohocvan.getMaTDHV());
-            stmt.setString(2, trinhdohocvan.getMaNV());
             stmt.setString(3, trinhdohocvan.getTenTDHV());
             stmt.executeUpdate();
 
@@ -113,7 +112,7 @@ public class TrinhDoHocVanDAO {
             table = table.substring(0, table.length() - 1);
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "UPDATE trinhdohocvan SET " + table + "WHERE MaTDHV = ? AND MaNV");
+                    "UPDATE trinhdohocvan SET " + table + "WHERE MaTDHV = ?");
 
             int index = 1;
             for (int i = 0; i < selection.length; i++) {
@@ -126,7 +125,6 @@ public class TrinhDoHocVanDAO {
             }
 
             stmt.setString(index++, trinhdohocvan.getMaTDHV());
-            stmt.setString(index++, trinhdohocvan.getMaNV());
             stmt.executeUpdate();
 
             return true;

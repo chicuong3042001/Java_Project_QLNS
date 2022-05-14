@@ -12,15 +12,13 @@ import java.util.ArrayList;
  */
 public class LuongDTO {
     private String MaLuong;
-    private String MaNV;
     private double TienLuong;
 
     public LuongDTO() {
     }
 
-    public LuongDTO(String MaLuong, String MaNV, double TienLuong) {
+    public LuongDTO(String MaLuong, double TienLuong) {
         this.MaLuong = MaLuong;
-        this.MaNV = MaNV;
         this.TienLuong = TienLuong;
     }
 
@@ -39,18 +37,9 @@ public class LuongDTO {
     public void setTienLuong(double TienLuong) {
         this.TienLuong = TienLuong;
     }
-
-    public String getMaNV() {
-        return MaNV;
-    }
-
-    public void setMaNV(String MaNV) {
-        this.MaNV = MaNV;
-    }
     
     public Object[] getSelection() {
         ArrayList<Boolean> result = new ArrayList();
-        result.add(this.MaNV != null);
         result.add(Double.isNaN(this.TienLuong));
 
         Object[] result2 = result.toArray();

@@ -35,6 +35,9 @@ public class NhanVienExcel {
     public static final int COLUMN_INDEX_SOCMND = 6;
     public static final int COLUMN_INDEX_SODIENTHOAI = 7;
     public static final int COLUMN_INDEX_EMAIL = 8;
+    public static final int COLUMN_INDEX_MAPB = 9;
+    public static final int COLUMN_INDEX_MACV = 10;
+    public static final int COLUMN_INDEX_MATDHV = 11;
 
     NhanVienDAO nhanviendao = new NhanVienDAO();
 
@@ -67,9 +70,12 @@ public class NhanVienExcel {
                     case 7 -> item.setSoCMND(cell.getStringCellValue());
                     case 8 -> item.setSoDienThoai(cell.getStringCellValue());
                     case 9 -> item.setEmail(cell.getStringCellValue());
+                    case 10 -> item.setSoCMND(cell.getStringCellValue());
+                    case 11-> item.setSoDienThoai(cell.getStringCellValue());
+                    case 12 -> item.setEmail(cell.getStringCellValue());
                 }
             }
-            if (!isFirstRow && !"".equals(item.getMaNV()) && item.getHinhNV() != null) {
+            if (!isFirstRow && !"".equals(item.getMaNV())) {
                 nhanviendao.addNhanVien(item);
             }
         }
@@ -134,6 +140,15 @@ public class NhanVienExcel {
 
         cell = row.createCell(COLUMN_INDEX_EMAIL);
         cell.setCellValue("Email");
+        
+        cell = row.createCell(COLUMN_INDEX_MAPB);
+        cell.setCellValue("Mã phòng ban");
+
+        cell = row.createCell(COLUMN_INDEX_MACV);
+        cell.setCellValue("Mã chức vụ");
+        
+        cell = row.createCell(COLUMN_INDEX_MATDHV);
+        cell.setCellValue("Mã TDHV");
     }
 
     private static void writeData(NhanVienDTO item, Row row) {

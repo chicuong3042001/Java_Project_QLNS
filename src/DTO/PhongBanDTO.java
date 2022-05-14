@@ -12,16 +12,14 @@ import java.util.ArrayList;
  */
 public class PhongBanDTO {
     private String MaPB;
-    private String MaNV;
     private String TenPB;
     private String SoDienThoai;
 
     public PhongBanDTO() {
     }
 
-    public PhongBanDTO(String MaPB, String MaNV, String TenPB, String SoDienThoai) {
+    public PhongBanDTO(String MaPB, String TenPB, String SoDienThoai) {
         this.MaPB = MaPB;
-        this.MaNV = MaNV;
         this.TenPB = TenPB;
         this.SoDienThoai = SoDienThoai;
     }
@@ -52,7 +50,6 @@ public class PhongBanDTO {
     
     public Object[] getSelection() {
         ArrayList<Boolean> result = new ArrayList();
-        result.add(this.MaNV != null);
         result.add(this.TenPB != null);
         result.add(this.SoDienThoai != null);
 

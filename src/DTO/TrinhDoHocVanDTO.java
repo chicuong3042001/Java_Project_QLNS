@@ -12,15 +12,13 @@ import java.util.ArrayList;
  */
 public class TrinhDoHocVanDTO {
     private String MaTDHV;
-    private String MaNV;
     private String TenTDHV;
 
     public TrinhDoHocVanDTO() {
     }
 
-    public TrinhDoHocVanDTO(String MaTDHV, String MaNV, String TenTDHV) {
+    public TrinhDoHocVanDTO(String MaTDHV, String TenTDHV) {
         this.MaTDHV = MaTDHV;
-        this.MaNV = MaNV;
         this.TenTDHV = TenTDHV;
     }
 
@@ -40,13 +38,6 @@ public class TrinhDoHocVanDTO {
         this.TenTDHV = TenTDHV;
     }
 
-    public String getMaNV() {
-        return MaNV;
-    }
-
-    public void setMaNV(String MaNV) {
-        this.MaNV = MaNV;
-    }
     
     public Object[] getSelection() {
         ArrayList<Boolean> result = new ArrayList();

@@ -22,12 +22,15 @@ public class NhanVienDTO {
     private String SoCMND;
     private String SoDienThoai;
     private String Email;
+    private String MaPB;
+    private String MaCV;
+    private String MaTDHV;
 
     public NhanVienDTO() {
     }
 
-    public NhanVienDTO(String MaNV, String HinhNV, String TenNV, String NgaySinh, String GioiTinh, String DiaChi, String SoCMND,
-            String SoDienThoai, String Email) {
+    public NhanVienDTO(String MaNV, String HinhNV, String TenNV, String NgaySinh, String GioiTinh, String DiaChi,
+            String SoCMND, String SoDienThoai, String Email, String MaPB, String MaCV, String MaTDHV) {
         this.MaNV = MaNV;
         this.HinhNV = HinhNV;
         this.TenNV = TenNV;
@@ -37,6 +40,9 @@ public class NhanVienDTO {
         this.SoCMND = SoCMND;
         this.SoDienThoai = SoDienThoai;
         this.Email = Email;
+        this.MaPB = MaPB;
+        this.MaCV = MaCV;
+        this.MaTDHV = MaTDHV;
     }
 
     public String getMaNV() {
@@ -66,7 +72,7 @@ public class NhanVienDTO {
     public String getNgaySinh() {
         return NgaySinh;
     }
-    
+
     public Date getNgaySinhSQL() {
         return Date.valueOf(NgaySinh);
     }
@@ -115,13 +121,35 @@ public class NhanVienDTO {
         this.Email = Email;
     }
 
-    @Override
-    public String toString() {
-        return "NhanVienDTO{" + "MaNV=" + MaNV + ", HinhNV=" + HinhNV + ", TenNV=" + TenNV + ", NgaySinh=" + NgaySinh + ", GioiTinh=" + GioiTinh + ", DiaChi=" + DiaChi + ", SoCMND=" + SoCMND + ", SoDienThoai=" + SoDienThoai + ", Email=" + Email + '}';
+    public String getMaPB() {
+        return MaPB;
     }
 
-    
-    
+    public void setMaPB(String MaPB) {
+        this.MaPB = MaPB;
+    }
+
+    public String getMaCV() {
+        return MaCV;
+    }
+
+    public void setMaCV(String MaCV) {
+        this.MaCV = MaCV;
+    }
+
+    public String getMaTDHV() {
+        return MaTDHV;
+    }
+
+    public void setMaTDHV(String MaTDHV) {
+        this.MaTDHV = MaTDHV;
+    }
+
+    @Override
+    public String toString() {
+        return "NhanVienDTO{" + "MaNV=" + MaNV + ", HinhNV=" + HinhNV + ", TenNV=" + TenNV + ", NgaySinh=" + NgaySinh + ", GioiTinh=" + GioiTinh + ", DiaChi=" + DiaChi + ", SoCMND=" + SoCMND + ", SoDienThoai=" + SoDienThoai + ", Email=" + Email + ", MaPB=" + MaPB + ", MaCV=" + MaCV + ", MaTDHV=" + MaTDHV + '}';
+    }
+
     public Object[] getSelection() {
         ArrayList<Boolean> result = new ArrayList();
         result.add(this.HinhNV != null);
@@ -132,6 +160,9 @@ public class NhanVienDTO {
         result.add(this.SoCMND != null);
         result.add(this.SoDienThoai != null);
         result.add(this.Email != null);
+        result.add(this.MaPB != null);
+        result.add(this.MaCV != null);
+        result.add(this.MaTDHV != null);
 
         Object[] result2 = result.toArray();
         return result2;

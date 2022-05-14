@@ -32,7 +32,7 @@ public class LuongDAO {
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                luong.add(new LuongDTO(rs.getString(1), rs.getString(2), rs.getDouble(3)));
+                luong.add(new LuongDTO(rs.getString(1), rs.getDouble(2)));
             }
             return luong;
         } catch (SQLException e) {
@@ -46,10 +46,9 @@ public class LuongDAO {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "INSERT INTO luong (MaLuong, MaNV, TienLuong) VALUES (?, ?, ?)");
+                    "INSERT INTO luong (MaLuong, TienLuong) VALUES (?, ?)");
             stmt.setString(1, luong.getMaLuong());
-            stmt.setString(2, luong.getMaNV());
-            stmt.setDouble(3, luong.getTienLuong());
+            stmt.setDouble(2, luong.getTienLuong());
             stmt.executeUpdate();
 
             return true;
@@ -114,7 +113,7 @@ public class LuongDAO {
 
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "UPDATE luong SET " + table + "WHERE MaLuong = ? AND MaNV");
+                    "UPDATE luong SET " + table + "WHERE MaLuong = ?");
 
             int index = 1;
             for (int i = 0; i < selection.length; i++) {
@@ -127,7 +126,6 @@ public class LuongDAO {
             }
 
             stmt.setString(index++, luong.getMaLuong());
-            stmt.setString(index++, luong.getMaNV());
             stmt.executeUpdate();
 
             return true;

@@ -27,7 +27,7 @@ public class LuongBUS {
         ArrayList<LuongDTO> list = luongdao.getLuong();
         
         for(LuongDTO item : list) {
-            if(item.getMaNV().equals(luong.getMaNV()) && item.getMaLuong().equals(luong.getMaLuong())) {
+            if(item.getMaLuong().equals(luong.getMaLuong())) {
                 throw new DuplicatedException("Mã lương và mã nhân viên bị trùng ");
             }
         }

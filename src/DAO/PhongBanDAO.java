@@ -32,7 +32,7 @@ public class PhongBanDAO {
 
             rs = stmt.executeQuery();
             while (rs.next()) {
-                phongbanDAO.add(new PhongBanDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)));
+                phongbanDAO.add(new PhongBanDTO(rs.getString(1), rs.getString(2), rs.getString(3)));
             }
             return phongbanDAO;
         } catch (SQLException e) {
