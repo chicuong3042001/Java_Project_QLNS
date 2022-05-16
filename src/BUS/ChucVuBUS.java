@@ -28,8 +28,8 @@ public class ChucVuBUS {
         ArrayList<ChucVuDTO> list = chucvudao.getChucVu();
 
         for (ChucVuDTO item : list) {
-            if (item.getMaNV().equals(chucvu.getMaNV()) && item.getMaCV().equals(chucvu.getMaCV())) {
-                throw new DuplicatedException("Mã chức vụ và mã nhân viên bị trùng ");
+            if (item.getMaCV().equals(chucvu.getMaCV())) {
+                throw new DuplicatedException("Mã nhân viên bị trùng ");
             }
         }
         return chucvudao.addChucVu(chucvu);

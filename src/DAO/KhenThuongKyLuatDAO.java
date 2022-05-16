@@ -61,30 +61,13 @@ public class KhenThuongKyLuatDAO {
         }
     }
 
-    public boolean deleteKhenThuongKyLuat(String id) {
-        try {
-            conn = DBConnection.getConnection();
-            stmt = conn.prepareStatement(
-                    "DELETE FROM khenthuongkyluat WHERE MaKTKL = ?");
-            stmt.setString(1, id);
-
-            stmt.executeUpdate();
-
-            return true;
-
-        } catch (SQLException e) {
-            return false;
-        } finally {
-            DBConnection.closeConnection(conn, stmt);
-        }
-    }
-
     public boolean deleteKhenThuongKyLuat(KhenThuongKyLuatDTO khenthuongkyluat) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "DELETE FROM khenthuongkyluat WHERE MaKTKL = ?");
+                    "DELETE FROM khenthuongkyluat WHERE MaKTKL = ? AND MaNV");
             stmt.setString(1, khenthuongkyluat.getMaKTKL());
+            stmt.setString(2, khenthuongkyluat.getMaNV());
 
             stmt.executeUpdate();
 
@@ -114,7 +97,7 @@ public class KhenThuongKyLuatDAO {
 
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "UPDATE khenthuongkyluat SET " + table + "WHERE MaKTKL = ? AND MaNV");
+                    "UPDATE khenthuongkyluat SET " + table + "WHERE MaKTKL = ? AND MaNV = ?");
 
             int index = 1;
             for (int i = 0; i < selection.length; i++) {

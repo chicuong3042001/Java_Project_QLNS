@@ -12,16 +12,14 @@ import java.util.ArrayList;
  */
 public class ChucVuDTO {
     private String MaCV;
-    private String MaNV;
     private String TenCV;
     private String GhiChu;
 
     public ChucVuDTO() {
     }
 
-    public ChucVuDTO(String MaCV, String MaNV, String TenCV, String GhiChu) {
+    public ChucVuDTO(String MaCV, String TenCV, String GhiChu) {
         this.MaCV = MaCV;
-        this.MaNV = MaNV;
         this.TenCV = TenCV;
         this.GhiChu = GhiChu;
     }
@@ -48,14 +46,6 @@ public class ChucVuDTO {
 
     public void setGhiChu(String GhiChu) {
         this.GhiChu = GhiChu;
-    }
-
-    public String getMaNV() {
-        return MaNV;
-    }
-
-    public void setMaNV(String MaNV) {
-        this.MaNV = MaNV;
     }
     
     public Object[] getSelection() {

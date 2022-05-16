@@ -61,30 +61,13 @@ public class DieuChinhLuongDAO {
         }
     }
 
-    public boolean deleteDieuChinhLuong(String id) {
-        try {
-            conn = DBConnection.getConnection();
-            stmt = conn.prepareStatement(
-                    "DELETE FROM dieuchinhluong WHERE MaDCL = ?");
-            stmt.setString(1, id);
-
-            stmt.executeUpdate();
-
-            return true;
-
-        } catch (SQLException e) {
-            return false;
-        } finally {
-            DBConnection.closeConnection(conn, stmt);
-        }
-    }
-
     public boolean deleteDieuChinhLuong(DieuChinhLuongDTO dieuchinhluong) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "DELETE FROM dieuchinhluong WHERE MaDCL = ?");
+                    "DELETE FROM dieuchinhluong WHERE MaDCL = ? AND MaNV = ?");
             stmt.setString(1, dieuchinhluong.getMaDCL());
+            stmt.setString(2, dieuchinhluong.getMaNV());
 
             stmt.executeUpdate();
 
