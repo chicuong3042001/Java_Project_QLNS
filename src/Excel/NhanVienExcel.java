@@ -47,7 +47,8 @@ public class NhanVienExcel {
         FileInputStream inputStream = new FileInputStream(new File(filepath));
 
         // Đối tượng workbook cho file XSL.
-        Workbook workbook = getWorkbook(inputStream, filepath);
+//        Workbook workbook = getWorkbook(inputStream, filepath);
+        Workbook workbook = new XSSFWorkbook(inputStream);
         // Lấy ra sheet đầu tiên từ workbook
         Sheet sheet = workbook.getSheetAt(0);
 
