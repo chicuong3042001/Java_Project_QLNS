@@ -25,17 +25,6 @@ public class NhanVienBUS {
     //Tìm kiếm
     public ArrayList<NhanVienDTO> findNhanVienByFilter(NhanVienDTO data) {
         return NhanViendao.findNhanVienByFilter(data);
-<<<<<<< HEAD
-=======
-    }
-    
-    public ArrayList<NhanVienDTO> findNhanVienByID(NhanVienDTO data) {
-        return NhanViendao.findNhanVienByID(data);
-    }
-    
-    public ArrayList<NhanVienDTO> findNhanVienByID(String data) {
-        return NhanViendao.findNhanVienByID(data);
->>>>>>> 2aa949123c1a7107c728994dabb3035f28ed6de0
     }
     
     public boolean addNhanVien(NhanVienDTO NhanVien) throws DuplicatedException {
