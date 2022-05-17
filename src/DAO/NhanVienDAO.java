@@ -46,6 +46,7 @@ public class NhanVienDAO {
         }
     }
 
+<<<<<<< HEAD
     public NhanVienDTO findNhanVienByID(String id) {
         try {
             conn = DBConnection.getConnection();
@@ -80,6 +81,8 @@ public class NhanVienDAO {
         return null;
     }
     
+=======
+>>>>>>> 2aa949123c1a7107c728994dabb3035f28ed6de0
     public ArrayList<NhanVienDTO> findNhanVienByFilter(NhanVienDTO nhanvien) {
         try {
             String table = "";
@@ -146,6 +149,54 @@ public class NhanVienDAO {
                     }
                 }
             }
+
+            rs = stmt.executeQuery();
+
+            ArrayList<NhanVienDTO> list = new ArrayList();
+            while (rs.next()) {
+                list.add(new NhanVienDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.
+                        getString(5),
+                        rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.
+                        getString(11), rs.getString(12)));
+            }
+
+            return list;
+        } catch (SQLException e) {
+            return null;
+        } finally {
+            DBConnection.closeConnection(conn, stmt, rs);
+        }
+    }
+    
+    public ArrayList<NhanVienDTO> findNhanVienByID(NhanVienDTO nhanvien) {
+        try {
+            conn = DBConnection.getConnection();
+            stmt = conn.prepareStatement("SELECT * FROM nhanvien WHERE MaNV = ?");
+            stmt.setString(1, nhanvien.getMaNV());
+
+            rs = stmt.executeQuery();
+
+            ArrayList<NhanVienDTO> list = new ArrayList();
+            while (rs.next()) {
+                list.add(new NhanVienDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.
+                        getString(5),
+                        rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.
+                        getString(11), rs.getString(12)));
+            }
+
+            return list;
+        } catch (SQLException e) {
+            return null;
+        } finally {
+            DBConnection.closeConnection(conn, stmt, rs);
+        }
+    }
+    
+    public ArrayList<NhanVienDTO> findNhanVienByID(String id) {
+        try {
+            conn = DBConnection.getConnection();
+            stmt = conn.prepareStatement("SELECT * FROM nhanvien WHERE MaNV = ?");
+            stmt.setString(1, id);
 
             rs = stmt.executeQuery();
 
