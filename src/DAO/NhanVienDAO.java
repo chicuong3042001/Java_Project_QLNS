@@ -46,7 +46,6 @@ public class NhanVienDAO {
         }
     }
 
-<<<<<<< HEAD
     public NhanVienDTO findNhanVienByID(String id) {
         try {
             conn = DBConnection.getConnection();
@@ -81,8 +80,6 @@ public class NhanVienDAO {
         return null;
     }
     
-=======
->>>>>>> 2aa949123c1a7107c728994dabb3035f28ed6de0
     public ArrayList<NhanVienDTO> findNhanVienByFilter(NhanVienDTO nhanvien) {
         try {
             String table = "";
