@@ -6,6 +6,7 @@ package GUI;
 
 import DAO.DBConnection;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Hashtable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,16 +23,37 @@ import net.sf.jasperreports.view.JasperViewer;
  */
 public class ReportData {
 
-    static Connection conn = DBConnection.getConnection();
-
     public void reportNhanVien() {
         try {
             Hashtable map = new Hashtable();
+            Connection conn = DBConnection.getConnection();
             JasperReport rpt = JasperCompileManager.compileReport("src/Report/reportNhanVien.jrxml");
             JasperPrint p = JasperFillManager.fillReport(rpt, map, conn);
-            JasperViewer.viewReport(p,false);
+            JasperViewer.viewReport(p, false);
+            
+            conn.close();
 
         } catch (JRException ex) {
+            Logger.getLogger(ReportData.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ReportData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    
+    public void reportBangLuong(String maNV) {
+        try {
+            Hashtable map = new Hashtable();
+            Connection conn = DBConnection.getConnection();
+            JasperReport rpt = JasperCompileManager.compileReport("src/Report/reportNhanVien.jrxml");
+            JasperPrint p = JasperFillManager.fillReport(rpt, map, conn);
+            JasperViewer.viewReport(p, false);
+            
+            conn.close();
+
+        } catch (JRException ex) {
+            Logger.getLogger(ReportData.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
             Logger.getLogger(ReportData.class.getName()).log(Level.SEVERE, null, ex);
         }
 
