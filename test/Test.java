@@ -22,12 +22,11 @@ public class Test {
     public static void checkDAO() {
         try {
             ChucVuBUS chucvudao = new ChucVuBUS();
-            ChucVuDTO chucvudto = new ChucVuDTO("001", "0001", "Giam doc", "Lienhung");
+            ChucVuDTO chucvudto = new ChucVuDTO("001", "Giam doc", "Lienhung");
             boolean add = chucvudao.addChucVu(chucvudto);
             System.out.println(add);
             ChucVuDTO updatedto = new ChucVuDTO();
             updatedto.setMaCV("001");
-            updatedto.setMaNV("0001");
             updatedto.setGhiChu("LienHung12");
             updatedto.setTenCV("GiamDoc212");
 

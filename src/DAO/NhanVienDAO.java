@@ -46,7 +46,41 @@ public class NhanVienDAO {
         }
     }
 
-    public ArrayList<NhanVienDTO> getNhanVien(NhanVienDTO nhanvien) {
+    public NhanVienDTO findNhanVienByID(String id) {
+        try {
+            conn = DBConnection.getConnection();
+            stmt = conn.prepareStatement("SELECT * FROM nhanvien WHERE MaNV = ?");
+            stmt.setString(1, id);
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                NhanVienDTO nvdto = new NhanVienDTO();
+                nvdto.setMaNV(rs.getString("MaNV"));
+                nvdto.setHinhNV(rs.getString("HinhNV"));
+                nvdto.setTenNV(rs.getString("TenNV"));
+                nvdto.setNgaySinh(rs.getString("NgaySinh"));
+                nvdto.setGioiTinh(rs.getString("GioiTinh"));
+                nvdto.setDiaChi(rs.getString("DiaChi"));
+                nvdto.setSoCMND(rs.getString("SoCMND"));
+                nvdto.setSoDienThoai(rs.getString("SoDienThoai"));
+                nvdto.setEmail(rs.getString("Email"));
+                nvdto.setMaPB(rs.getString("MaPB"));
+                nvdto.setMaCV(rs.getString("MaCV"));
+                nvdto.setMaTDHV(rs.getString("MaTDHV"));
+                
+                return nvdto;
+            }
+            
+        } catch (SQLException e) {
+            return null;
+        } finally {
+            DBConnection.closeConnection(conn, stmt, rs);
+        }
+        return null;
+    }
+    
+    public ArrayList<NhanVienDTO> findNhanVienByFilter(NhanVienDTO nhanvien) {
         try {
             String table = "";
             Object[] selection = nhanvien.getSelection();
@@ -92,7 +126,7 @@ public class NhanVienDAO {
                         case 2 ->
                             stmt.setString(index++, nhanvien.getTenNV());
                         case 3 ->
-                            stmt.setDate(index++, nhanvien.getNgaySinhSQL());
+                            stmt.setString(index++, nhanvien.getNgaySinh());
                         case 4 ->
                             stmt.setString(index++, nhanvien.getGioiTinh());
                         case 5 ->
@@ -131,15 +165,16 @@ public class NhanVienDAO {
         }
     }
 
+
     public boolean addNhanVien(NhanVienDTO nhanvien) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "INSERT INTO nhanvien (MaNV, HinhNV, TenNV, NgaySinh, GioiTinh, DiaChi, SoCMND, SoDienThoai, Email, MaPB, MaCV, MaTDHV) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    "INSERT INTO nhanvien (MaNV, HinhNV, TenNV, NgaySinh, GioiTinh, DiaChi, SoCMND, SoDienThoai, Email, MaPB, MaCV, MaTDHV) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
             stmt.setString(1, nhanvien.getMaNV());
             stmt.setString(2, nhanvien.getHinhNV());
             stmt.setString(3, nhanvien.getTenNV());
-            stmt.setDate(4, nhanvien.getNgaySinhSQL());
+            stmt.setString(4, nhanvien.getNgaySinh());
             stmt.setString(5, nhanvien.getGioiTinh());
             stmt.setString(6, nhanvien.getDiaChi());
             stmt.setString(7, nhanvien.getSoCMND());
@@ -243,7 +278,7 @@ public class NhanVienDAO {
                         case 2 ->
                             stmt.setString(index++, nhanvien.getTenNV());
                         case 3 ->
-                            stmt.setDate(4, nhanvien.getNgaySinhSQL());
+                            stmt.setString(index++, nhanvien.getNgaySinh());
                         case 4 ->
                             stmt.setString(index++, nhanvien.getGioiTinh());
                         case 5 ->
@@ -263,17 +298,21 @@ public class NhanVienDAO {
                     }
                 }
             }
-            stmt.setString(index++, nhanvien.getHinhNV());
 
             stmt.setString(index, nhanvien.getMaNV());
+            System.out.println(stmt.toString());
             stmt.executeUpdate();
 
             return true;
 
         } catch (SQLException e) {
-            return false;
+            System.out.println(e.getMessage());
         } finally {
             DBConnection.closeConnection(conn, stmt);
         }
+        return false;
     }
+     
 }
+
+    

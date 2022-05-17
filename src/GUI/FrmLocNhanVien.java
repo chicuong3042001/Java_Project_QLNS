@@ -4,6 +4,8 @@
  */
 package GUI;
 
+import BUS.NhanVienBUS;
+import DTO.NhanVienDTO;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 
@@ -14,6 +16,8 @@ import javax.swing.JDialog;
 public class FrmLocNhanVien extends javax.swing.JPanel {
     private JButton btn;
     private JDialog dialog;
+    NhanVienDTO nhanVienDTO;
+    NhanVienBUS nhanVienBUS;
     /**
      * Creates new form FrmLocNhanVien
      */
@@ -35,51 +39,47 @@ public class FrmLocNhanVien extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
-        jLabel1 = new javax.swing.JLabel();
-        filterAddressField = new javax.swing.JTextField();
-        filterMaleRadio = new javax.swing.JRadioButton();
-        filterFemaleRadio = new javax.swing.JRadioButton();
-        filterBirthdayField = new javax.swing.JTextField();
-        filterNameField = new javax.swing.JTextField();
-        filterIDNumField = new javax.swing.JTextField();
-        filterPhoneNumField = new javax.swing.JTextField();
-        filterEmailField = new javax.swing.JTextField();
-        jSeparator1 = new javax.swing.JSeparator();
-        filterBtn = new javax.swing.JButton();
         filterCancelBtn = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        filterEmailField = new javax.swing.JTextField();
+        CVField = new javax.swing.JTextField();
+        jSeparator1 = new javax.swing.JSeparator();
+        TDHVField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel1.setText("Chọn thông tin cần lọc");
-
-        buttonGroup1.add(filterMaleRadio);
-        filterMaleRadio.setText("Nam");
-
-        buttonGroup1.add(filterFemaleRadio);
-        filterFemaleRadio.setText("Nữ");
-
-        filterBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/loc.png"))); // NOI18N
-        filterBtn.setText("Lọc");
-        filterBtn.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        filterBtn.setPreferredSize(new java.awt.Dimension(44, 18));
+        filterIDNumField = new javax.swing.JTextField();
+        filterNameField = new javax.swing.JTextField();
+        filterBtn = new javax.swing.JButton();
+        filterAddressField = new javax.swing.JTextField();
+        filterBirthdayField = new javax.swing.JTextField();
+        filterPhoneNumField = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        gioitinhCBB = new javax.swing.JComboBox();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         filterCancelBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/huy.png"))); // NOI18N
         filterCancelBtn.setText("Hủy");
         filterCancelBtn.setMargin(new java.awt.Insets(0, 0, 0, 0));
-
-        jLabel2.setText("Tên:");
+        filterCancelBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                filterCancelBtnActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Ngày sinh:");
 
+        jLabel10.setText("Mã CV");
+
         jLabel4.setText("Giới tính:");
+
+        jLabel11.setText("Mã TDHV");
 
         jLabel5.setText("Địa chỉ:");
 
@@ -89,63 +89,84 @@ public class FrmLocNhanVien extends javax.swing.JPanel {
 
         jLabel8.setText("Email: ");
 
+        filterBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/loc.png"))); // NOI18N
+        filterBtn.setText("Lọc");
+        filterBtn.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        filterBtn.setPreferredSize(new java.awt.Dimension(44, 18));
+        filterBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                filterBtnActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel1.setText("Chọn thông tin cần lọc");
+
+        gioitinhCBB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nam", "Nữ" }));
+
+        jLabel2.setText("Tên:");
+
+        jLabel9.setText("Mã PB");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel8))
-                                .addGap(50, 50, 50)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(filterFemaleRadio)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(filterAddressField, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(filterIDNumField, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(filterPhoneNumField, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(filterEmailField, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(filterMaleRadio))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(filterBirthdayField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(filterNameField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                .addGap(0, 7, Short.MAX_VALUE))
+                .addGap(61, 61, 61)
+                .addComponent(jLabel1)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addComponent(jSeparator1)
             .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(filterPhoneNumField, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(filterIDNumField, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(filterAddressField, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(filterEmailField, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(gioitinhCBB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(86, 86, 86))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addGap(25, 25, 25)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(filterNameField)
+                            .addComponent(filterBirthdayField)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel10))
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(CVField)
+                            .addComponent(TDHVField)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(45, 45, 45)
+                        .addComponent(jTextField1)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(29, 29, 29)
                 .addComponent(filterBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(filterCancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(23, 23, 23))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,9 +185,8 @@ public class FrmLocNhanVien extends javax.swing.JPanel {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(filterMaleRadio)
-                    .addComponent(filterFemaleRadio)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addComponent(gioitinhCBB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(filterAddressField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -183,28 +203,67 @@ public class FrmLocNhanVien extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(filterEmailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(filterCancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(filterBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CVField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TDHVField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(filterBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(filterCancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void filterCancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterCancelBtnActionPerformed
+        // TODO add your handling code here:
+        filterAddressField.setText("");
+        filterBirthdayField.setText("");
+        filterEmailField.setText("");
+        filterIDNumField.setText("");
+        filterNameField.setText("");
+        filterPhoneNumField.setText("");
+    }//GEN-LAST:event_filterCancelBtnActionPerformed
+
+    private void filterBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterBtnActionPerformed
+        // TODO add your handling code here:
+        nhanVienDTO.setTenNV(filterNameField.getText());
+        nhanVienDTO.setNgaySinh(filterBirthdayField.getText());
+        nhanVienDTO.setGioiTinh(gioitinhCBB.getSelectedItem().toString());
+        nhanVienDTO.setDiaChi(filterAddressField.getText());
+        nhanVienDTO.setSoCMND(filterIDNumField.getText());
+        nhanVienDTO.setSoDienThoai(filterPhoneNumField.getText());
+        nhanVienDTO.setMaCV(CVField.getText());
+        nhanVienDTO.setMaTDHV(TDHVField.getText());
+        nhanVienDTO.setMaCV(CVField.getText());
+        nhanVienDTO.setEmail(filterEmailField.getText());
+        nhanVienBUS.findNhanVienByFilter(nhanVienDTO);
+    }//GEN-LAST:event_filterBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JTextField CVField;
+    private javax.swing.JTextField TDHVField;
     private javax.swing.JTextField filterAddressField;
     private javax.swing.JTextField filterBirthdayField;
     private javax.swing.JButton filterBtn;
     private javax.swing.JButton filterCancelBtn;
     private javax.swing.JTextField filterEmailField;
-    private javax.swing.JRadioButton filterFemaleRadio;
     private javax.swing.JTextField filterIDNumField;
-    private javax.swing.JRadioButton filterMaleRadio;
     private javax.swing.JTextField filterNameField;
     private javax.swing.JTextField filterPhoneNumField;
+    private javax.swing.JComboBox gioitinhCBB;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -212,6 +271,8 @@ public class FrmLocNhanVien extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

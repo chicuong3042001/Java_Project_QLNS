@@ -34,10 +34,6 @@ public class KhenThuongKyLuatBUS {
         return khenthuongkyluatdao.addKhenThuongKyLuat(khenthuongkyluat);
     }
     
-    public boolean deleteKhenThuongKyLuat(String id) {
-        return khenthuongkyluatdao.deleteKhenThuongKyLuat(id);
-    }
-    
     public boolean deleteKhenThuongKyLuat(KhenThuongKyLuatDTO khenthuongkyluat) {
         return khenthuongkyluatdao.deleteKhenThuongKyLuat(khenthuongkyluat);
     }

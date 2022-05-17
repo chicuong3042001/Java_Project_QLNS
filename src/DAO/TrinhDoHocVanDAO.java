@@ -27,7 +27,7 @@ public class TrinhDoHocVanDAO {
     public ArrayList<TrinhDoHocVanDTO> getTrinhDoHocVan() {
         try {
             conn = DBConnection.getConnection();
-            stmt = conn.prepareStatement("SELECT * FROM trinhdohocvan");
+            stmt = conn.prepareStatement("SELECT * FROM trinhdohv");
             ArrayList<TrinhDoHocVanDTO> trinhdohocvan = new ArrayList();
             rs = stmt.executeQuery();
 
@@ -42,13 +42,37 @@ public class TrinhDoHocVanDAO {
         }
     }
 
+    public TrinhDoHocVanDTO findTDHVByID(String id) {
+        try {
+            conn = DBConnection.getConnection();
+            stmt = conn.prepareStatement("SELECT * FROM trinhdohv WHERE MaTDHV = ?");
+            stmt.setString(1, id);
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                TrinhDoHocVanDTO tdhvdto = new TrinhDoHocVanDTO();
+                tdhvdto.setMaTDHV(rs.getString("MaTDHV"));
+                tdhvdto.setTenTDHV(rs.getString("TenTDHV"));
+                
+                return tdhvdto;
+            }
+            
+        } catch (SQLException e) {
+            return null;
+        } finally {
+            DBConnection.closeConnection(conn, stmt, rs);
+        }
+        return null;
+    }
+    
     public boolean addTrinhDoHocVan(TrinhDoHocVanDTO trinhdohocvan) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "INSERT INTO trinhdohocvan (MaTDHV, TenTDHV) VALUES (?, ?, ?)");
+                    "INSERT INTO trinhdohv (MaTDHV, TenTDHV) VALUES (?, ?)");
             stmt.setString(1, trinhdohocvan.getMaTDHV());
-            stmt.setString(3, trinhdohocvan.getTenTDHV());
+            stmt.setString(2, trinhdohocvan.getTenTDHV());
             stmt.executeUpdate();
 
             return true;
@@ -64,7 +88,7 @@ public class TrinhDoHocVanDAO {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "DELETE FROM trinhdohocvan WHERE MaTDHV = ?");
+                    "DELETE FROM trinhdohv WHERE MaTDHV = ?");
             stmt.setString(1, id);
 
             stmt.executeUpdate();
@@ -82,7 +106,7 @@ public class TrinhDoHocVanDAO {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "DELETE FROM trinhdohocvan WHERE MaTDHV = ?");
+                    "DELETE FROM trinhdohv WHERE MaTDHV = ?");
             stmt.setString(1, trinhdohocvan.getMaTDHV());
 
             stmt.executeUpdate();
@@ -112,7 +136,7 @@ public class TrinhDoHocVanDAO {
             table = table.substring(0, table.length() - 1);
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "UPDATE trinhdohocvan SET " + table + "WHERE MaTDHV = ?");
+                    "UPDATE trinhdohv SET " + table + "WHERE MaTDHV = ?");
 
             int index = 1;
             for (int i = 0; i < selection.length; i++) {

@@ -28,10 +28,14 @@ public class TrinhDoHocVanBUS {
         
         for(TrinhDoHocVanDTO item : list) {
             if(item.getMaTDHV().equals(TrinhDoHocVan.getMaTDHV())) {
-                throw new DuplicatedException("Mã trình độ và mã nhân viên bị trùng ");
+                throw new DuplicatedException("Mã trình độ học vấn bị trùng ");
             }
         }
         return TrinhDoHocVandao.addTrinhDoHocVan(TrinhDoHocVan);
+    }
+    
+    public TrinhDoHocVanDTO findTDHVByID(String id){
+        return TrinhDoHocVandao.findTDHVByID(id);
     }
     
     public boolean deleteTrinhDoHocVan(String id) {
@@ -44,6 +48,5 @@ public class TrinhDoHocVanBUS {
     
     public boolean updateTrinhDoHocVan(TrinhDoHocVanDTO TrinhDoHocVan) {
         return TrinhDoHocVandao.updateTrinhDoHocVan(TrinhDoHocVan);
-    }
-
+    }   
 }

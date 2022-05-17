@@ -32,7 +32,7 @@ public class ChucVuDAO {
 
             rs = stmt.executeQuery();
             while (rs.next()) {
-                chucvuDAO.add(new ChucVuDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)));
+                chucvuDAO.add(new ChucVuDTO(rs.getString(1), rs.getString(2), rs.getString(3)));
             }
             return chucvuDAO;
         } catch (SQLException e) {
@@ -46,11 +46,10 @@ public class ChucVuDAO {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "INSERT INTO ChucVu (MaCV, MaNV, TenCV, GhiChu) VALUES (?, ?, ?, ?)");
+                    "INSERT INTO ChucVu (MaCV, TenCV, GhiChu) VALUES (?, ?, ?)");
             stmt.setString(1, chucvu.getMaCV());
-            stmt.setString(2, chucvu.getMaNV());
-            stmt.setString(3, chucvu.getTenCV());
-            stmt.setString(4, chucvu.getGhiChu());
+            stmt.setString(2, chucvu.getTenCV());
+            stmt.setString(3, chucvu.getGhiChu());
             stmt.executeUpdate();
 
             return true;
@@ -115,7 +114,7 @@ public class ChucVuDAO {
             }
             table = table.substring(0, table.length() - 1);
 
-            String sql = "UPDATE ChucVu SET " + table + "WHERE MaCV = ? AND MaNV = ?";
+            String sql = "UPDATE ChucVu SET " + table + "WHERE MaCV = ?";
 
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(sql);
@@ -133,7 +132,6 @@ public class ChucVuDAO {
             }
 
             stmt.setString(index++, chucvu.getMaCV());
-            stmt.setString(index++, chucvu.getMaNV());
             stmt.executeUpdate();
 
             return true;

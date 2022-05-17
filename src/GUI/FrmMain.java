@@ -4,6 +4,7 @@
  */
 package GUI;
 
+import BUS.ShowDialog;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
@@ -362,6 +363,9 @@ public class FrmMain extends javax.swing.JFrame {
         salaryExportLabel.setText("<html><center>Xuất bảng<br> lương</center></html>");
         salaryExportLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         salaryExportLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                salaryExportLabelMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 salaryExportLabelMouseEntered(evt);
             }
@@ -386,6 +390,9 @@ public class FrmMain extends javax.swing.JFrame {
         employeeExportLabel.setText("<html><center>Xuất DS<br> nhân viên</center></html>");
         employeeExportLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         employeeExportLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                employeeExportLabelMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 employeeExportLabelMouseEntered(evt);
             }
@@ -437,6 +444,9 @@ public class FrmMain extends javax.swing.JFrame {
         employeeImportLabel.setText("<html><center>Nhập DS nhân viên</center></html>");
         employeeImportLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         employeeImportLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                employeeImportLabelMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 employeeImportLabelMouseEntered(evt);
             }
@@ -505,6 +515,9 @@ public class FrmMain extends javax.swing.JFrame {
         softwareInfoLabel.setText("<html><center>Thông Tin<br>Phần Mềm</center></html>");
         softwareInfoLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         softwareInfoLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                softwareInfoLabelMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 softwareInfoLabelMouseEntered(evt);
             }
@@ -532,6 +545,9 @@ public class FrmMain extends javax.swing.JFrame {
         phoneLabel.setText("Liên lạc");
         phoneLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         phoneLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                phoneLabelMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 phoneLabelMouseEntered(evt);
             }
@@ -848,6 +864,37 @@ public class FrmMain extends javax.swing.JFrame {
             createTab("Học vấn", new FrmTDHV(), 4);
         }
     }//GEN-LAST:event_studyLabelMouseClicked
+
+    private void employeeExportLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_employeeExportLabelMouseClicked
+        // TODO add your handling code here:
+        if (KiemTraTab(9)) {
+            createTab("Xuất danh sách nhân viên", new FrmXuatDSNV(), 9);
+        }
+    }//GEN-LAST:event_employeeExportLabelMouseClicked
+
+    private void employeeImportLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_employeeImportLabelMouseClicked
+        // TODO add your handling code here:
+        if (KiemTraTab(10)) {
+            createTab("Nhập danh sách nhân viên", new FrmNhapDSNV(), 10);
+        }
+    }//GEN-LAST:event_employeeImportLabelMouseClicked
+
+    private void salaryExportLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salaryExportLabelMouseClicked
+        // TODO add your handling code here:
+        if (KiemTraTab(8)) {
+            createTab("Xuất bảng lương", new FrmXuatBangLuong(), 8);
+        }
+    }//GEN-LAST:event_salaryExportLabelMouseClicked
+
+    private void softwareInfoLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_softwareInfoLabelMouseClicked
+        // TODO add your handling code here:
+        new ShowDialog(this).Show("Thông in phần mềm", new FrmTTPM(), 410, 250);
+    }//GEN-LAST:event_softwareInfoLabelMouseClicked
+
+    private void phoneLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_phoneLabelMouseClicked
+        // TODO add your handling code here:
+        new ShowDialog(this).Show("Thông tin liên hệ", new FrmLienHe(), 410, 335);
+    }//GEN-LAST:event_phoneLabelMouseClicked
 
     /**
      * @param args the command line arguments

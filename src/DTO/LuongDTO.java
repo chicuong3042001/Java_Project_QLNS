@@ -11,14 +11,17 @@ import java.util.ArrayList;
  * @author chicu
  */
 public class LuongDTO {
+
     private String MaLuong;
+    private String MaNV;
     private double TienLuong;
 
     public LuongDTO() {
     }
 
-    public LuongDTO(String MaLuong, double TienLuong) {
+    public LuongDTO(String MaLuong, String MaNV, double TienLuong) {
         this.MaLuong = MaLuong;
+        this.MaNV = MaNV;
         this.TienLuong = TienLuong;
     }
 
@@ -30,6 +33,14 @@ public class LuongDTO {
         this.MaLuong = MaLuong;
     }
 
+    public String getMaNV() {
+        return MaNV;
+    }
+
+    public void setMaNV(String MaNV) {
+        this.MaNV = MaNV;
+    }
+
     public double getTienLuong() {
         return TienLuong;
     }
@@ -37,7 +48,7 @@ public class LuongDTO {
     public void setTienLuong(double TienLuong) {
         this.TienLuong = TienLuong;
     }
-    
+
     public Object[] getSelection() {
         ArrayList<Boolean> result = new ArrayList();
         result.add(Double.isNaN(this.TienLuong));
@@ -45,5 +56,5 @@ public class LuongDTO {
         Object[] result2 = result.toArray();
         return result2;
     }
-    
+
 }

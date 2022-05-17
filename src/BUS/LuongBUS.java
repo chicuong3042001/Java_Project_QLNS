@@ -27,15 +27,11 @@ public class LuongBUS {
         ArrayList<LuongDTO> list = luongdao.getLuong();
         
         for(LuongDTO item : list) {
-            if(item.getMaLuong().equals(luong.getMaLuong())) {
+            if(item.getMaLuong().equals(luong.getMaLuong()) && item.getMaNV().equals(luong.getMaNV())) {
                 throw new DuplicatedException("Mã lương và mã nhân viên bị trùng ");
             }
         }
         return luongdao.addLuong(luong);
-    }
-    
-    public boolean deleteLuong(String id) {
-        return luongdao.deleteLuong(id);
     }
     
     public boolean deleteLuong(LuongDTO luong) {

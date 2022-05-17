@@ -32,7 +32,7 @@ public class LuongDAO {
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                luong.add(new LuongDTO(rs.getString(1), rs.getDouble(2)));
+                luong.add(new LuongDTO(rs.getString(1), rs.getString(2), rs.getDouble(3)));
             }
             return luong;
         } catch (SQLException e) {
@@ -46,27 +46,10 @@ public class LuongDAO {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "INSERT INTO luong (MaLuong, TienLuong) VALUES (?, ?)");
+                    "INSERT INTO luong (MaLuong, MaNV, TienLuong) VALUES (?, ?, ?)");
             stmt.setString(1, luong.getMaLuong());
-            stmt.setDouble(2, luong.getTienLuong());
-            stmt.executeUpdate();
-
-            return true;
-
-        } catch (SQLException e) {
-            return false;
-        } finally {
-            DBConnection.closeConnection(conn, stmt);
-        }
-    }
-
-    public boolean deleteLuong(String id) {
-        try {
-            conn = DBConnection.getConnection();
-            stmt = conn.prepareStatement(
-                    "DELETE FROM luong WHERE MaLuong = ?");
-            stmt.setString(1, id);
-
+            stmt.setString(2, luong.getMaNV());
+            stmt.setDouble(3, luong.getTienLuong());
             stmt.executeUpdate();
 
             return true;
@@ -82,8 +65,9 @@ public class LuongDAO {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "DELETE FROM luong WHERE MaLuong = ?");
+                    "DELETE FROM luong WHERE MaLuong = ? AND MaNV = ?");
             stmt.setString(1, luong.getMaLuong());
+            stmt.setString(2, luong.getMaNV());
 
             stmt.executeUpdate();
 
@@ -113,7 +97,7 @@ public class LuongDAO {
 
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "UPDATE luong SET " + table + "WHERE MaLuong = ?");
+                    "UPDATE luong SET " + table + "WHERE MaLuong = ? AND MaNV = ? ");
 
             int index = 1;
             for (int i = 0; i < selection.length; i++) {
@@ -126,6 +110,7 @@ public class LuongDAO {
             }
 
             stmt.setString(index++, luong.getMaLuong());
+            stmt.setString(index++, luong.getMaNV());
             stmt.executeUpdate();
 
             return true;

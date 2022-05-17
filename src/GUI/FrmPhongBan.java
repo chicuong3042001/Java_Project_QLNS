@@ -4,14 +4,18 @@
  */
 package GUI;
 
+import BUS.PhongBanBUS;
+import DTO.PhongBanDTO;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -22,17 +26,43 @@ public class FrmPhongBan extends javax.swing.JPanel {
     JComboBox departmentCBB = new JComboBox();
     JTextField employeeIDField = new JTextField();
     JLabel searchLabel = new JLabel(new ImageIcon(getClass().getResource("/GUI/Images/buttonsearch.png")));
-    JButton departmentAddButton = new JButton(new ImageIcon(getClass().getResource("/GUI/Images/add.png")));
-    JButton departmentDeleteButton = new JButton(new ImageIcon(getClass().getResource("/GUI/Images/xoa.png")));
-    JButton departmentSaveButton = new JButton(new ImageIcon(getClass().getResource("/GUI/Images/sua.png")));
-    JButton departmentCancelButton = new JButton(new ImageIcon(getClass().getResource("/GUI/Images/huy.png")));
+    JLabel employeeIDLabel = new JLabel("Nhập mã nhân viên:");
+    
+    
+    PhongBanBUS phongBanBus;
+    PhongBanDTO phongBanDTO;
+    DefaultTableModel defaultTableModel;
     /**
      * Creates new form FrmPhongBan
      */
     public FrmPhongBan() {
         initComponents();
+        phongBanBus = new PhongBanBUS();
+        phongBanDTO = new PhongBanDTO();
+        defaultTableModel = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        departmentTable.setModel(defaultTableModel);
+        defaultTableModel.addColumn("Mã PB");
+        defaultTableModel.addColumn("Tên PB");
+        defaultTableModel.addColumn("Số điện thoại");
+        setData(phongBanBus.getPhongBan());
     }
-
+    public void setData(ArrayList<PhongBanDTO> departments) {
+        for (PhongBanDTO department : departments) {
+            defaultTableModel.addRow(new Object[] {
+                department.getMaPB(),
+                department.getTenPB(),
+                department.getSoDienThoai()
+            });
+        }
+    }
+    public void insert(){
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -109,8 +139,13 @@ public class FrmPhongBan extends javax.swing.JPanel {
         departmentAddBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/add.png"))); // NOI18N
         departmentAddBtn.setText("Thêm");
         departmentAddBtn.setPreferredSize(new java.awt.Dimension(90, 30));
+        departmentAddBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                departmentAddBtnActionPerformed(evt);
+            }
+        });
 
-        departmentNameLabel.setText("Tên phòng ban");
+        departmentNameLabel.setText("Tên phòng ban:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -158,7 +193,7 @@ public class FrmPhongBan extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(departmentCancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(departmentSaveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(177, Short.MAX_VALUE))
+                .addContainerGap(180, Short.MAX_VALUE))
         );
 
         departmentTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -178,10 +213,21 @@ public class FrmPhongBan extends javax.swing.JPanel {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(0, 0, 204)));
         jPanel1.setPreferredSize(new java.awt.Dimension(207, 24));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Thông tin phòng ban");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, -1, 23));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(69, 69, 69)
+                .addComponent(jLabel1))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(0, 0, 204)));
 
@@ -232,7 +278,7 @@ public class FrmPhongBan extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
@@ -255,9 +301,9 @@ public class FrmPhongBan extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-    public void hiddenMenu(boolean flag, String noidung, String timtheo) {
+    public void hiddenMenu(boolean flag, String noidung) {
         departmentIDLabel.setText(noidung);
-        departmentNameLabel.setText(timtheo);
+        departmentNameLabel.setVisible(flag);
         departmentIDField.setVisible(flag);
         departmentCancelBtn.setVisible(flag);
         departmentAddBtn.setVisible(flag);
@@ -282,6 +328,9 @@ public class FrmPhongBan extends javax.swing.JPanel {
             departmentCBB.addItem("Mã Học Sinh");
             departmentCBB.addItem("Tên Học Sinh");
             jPanel2.add(departmentCBB);
+            employeeIDLabel.setSize(130,17);
+            employeeIDLabel.setLocation(departmentCBB.getX(), departmentCBB.getY()+50);
+            jPanel2.add(employeeIDLabel);
             employeeIDField.setSize(150,25);
             employeeIDField.setLocation(departmentNameField.getX(),departmentNameField.getY());
             jPanel2.add(employeeIDField);
@@ -295,52 +344,33 @@ public class FrmPhongBan extends javax.swing.JPanel {
                     
                 }
             });
-            departmentAddButton.setSize(90,30);
-            departmentAddButton.setText("Thêm");
-            departmentAddButton.setLocation(departmentAddBtn.getX(), departmentAddBtn.getY());
-            departmentDeleteButton.setSize(90, 30);
-            departmentDeleteButton.setText("Xóa");
-            departmentDeleteButton.setLocation(departmentDeleteBtn.getX(), departmentDeleteBtn.getY());
-            departmentSaveButton.setSize(90, 30);
-            departmentSaveButton.setText("Sửa");
-            departmentSaveButton.setLocation(departmentSaveBtn.getX(), departmentSaveBtn.getY());
-            departmentCancelButton.setSize(90, 30);
-            departmentCancelButton.setText("Hủy");
-            departmentCancelButton.setLocation(departmentCancelBtn.getX(), departmentCancelBtn.getY());
-            jPanel2.add(departmentAddButton);
-            jPanel2.add(departmentCancelButton);
-            jPanel2.add(departmentDeleteButton);
-            jPanel2.add(departmentSaveButton);
+            
             init=false;
         }
         else
         {
             departmentCBB.setVisible(true);
             employeeIDField.setVisible(true);
+            employeeIDLabel.setVisible(true);
             searchLabel.setVisible(true);
-            departmentAddButton.setVisible(true);
-            departmentCancelButton.setVisible(true);
-            departmentDeleteButton.setVisible(true);
-            departmentSaveButton.setVisible(true);
+            
         }
                
     }
     private void searchBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchBtnMouseClicked
-        hiddenMenu(false, "Chọn phòng ban: ", "Nhập mã nhân viên: ");
+        hiddenMenu(false, "Chọn phòng ban: ");
         frmsearch(jPanel2, departmentIDField, departmentIDLabel);
     }//GEN-LAST:event_searchBtnMouseClicked
 
     private void departmentBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_departmentBtnMouseClicked
         // TODO add your handling code here:
         if (!getInit()) {
-            hiddenMenu(true, "Mã phòng ban", "Tên phòng ban");
+            hiddenMenu(true, "Mã phòng ban");
             departmentCBB.setVisible(false);
             employeeIDField.setVisible(false);
+            employeeIDLabel.setVisible(false);
             searchLabel.setVisible(false);
-            departmentAddButton.setVisible(false);
-            departmentCancelButton.setVisible(false);
-            departmentDeleteButton.setVisible(false);
-            departmentSaveButton.setVisible(false);
+            
         }
     }//GEN-LAST:event_departmentBtnMouseClicked
 
@@ -348,7 +378,12 @@ public class FrmPhongBan extends javax.swing.JPanel {
         // TODO add your handling code here:
         departmentIDField.setText("");
         departmentNameField.setText("");
+        departmentPhoneNumField.setText("");
     }//GEN-LAST:event_departmentCancelBtnActionPerformed
+
+    private void departmentAddBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departmentAddBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_departmentAddBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

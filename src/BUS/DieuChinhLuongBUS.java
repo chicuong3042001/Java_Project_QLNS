@@ -34,10 +34,6 @@ public class DieuChinhLuongBUS {
         return dieuchinhluongdao.addDieuChinhLuong(dieuchinhluong);
     }
     
-    public boolean deleteDieuChinhLuong(String id) {
-        return dieuchinhluongdao.deleteDieuChinhLuong(id);
-    }
-    
     public boolean deleteDieuChinhLuong(DieuChinhLuongDTO dieuchinhluong) {
         return dieuchinhluongdao.deleteDieuChinhLuong(dieuchinhluong);
     }
