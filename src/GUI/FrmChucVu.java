@@ -33,7 +33,6 @@ public class FrmChucVu extends javax.swing.JPanel {
      */
     public FrmChucVu() {
         initComponents();
-        
     }
 
     /**
