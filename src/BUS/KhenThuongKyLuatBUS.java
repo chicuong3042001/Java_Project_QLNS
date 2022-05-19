@@ -14,32 +14,36 @@ import java.util.ArrayList;
  * @author chicu
  */
 public class KhenThuongKyLuatBUS {
-    KhenThuongKyLuatDAO khenthuongkyluatdao = new KhenThuongKyLuatDAO();
+    KhenThuongKyLuatDAO chitietkhenthuongkyluatdao = new KhenThuongKyLuatDAO();
     
     public KhenThuongKyLuatBUS() {
     }
     
     public ArrayList<KhenThuongKyLuatDTO> getKhenThuongKyLuat() {
-        return khenthuongkyluatdao.getKhenThuongKyLuat();
+        return chitietkhenthuongkyluatdao.getKhenThuongKyLuat();
     }
     
-    public boolean addKhenThuongKyLuat(KhenThuongKyLuatDTO khenthuongkyluat) throws DuplicatedException {
-        ArrayList<KhenThuongKyLuatDTO> list = khenthuongkyluatdao.getKhenThuongKyLuat();
+    public boolean addKhenThuongKyLuat(KhenThuongKyLuatDTO chitietkhenthuongkyluat) throws DuplicatedException {
+        ArrayList<KhenThuongKyLuatDTO> list = chitietkhenthuongkyluatdao.getKhenThuongKyLuat();
         
         for(KhenThuongKyLuatDTO item : list) {
-            if(item.getMaNV().equals(khenthuongkyluat.getMaNV()) && item.getMaKTKL().equals(khenthuongkyluat.getMaKTKL())) {
-                throw new DuplicatedException("Mã khen thưởng kỷ luật và mã nhân viên bị trùng ");
+            if(item.getMaKTKL().equals(chitietkhenthuongkyluat.getMaKTKL())) {
+                throw new DuplicatedException("Mã khen thưởng bị trùng ");
             }
         }
-        return khenthuongkyluatdao.addKhenThuongKyLuat(khenthuongkyluat);
+        return chitietkhenthuongkyluatdao.addKhenThuongKyLuat(chitietkhenthuongkyluat);
     }
     
-    public boolean deleteKhenThuongKyLuat(KhenThuongKyLuatDTO khenthuongkyluat) {
-        return khenthuongkyluatdao.deleteKhenThuongKyLuat(khenthuongkyluat);
+    public boolean deleteKhenThuongKyLuat(String id) {
+        return chitietkhenthuongkyluatdao.deleteKhenThuongKyLuat(id);
     }
     
-    public boolean updateKhenThuongKyLuat(KhenThuongKyLuatDTO khenthuongkyluat) {
-        return khenthuongkyluatdao.updateKhenThuongKyLuat(khenthuongkyluat);
+    public boolean deleteKhenThuongKyLuat(KhenThuongKyLuatDTO chitietkhenthuongkyluat) {
+        return chitietkhenthuongkyluatdao.deleteKhenThuongKyLuat(chitietkhenthuongkyluat);
+    }
+    
+    public boolean updateKhenThuongKyLuat(KhenThuongKyLuatDTO chitietkhenthuongkyluat) {
+        return chitietkhenthuongkyluatdao.updateKhenThuongKyLuat(chitietkhenthuongkyluat);
     }
 
 }

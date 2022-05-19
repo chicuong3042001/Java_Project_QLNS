@@ -32,7 +32,7 @@ public class ChiTietLuongDAO {
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                chitietluong.add(new ChiTietLuongDTO(rs.getString(1), rs.getDouble(2), rs.getDouble(3), rs.getDouble(4), rs.getDouble(5)));
+                chitietluong.add(new ChiTietLuongDTO(rs.getString(1), rs.getDouble(2), rs.getDouble(3)));
             }
             return chitietluong;
         } catch (SQLException e) {
@@ -46,12 +46,10 @@ public class ChiTietLuongDAO {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "INSERT INTO Chitietluong (MaLuong, LuongCB, KhoanCongThem, KhoanTru, HeSoLuong) VALUES (?, ?, ?, ?, ?)");
+                    "INSERT INTO Chitietluong (MaLuong, ThuongPhat, HeSoLuong) VALUES (?, ?, ?)");
             stmt.setString(1, chitietluong.getMaLuong());
-            stmt.setDouble(2, chitietluong.getLuongCB());
-            stmt.setDouble(3, chitietluong.getKhoanCongThem());
-            stmt.setDouble(4, chitietluong.getKhoanTru());
-            stmt.setDouble(5, chitietluong.getHeSoLuong());
+            stmt.setDouble(3, chitietluong.getThuongPhat());
+            stmt.setDouble(4, chitietluong.getHeSoLuong());
             stmt.executeUpdate();
 
             return true;
@@ -107,12 +105,8 @@ public class ChiTietLuongDAO {
                 if ((boolean) selection[i]) {
                     switch (i + 1) {
                         case 1 ->
-                            table += "LuongCB = ? ,";
+                            table += "ThuongPhat = ? ,";
                         case 2 ->
-                            table += "KhoanCongThem = ? ,";
-                        case 3 ->
-                            table += "KhoanTru = ? ,";
-                        case 4 ->
                             table += "HeSoLuong = ? ,";
                     }
                 }
@@ -128,12 +122,8 @@ public class ChiTietLuongDAO {
                 if ((boolean) selection[i]) {
                     switch (i + 1) {
                         case 1 ->
-                            stmt.setDouble(index++, chitietluong.getLuongCB());
+                            stmt.setDouble(index++, chitietluong.getThuongPhat());
                         case 2 ->
-                            stmt.setDouble(index++, chitietluong.getKhoanCongThem());
-                        case 3 ->
-                            stmt.setDouble(index++, chitietluong.getKhoanTru());
-                        case 4 ->
                             stmt.setDouble(index++, chitietluong.getHeSoLuong());
                     }
                 }

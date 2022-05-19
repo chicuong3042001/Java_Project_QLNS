@@ -4,7 +4,7 @@
  */
 package DAO;
 
-import DTO.DieuChinhLuongDTO;
+import DTO.ChiTietKTKLDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,26 +15,26 @@ import java.util.ArrayList;
  *
  * @author chicu
  */
-public class DieuChinhLuongDAO {
+public class ChiTietKTKLDAO {
 
     Connection conn = null;
     PreparedStatement stmt = null;
     ResultSet rs = null;
 
-    public DieuChinhLuongDAO() {
+    public ChiTietKTKLDAO() {
     }
 
-    public ArrayList<DieuChinhLuongDTO> getDieuChinhLuong() {
+    public ArrayList<ChiTietKTKLDTO> getChiTietKTKL() {
         try {
             conn = DBConnection.getConnection();
-            stmt = conn.prepareStatement("SELECT * FROM dieuchinhluong");
-            ArrayList<DieuChinhLuongDTO> dieuchinhluong = new ArrayList();
+            stmt = conn.prepareStatement("SELECT * FROM khenthuongkyluat");
+            ArrayList<ChiTietKTKLDTO> khenthuongkyluat = new ArrayList();
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                dieuchinhluong.add(new DieuChinhLuongDTO(rs.getString(1), rs.getString(2), rs.getDouble(3)));
+                khenthuongkyluat.add(new ChiTietKTKLDTO(rs.getString(1), rs.getString(2)));
             }
-            return dieuchinhluong;
+            return khenthuongkyluat;
         } catch (SQLException e) {
             return null;
         } finally {
@@ -42,14 +42,13 @@ public class DieuChinhLuongDAO {
         }
     }
 
-    public boolean addDieuChinhLuong(DieuChinhLuongDTO dieuchinhluong) {
+    public boolean addChiTietKTKL(ChiTietKTKLDTO khenthuongkyluat) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "INSERT INTO dieuchinhluong (MaDCL, MaNV, HeSoLuongMoi) VALUES (?, ?, ?)");
-            stmt.setString(1, dieuchinhluong.getMaDCL());
-            stmt.setString(2, dieuchinhluong.getMaNV());
-            stmt.setDouble(3, dieuchinhluong.getHeSoLuongMoi());
+                    "INSERT INTO khenthuongkyluat (MaKTKL, MaNV) VALUES (?, ?)");
+            stmt.setString(1, khenthuongkyluat.getMaKTKL());
+            stmt.setString(2, khenthuongkyluat.getMaNV());
             stmt.executeUpdate();
 
             return true;
@@ -61,13 +60,13 @@ public class DieuChinhLuongDAO {
         }
     }
 
-    public boolean deleteDieuChinhLuong(DieuChinhLuongDTO dieuchinhluong) {
+    public boolean deleteChiTietKTKL(ChiTietKTKLDTO khenthuongkyluat) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "DELETE FROM dieuchinhluong WHERE MaDCL = ? AND MaNV = ?");
-            stmt.setString(1, dieuchinhluong.getMaDCL());
-            stmt.setString(2, dieuchinhluong.getMaNV());
+                    "DELETE FROM khenthuongkyluat WHERE MaKTKL = ? AND MaNV");
+            stmt.setString(1, khenthuongkyluat.getMaKTKL());
+            stmt.setString(2, khenthuongkyluat.getMaNV());
 
             stmt.executeUpdate();
 
@@ -80,16 +79,16 @@ public class DieuChinhLuongDAO {
         }
     }
 
-    public boolean updateDieuChinhLuong(DieuChinhLuongDTO dieuchinhluong) {
+    public boolean updateChiTietKTKL(ChiTietKTKLDTO khenthuongkyluat) {
         try {
-            Object[] selection = dieuchinhluong.getSelection();
+            Object[] selection = khenthuongkyluat.getSelection();
             
             String table = "";
             for (int i = 0; i < selection.length; i++) {
                 if ((boolean) selection[i]) {
                     switch (i + 1) {
                         case 1 ->
-                            table += "HeSoLuong = ? ,";
+                            table += "SoTien = ? ,";
                     }
                 }
             }
@@ -97,21 +96,18 @@ public class DieuChinhLuongDAO {
 
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "UPDATE dieuchinhluong SET " + table + "WHERE MaDCL = ? AND MaNV = ?");
+                    "UPDATE khenthuongkyluat SET " + table + "WHERE MaKTKL = ? AND MaNV = ?");
 
             int index = 1;
             for (int i = 0; i < selection.length; i++) {
                 if ((boolean) selection[i]) {
                     switch (i + 1) {
-                        case 1 ->
-                            stmt.setDouble(index++, dieuchinhluong.getHeSoLuongMoi());
                     }
                 }
             }
 
-            stmt.setString(index++, dieuchinhluong.getMaDCL());
-            stmt.setString(index++, dieuchinhluong.getMaNV());
-
+            stmt.setString(index++, khenthuongkyluat.getMaKTKL());
+            stmt.setString(index++, khenthuongkyluat.getMaNV());
             stmt.executeUpdate();
 
             return true;

@@ -27,14 +27,15 @@ public class KhenThuongKyLuatDAO {
     public ArrayList<KhenThuongKyLuatDTO> getKhenThuongKyLuat() {
         try {
             conn = DBConnection.getConnection();
-            stmt = conn.prepareStatement("SELECT * FROM khenthuongkyluat");
-            ArrayList<KhenThuongKyLuatDTO> khenthuongkyluat = new ArrayList();
+            stmt = conn.prepareStatement("SELECT * FROM Chitietktkl");
+            ArrayList<KhenThuongKyLuatDTO> chitietkhenthuongkyluat = new ArrayList();
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                khenthuongkyluat.add(new KhenThuongKyLuatDTO(rs.getString(1), rs.getString(2), rs.getDouble(3)));
+                chitietkhenthuongkyluat.add(new KhenThuongKyLuatDTO(rs.getString(1), rs.getDouble(2), rs.getDate(3), rs.
+                        getString(4), rs.getString(5)));
             }
-            return khenthuongkyluat;
+            return chitietkhenthuongkyluat;
         } catch (SQLException e) {
             return null;
         } finally {
@@ -42,14 +43,16 @@ public class KhenThuongKyLuatDAO {
         }
     }
 
-    public boolean addKhenThuongKyLuat(KhenThuongKyLuatDTO khenthuongkyluat) {
+    public boolean addKhenThuongKyLuat(KhenThuongKyLuatDTO chitietkhenthuongkiluat) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "INSERT INTO khenthuongkyluat (MaKTKL, MaNV, SoTien) VALUES (?, ?, ?)");
-            stmt.setString(1, khenthuongkyluat.getMaKTKL());
-            stmt.setString(2, khenthuongkyluat.getMaNV());
-            stmt.setDouble(3, khenthuongkyluat.getSoTien());
+                    "INSERT INTO Chitietktkl (MaKTKL, SoTien, NgayQuyetDinh, LoaiQuyetDinh, NoiDung) VALUES (?, ?, ?, ?, ?)");
+            stmt.setString(1, chitietkhenthuongkiluat.getMaKTKL());
+            stmt.setDouble(2, chitietkhenthuongkiluat.getSoTien());
+            stmt.setDate(3, chitietkhenthuongkiluat.getNgayQuyetDinh());
+            stmt.setString(4, chitietkhenthuongkiluat.getLoaiQuyetDinh());
+            stmt.setString(5, chitietkhenthuongkiluat.getNoiDung());
             stmt.executeUpdate();
 
             return true;
@@ -61,13 +64,12 @@ public class KhenThuongKyLuatDAO {
         }
     }
 
-    public boolean deleteKhenThuongKyLuat(KhenThuongKyLuatDTO khenthuongkyluat) {
+    public boolean deleteKhenThuongKyLuat(String id) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "DELETE FROM khenthuongkyluat WHERE MaKTKL = ? AND MaNV");
-            stmt.setString(1, khenthuongkyluat.getMaKTKL());
-            stmt.setString(2, khenthuongkyluat.getMaNV());
+                    "DELETE FROM Chitietktkl WHERE MaKTKL = ?");
+            stmt.setString(1, id);
 
             stmt.executeUpdate();
 
@@ -80,16 +82,39 @@ public class KhenThuongKyLuatDAO {
         }
     }
 
-    public boolean updateKhenThuongKyLuat(KhenThuongKyLuatDTO khenthuongkyluat) {
+    public boolean deleteKhenThuongKyLuat(KhenThuongKyLuatDTO chitietkhenthuongkiluat) {
         try {
-            Object[] selection = khenthuongkyluat.getSelection();
-            
+            conn = DBConnection.getConnection();
+            stmt = conn.prepareStatement(
+                    "DELETE FROM Chitietdcl WHERE MaKTKL = ?");
+            stmt.setString(1, chitietkhenthuongkiluat.getMaKTKL());
+
+            stmt.executeUpdate();
+
+            return true;
+
+        } catch (SQLException e) {
+            return false;
+        } finally {
+            DBConnection.closeConnection(conn, stmt);
+        }
+    }
+
+    public boolean updateKhenThuongKyLuat(KhenThuongKyLuatDTO chitietkhenthuongkiluat) {
+        try {
+            Object[] selection = chitietkhenthuongkiluat.getSelection();
             String table = "";
             for (int i = 0; i < selection.length; i++) {
                 if ((boolean) selection[i]) {
                     switch (i + 1) {
                         case 1 ->
                             table += "SoTien = ? ,";
+                        case 2 ->
+                            table += "NgayQuyetDinh = ? ,";
+                        case 3 ->
+                            table += "LoaiQuyetDinh = ? ,";
+                        case 4 ->
+                            table += "NoiDung = ? ,";
                     }
                 }
             }
@@ -97,20 +122,25 @@ public class KhenThuongKyLuatDAO {
 
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "UPDATE khenthuongkyluat SET " + table + "WHERE MaKTKL = ? AND MaNV = ?");
+                    "UPDATE Chitietdcl SET " + table + "WHERE MaKTKL = ?");
 
             int index = 1;
             for (int i = 0; i < selection.length; i++) {
                 if ((boolean) selection[i]) {
                     switch (i + 1) {
                         case 1 ->
-                            stmt.setDouble(index++, khenthuongkyluat.getSoTien());
+                            stmt.setDouble(index++, chitietkhenthuongkiluat.getSoTien());
+                        case 2 ->
+                            stmt.setDate(index++, chitietkhenthuongkiluat.getNgayQuyetDinh());
+                        case 3 ->
+                            stmt.setString(index++, chitietkhenthuongkiluat.getLoaiQuyetDinh());
+                        case 4 ->
+                            stmt.setString(index++, chitietkhenthuongkiluat.getNoiDung());
                     }
                 }
             }
 
-            stmt.setString(index++, khenthuongkyluat.getMaKTKL());
-            stmt.setString(index++, khenthuongkyluat.getMaNV());
+            stmt.setString(index, chitietkhenthuongkiluat.getMaKTKL());
             stmt.executeUpdate();
 
             return true;

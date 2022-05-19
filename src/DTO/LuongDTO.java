@@ -14,15 +14,13 @@ public class LuongDTO {
 
     private String MaLuong;
     private String MaNV;
-    private double TienLuong;
 
     public LuongDTO() {
     }
 
-    public LuongDTO(String MaLuong, String MaNV, double TienLuong) {
+    public LuongDTO(String MaLuong, String MaNV) {
         this.MaLuong = MaLuong;
         this.MaNV = MaNV;
-        this.TienLuong = TienLuong;
     }
 
     public String getMaLuong() {
@@ -41,17 +39,8 @@ public class LuongDTO {
         this.MaNV = MaNV;
     }
 
-    public double getTienLuong() {
-        return TienLuong;
-    }
-
-    public void setTienLuong(double TienLuong) {
-        this.TienLuong = TienLuong;
-    }
-
     public Object[] getSelection() {
         ArrayList<Boolean> result = new ArrayList();
-        result.add(Double.isNaN(this.TienLuong));
 
         Object[] result2 = result.toArray();
         return result2;

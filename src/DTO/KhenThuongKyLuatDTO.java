@@ -4,6 +4,7 @@
  */
 package DTO;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 /**
@@ -11,17 +12,22 @@ import java.util.ArrayList;
  * @author chicu
  */
 public class KhenThuongKyLuatDTO {
+
     private String MaKTKL;
-    private String MaNV;
     private double SoTien;
+    private Date NgayQuyetDinh;
+    private String LoaiQuyetDinh;
+    private String NoiDung;
 
     public KhenThuongKyLuatDTO() {
     }
 
-    public KhenThuongKyLuatDTO(String MaKTKL, String MaNV, double SoTien) {
+    public KhenThuongKyLuatDTO(String MaKTKL, double SoTien, Date NgayQuyetDinh, String LoaiQuyetDinh, String NoiDung) {
         this.MaKTKL = MaKTKL;
-        this.MaNV = MaNV;
         this.SoTien = SoTien;
+        this.NgayQuyetDinh = NgayQuyetDinh;
+        this.LoaiQuyetDinh = LoaiQuyetDinh;
+        this.NoiDung = NoiDung;
     }
 
     public String getMaKTKL() {
@@ -40,20 +46,38 @@ public class KhenThuongKyLuatDTO {
         this.SoTien = SoTien;
     }
 
-    public String getMaNV() {
-        return MaNV;
+    public Date getNgayQuyetDinh() {
+        return NgayQuyetDinh;
     }
 
-    public void setMaNV(String MaNV) {
-        this.MaNV = MaNV;
+    public void setNgayQuyetDinh(Date NgayQuyetDinh) {
+        this.NgayQuyetDinh = NgayQuyetDinh;
     }
-    
+
+    public String getLoaiQuyetDinh() {
+        return LoaiQuyetDinh;
+    }
+
+    public void setLoaiQuyetDinh(String LoaiQuyetDinh) {
+        this.LoaiQuyetDinh = LoaiQuyetDinh;
+    }
+
+    public String getNoiDung() {
+        return NoiDung;
+    }
+
+    public void setNoiDung(String NoiDung) {
+        this.NoiDung = NoiDung;
+    }
+
     public Object[] getSelection() {
         ArrayList<Boolean> result = new ArrayList();
         result.add(Double.isNaN(this.SoTien));
+        result.add(this.NgayQuyetDinh != null);
+        result.add(this.LoaiQuyetDinh != null);
+        result.add(this.NoiDung != null);
 
         Object[] result2 = result.toArray();
         return result2;
     }
-    
 }

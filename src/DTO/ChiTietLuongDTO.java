@@ -5,6 +5,7 @@
 package DTO;
 
 import java.util.ArrayList;
+import java.sql.Date;
 
 /**
  *
@@ -13,18 +14,16 @@ import java.util.ArrayList;
 public class ChiTietLuongDTO {
     private String MaLuong;
     private double LuongCB;
-    private double KhoanCongThem;
-    private double KhoanTru;
+    private double ThuongPhat;
     private double HeSoLuong;
+    private Date NgayLapBang;
 
     public ChiTietLuongDTO() {
     }
 
-    public ChiTietLuongDTO(String MaLuong, double LuongCB, double KhoanCongThem, double KhoanTru,double HeSoLuong) {
+    public ChiTietLuongDTO(String MaLuong, double ThuongPhat, double HeSoLuong) {
         this.MaLuong = MaLuong;
-        this.LuongCB = LuongCB;
-        this.KhoanCongThem = KhoanCongThem;
-        this.KhoanTru = KhoanTru;
+        this.ThuongPhat = ThuongPhat;
         this.HeSoLuong = HeSoLuong;
     }
 
@@ -36,6 +35,22 @@ public class ChiTietLuongDTO {
         this.MaLuong = MaLuong;
     }
 
+    public double getHeSoLuong() {
+        return HeSoLuong;
+    }
+
+    public void setHeSoLuong(double HeSoLuong) {
+        this.HeSoLuong = HeSoLuong;
+    }
+
+    public double getThuongPhat() {
+        return ThuongPhat;
+    }
+
+    public void setThuongPHat(double ThuongPhat) {
+        this.ThuongPhat = ThuongPhat;
+    }
+
     public double getLuongCB() {
         return LuongCB;
     }
@@ -44,36 +59,19 @@ public class ChiTietLuongDTO {
         this.LuongCB = LuongCB;
     }
 
-    public double getKhoanCongThem() {
-        return KhoanCongThem;
+    public Date getNgayLapBang() {
+        return NgayLapBang;
     }
 
-    public void setKhoanCongThem(double KhoanCongThem) {
-        this.KhoanCongThem = KhoanCongThem;
-    }
-
-    public double getKhoanTru() {
-        return KhoanTru;
-    }
-
-    public void setKhoanTru(double KhoanTru) {
-        this.KhoanTru = KhoanTru;
-    }
-
-    public double getHeSoLuong() {
-        return HeSoLuong;
-    }
-
-    public void setHeSoLuong(double HeSoLuong) {
-        this.HeSoLuong = HeSoLuong;
+    public void setNgayLapBang(Date NgayLapBang) {
+        this.NgayLapBang = NgayLapBang;
     }
     
     public Object[] getSelection() {
         ArrayList<Boolean> result = new ArrayList();
-        result.add(Double.isNaN(this.LuongCB));
-        result.add(Double.isNaN(this.KhoanCongThem));
-        result.add(Double.isNaN(this.KhoanTru));
+        result.add(Double.isNaN(this.ThuongPhat));
         result.add(Double.isNaN(this.HeSoLuong));
+        result.add(this.NgayLapBang != null);
 
         Object[] result2 = result.toArray();
         return result2;

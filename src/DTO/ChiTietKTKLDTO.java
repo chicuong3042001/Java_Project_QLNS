@@ -10,36 +10,26 @@ import java.util.ArrayList;
  *
  * @author chicu
  */
-public class DieuChinhLuongDTO {
-
-    private String MaDCL;
+public class ChiTietKTKLDTO {
+    private String MaKTKL;
     private String MaNV;
-    private double HeSoLuongMoi;
 
-    public DieuChinhLuongDTO() {
+    public ChiTietKTKLDTO() {
     }
 
-    public DieuChinhLuongDTO(String MaDCL, String MaNV, double HeSoLuongMoi) {
-        this.MaDCL = MaDCL;
+    public ChiTietKTKLDTO(String MaKTKL, String MaNV) {
+        this.MaKTKL = MaKTKL;
         this.MaNV = MaNV;
-        this.HeSoLuongMoi = HeSoLuongMoi;
     }
 
-    public String getMaDCL() {
-        return MaDCL;
+    public String getMaKTKL() {
+        return MaKTKL;
     }
 
-    public void setMaDCL(String MaDCL) {
-        this.MaDCL = MaDCL;
+    public void setMaKTKL(String MaKTKL) {
+        this.MaKTKL = MaKTKL;
     }
 
-    public double getHeSoLuongMoi() {
-        return HeSoLuongMoi;
-    }
-
-    public void setHeSoLuongMoi(double HeSoLuongMoi) {
-        this.HeSoLuongMoi = HeSoLuongMoi;
-    }
 
     public String getMaNV() {
         return MaNV;
@@ -48,12 +38,12 @@ public class DieuChinhLuongDTO {
     public void setMaNV(String MaNV) {
         this.MaNV = MaNV;
     }
-
+    
     public Object[] getSelection() {
         ArrayList<Boolean> result = new ArrayList();
-        result.add(Double.isNaN(this.HeSoLuongMoi));
 
         Object[] result2 = result.toArray();
         return result2;
     }
+    
 }
