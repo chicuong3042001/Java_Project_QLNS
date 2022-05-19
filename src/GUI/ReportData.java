@@ -44,6 +44,7 @@ public class ReportData {
     public void reportBangLuong(String maNV) {
         try {
             Hashtable map = new Hashtable();
+            map.put("maNV", maNV);
             Connection conn = DBConnection.getConnection();
             JasperReport rpt = JasperCompileManager.compileReport("src/Report/reportNhanVien.jrxml");
             JasperPrint p = JasperFillManager.fillReport(rpt, map, conn);
