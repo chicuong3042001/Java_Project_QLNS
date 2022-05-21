@@ -18,16 +18,18 @@ public class KhenThuongKyLuatDTO {
     private Date NgayQuyetDinh;
     private String LoaiQuyetDinh;
     private String NoiDung;
+    private Date NgaySuaDoi;
 
     public KhenThuongKyLuatDTO() {
     }
 
-    public KhenThuongKyLuatDTO(String MaKTKL, double SoTien, Date NgayQuyetDinh, String LoaiQuyetDinh, String NoiDung) {
+    public KhenThuongKyLuatDTO(String MaKTKL, double SoTien, Date NgayQuyetDinh, String LoaiQuyetDinh, String NoiDung, Date NgaySuaDoi) {
         this.MaKTKL = MaKTKL;
         this.SoTien = SoTien;
         this.NgayQuyetDinh = NgayQuyetDinh;
         this.LoaiQuyetDinh = LoaiQuyetDinh;
         this.NoiDung = NoiDung;
+        this.NgaySuaDoi = NgaySuaDoi;
     }
 
     public String getMaKTKL() {
@@ -73,7 +75,6 @@ public class KhenThuongKyLuatDTO {
     public Object[] getSelection() {
         ArrayList<Boolean> result = new ArrayList();
         result.add(Double.isNaN(this.SoTien));
-        result.add(this.NgayQuyetDinh != null);
         result.add(this.LoaiQuyetDinh != null);
         result.add(this.NoiDung != null);
 

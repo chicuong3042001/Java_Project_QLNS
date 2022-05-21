@@ -10,7 +10,7 @@ package Report;
  */
 public class QueryStorage {
 
-    String UpdateTienVaoLuong = "INSERT INTO `chitietluong`(`MaLuong`, `MaNV`, `ThuongPhat`, `HeSoLuong`, `NgayLapBang`) "
+    String ThemLuong = "INSERT INTO `chitietluong`(`MaLuong`, `MaNV`, `ThuongPhat`, `HeSoLuong`, `NgayLapBang`) "
             + "VALUES ('?,?,"
             + "(SELECT SUM(khenthuongkyluat.SoTien) "
             + "FROM nhanvien JOIN chitietktkl JOIN khenthuongkyluat ON nhanvien.MaNV = chitietktkl.MaNV AND chitietktkl.MaKTKL = khenthuongkyluat.MaKTKL "
@@ -26,4 +26,6 @@ public class QueryStorage {
             + "FROM NhanVien JOIN chitietluong JOIN luong ON nhanvien.MaNV = chitietluong.MaNV AND chitietluong.MaLuong = luong.MaLuong "
             + "WHERE (MaNV = ?) | 1;";
     //BangLuongDTO(String ManV, String tenNV, Date NgayLap, Double LuongCB, Double HSluong,Double ThuongPhat, Double TienLuong )
+    
+    String updateThongTinKyLuatSauKhiCoBangLuong = "";
 }

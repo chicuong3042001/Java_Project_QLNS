@@ -32,7 +32,7 @@ public class LuongDAO {
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                luong.add(new LuongDTO(rs.getString(1), rs.getString(2)));
+                luong.add(new LuongDTO(rs.getString("MaLuong"), rs.getString("MaNV")));
             }
             return luong;
         } catch (SQLException e) {

@@ -15,7 +15,7 @@ import java.util.ArrayList;
  *
  * @author chicu
  */
-public class KhenThuongKyLuatDAO {
+public class KhenThuongKyLuatDAO{
 
     Connection conn = null;
     PreparedStatement stmt = null;
@@ -27,15 +27,21 @@ public class KhenThuongKyLuatDAO {
     public ArrayList<KhenThuongKyLuatDTO> getKhenThuongKyLuat() {
         try {
             conn = DBConnection.getConnection();
-            stmt = conn.prepareStatement("SELECT * FROM Chitietktkl");
-            ArrayList<KhenThuongKyLuatDTO> chitietkhenthuongkyluat = new ArrayList();
+            stmt = conn.prepareStatement("SELECT * FROM Khenthuongkyluat");
+            ArrayList<KhenThuongKyLuatDTO> khenthuongkyluat = new ArrayList();
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                chitietkhenthuongkyluat.add(new KhenThuongKyLuatDTO(rs.getString(1), rs.getDouble(2), rs.getDate(3), rs.
-                        getString(4), rs.getString(5)));
+                khenthuongkyluat.add(new KhenThuongKyLuatDTO(
+                        rs.getString("MaKTKL"), 
+                        rs.getDouble("SoTien"), 
+                        rs.getDate("NgayQuyetDinh"), 
+                        rs.getString("LoaiQuyetDinh"), 
+                        rs.getString("NoiDung"), 
+                        rs.getDate("NgaySuaDoi")
+                ));
             }
-            return chitietkhenthuongkyluat;
+            return khenthuongkyluat;
         } catch (SQLException e) {
             return null;
         } finally {
@@ -43,16 +49,15 @@ public class KhenThuongKyLuatDAO {
         }
     }
 
-    public boolean addKhenThuongKyLuat(KhenThuongKyLuatDTO chitietkhenthuongkiluat) {
+    public boolean addKhenThuongKyLuat(KhenThuongKyLuatDTO khenthuongkiluat) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "INSERT INTO Chitietktkl (MaKTKL, SoTien, NgayQuyetDinh, LoaiQuyetDinh, NoiDung) VALUES (?, ?, ?, ?, ?)");
-            stmt.setString(1, chitietkhenthuongkiluat.getMaKTKL());
-            stmt.setDouble(2, chitietkhenthuongkiluat.getSoTien());
-            stmt.setDate(3, chitietkhenthuongkiluat.getNgayQuyetDinh());
-            stmt.setString(4, chitietkhenthuongkiluat.getLoaiQuyetDinh());
-            stmt.setString(5, chitietkhenthuongkiluat.getNoiDung());
+                    "INSERT INTO Khenthuongkyluat (MaKTKL, SoTien, NgayQuyetDinh, LoaiQuyetDinh, NoiDung, NgaySuaDoi) VALUES (?, ?, CURRENT_DATE, ?, ?, CURRENT_DATE)");
+            stmt.setString(1, khenthuongkiluat.getMaKTKL());
+            stmt.setDouble(2, khenthuongkiluat.getSoTien());
+            stmt.setString(3, khenthuongkiluat.getLoaiQuyetDinh());
+            stmt.setString(4, khenthuongkiluat.getNoiDung());
             stmt.executeUpdate();
 
             return true;
@@ -68,7 +73,7 @@ public class KhenThuongKyLuatDAO {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "DELETE FROM Chitietktkl WHERE MaKTKL = ?");
+                    "DELETE FROM Khenthuongkyluat WHERE MaKTKL = ?");
             stmt.setString(1, id);
 
             stmt.executeUpdate();
@@ -82,12 +87,12 @@ public class KhenThuongKyLuatDAO {
         }
     }
 
-    public boolean deleteKhenThuongKyLuat(KhenThuongKyLuatDTO chitietkhenthuongkiluat) {
+    public boolean deleteKhenThuongKyLuat(KhenThuongKyLuatDTO khenthuongkiluat) {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "DELETE FROM Chitietdcl WHERE MaKTKL = ?");
-            stmt.setString(1, chitietkhenthuongkiluat.getMaKTKL());
+                    "DELETE FROM khenthuongkyluat WHERE MaKTKL = ?");
+            stmt.setString(1, khenthuongkiluat.getMaKTKL());
 
             stmt.executeUpdate();
 
@@ -100,48 +105,49 @@ public class KhenThuongKyLuatDAO {
         }
     }
 
-    public boolean updateKhenThuongKyLuat(KhenThuongKyLuatDTO chitietkhenthuongkiluat) {
+    public boolean updateKhenThuongKyLuat(KhenThuongKyLuatDTO khenthuongkiluat) {
         try {
-            Object[] selection = chitietkhenthuongkiluat.getSelection();
-            String table = "";
+            Object[] selection = khenthuongkiluat.getSelection();
+            String table = "NgaySuaDoi = CURRENT_DATE";
             for (int i = 0; i < selection.length; i++) {
                 if ((boolean) selection[i]) {
                     switch (i + 1) {
                         case 1 ->
                             table += "SoTien = ? ,";
                         case 2 ->
-                            table += "NgayQuyetDinh = ? ,";
-                        case 3 ->
                             table += "LoaiQuyetDinh = ? ,";
-                        case 4 ->
+                        case 3 ->
                             table += "NoiDung = ? ,";
                     }
                 }
             }
             table = table.substring(0, table.length() - 1);
 
+            String sql = "UPDATE khenthuongkyluat SET " + table + "WHERE MaKTKL = ? ";
+
             conn = DBConnection.getConnection();
-            stmt = conn.prepareStatement(
-                    "UPDATE Chitietdcl SET " + table + "WHERE MaKTKL = ?");
+            stmt = conn.prepareStatement(sql);
 
             int index = 1;
             for (int i = 0; i < selection.length; i++) {
                 if ((boolean) selection[i]) {
                     switch (i + 1) {
                         case 1 ->
-                            stmt.setDouble(index++, chitietkhenthuongkiluat.getSoTien());
+                            stmt.setDouble(index++, khenthuongkiluat.getSoTien());
                         case 2 ->
-                            stmt.setDate(index++, chitietkhenthuongkiluat.getNgayQuyetDinh());
+                            stmt.setString(index++, khenthuongkiluat.getLoaiQuyetDinh());
                         case 3 ->
-                            stmt.setString(index++, chitietkhenthuongkiluat.getLoaiQuyetDinh());
-                        case 4 ->
-                            stmt.setString(index++, chitietkhenthuongkiluat.getNoiDung());
+                            stmt.setString(index++, khenthuongkiluat.getNoiDung());
                     }
                 }
             }
 
-            stmt.setString(index, chitietkhenthuongkiluat.getMaKTKL());
+            stmt.setString(index, khenthuongkiluat.getMaKTKL());
             stmt.executeUpdate();
+
+            if (hasBangLuong()) {
+                addLuongAllNhanVien();
+            }
 
             return true;
 
@@ -149,6 +155,49 @@ public class KhenThuongKyLuatDAO {
             return false;
         } finally {
             DBConnection.closeConnection(conn, stmt);
+        }
+    }
+    
+    private boolean hasBangLuong() throws SQLException {
+        stmt = conn.prepareStatement("SELECT * FROM khenthuongkyluat JOIN chitietluong "
+                + "WHERE MONTH(khenthuongkyluat.NgayQuyetDinh) = MONTH(chitietluong.NgayLapBang) AND YEAR(khenthuongkyluat.NgayQuyetDinh) = YEAR(chitietluong.NgayLapBang) "
+                + "AND MONTH(chitietluong.NgayLapBang) = MONTH(CURRENT_DATE) AND YEARchitietluong.NgayLapBang) = YEAR(CURRENT_DATE);");
+        rs = stmt.executeQuery();
+        return rs.next();
+    }
+
+    private ArrayList<String> getMaNhanVien() throws SQLException {
+        stmt = conn.prepareStatement(
+                "SELECT chitietktkl.MaNV FROM chitietktkl JOIN khenthuongkyluat ON chitietktkl.MaKTKL = khenthuongkyluat.MaKTKL "
+                + "WHERE chitietktkl.MaKTKL = ? AND MONTH(khenthuongkyluat.NgayQuyetDinh) = MONTH(CURRENT_DATE) AND YEAR(khenthuongkyluat.NgayQuyetDinh) = YEAR(CURRENT_DATE);");
+
+        ArrayList<String> MaNhanVien = new ArrayList();
+        rs = stmt.executeQuery();
+
+        while (rs.next()) {
+            MaNhanVien.add(rs.getString("MaNV"));
+        }
+
+        return MaNhanVien;
+    }
+
+    private void addLuongAllNhanVien() throws SQLException {
+        String sql = "UPDATE chitietktkl JOIN chitietluong"
+                + "	ON AND chitietktkl.MaNV = chitietluong.MaNV AND MONTH(chitietluong.NgayLapBang) = MONTH(CURRENT_DATE)"
+                + "SET chitietluong.ThuongPhat = (SELECT SUM(khenthuongkyluat.SoTien)"
+                + "                    FROM chitietktkl JOIN khenthuongkyluat ON chitietktkl.MaKTKL = khenthuongkyluat.MaKTKL"
+                + "                    WHERE chitietktkl.MaNV = ?"
+                + "                      AND YEAR(khenthuongkyluat.NgayQuyetDinh) = YEAR(CURRENT_DATE)"
+                + "                      AND MONTH(khenthuongkyluat.NgayQuyetDinh) = MONTH(CURRENT_DATE))"
+                + "    chitietluong.NgaySuaDoi = CURRENT_DATE"
+                + "WHERE chitietktkl.MaNV = ?";
+        stmt = conn.prepareStatement(sql);
+        
+        ArrayList<String> MaNhanVien = getMaNhanVien();
+        for (String ma : MaNhanVien) {
+            stmt.setString(1, ma);
+            stmt.setString(2, ma);
+            stmt.executeUpdate();
         }
     }
 }

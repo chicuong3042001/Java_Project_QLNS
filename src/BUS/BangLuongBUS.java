@@ -27,8 +27,8 @@ public class BangLuongBUS {
         ArrayList<BangLuongDTO> list = chitietluongdao.getBangLuong();
         
         for(BangLuongDTO item : list) {
-            if(item.getMaLuong().equals(chitietluong.getMaLuong())) {
-                throw new DuplicatedException("Mã lương bị trùng ");
+            if(item.getMaLuong().equals(chitietluong.getMaLuong()) && item.getMaNV().equals(chitietluong.getMaNV())) {
+                throw new DuplicatedException("Mã lương và mã nhân viên bị trùng");
             }
         }
         return chitietluongdao.addBangLuong(chitietluong);

@@ -19,13 +19,26 @@ public class BangLuongDTO {
     private double HeSoLuong;//sửa dc
     private double ThuongPhat;
     private double TienLuong;
+    private Date NgaySuaDoi;
 
     public BangLuongDTO(String MaNV,String MaLuong, String TenNV, Date NgayLapBang, double LuongCoBan, double HeSoLuong, double ThuongPhat,
-            double TienLuong) {
+            double TienLuong, Date NgaySuaDoi) {
         this.MaNV = MaNV;
         this.MaLuong = MaLuong;
         this.TenNV = TenNV;
         this.NgayLapBang = NgayLapBang;
+        this.LuongCoBan = LuongCoBan;
+        this.HeSoLuong = HeSoLuong;
+        this.ThuongPhat = ThuongPhat;
+        this.TienLuong = TienLuong;
+        this.NgaySuaDoi = NgaySuaDoi;
+    }
+
+    public BangLuongDTO(String MaNV, String MaLuong, String TenNV, double LuongCoBan, double HeSoLuong,
+            double ThuongPhat, double TienLuong) {
+        this.MaNV = MaNV;
+        this.MaLuong = MaLuong;
+        this.TenNV = TenNV;
         this.LuongCoBan = LuongCoBan;
         this.HeSoLuong = HeSoLuong;
         this.ThuongPhat = ThuongPhat;
@@ -94,6 +107,14 @@ public class BangLuongDTO {
 
     public void setMaLuong(String MaLuong) {
         this.MaLuong = MaLuong;
+    }
+
+    public Date getNgaySuaDoi() {
+        return NgaySuaDoi;
+    }
+
+    public void setNgaySuaDoi(Date NgaySuaDoi) {
+        this.NgaySuaDoi = NgaySuaDoi;
     }
     
 }
