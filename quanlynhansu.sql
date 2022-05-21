@@ -2,9 +2,9 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: May 20, 2022 at 09:09 AM
--- Server version: 10.4.21-MariaDB
+-- Host: 127.0.0.1
+-- Generation Time: May 21, 2022 at 05:06 PM
+-- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `quanlynhansu1`
+-- Database: `quanlynhansu`
 --
 
 -- --------------------------------------------------------
@@ -53,16 +53,18 @@ CREATE TABLE `chitietluong` (
   `MaNV` varchar(255) NOT NULL,
   `ThuongPhat` double NOT NULL DEFAULT 0,
   `HeSoLuong` double NOT NULL,
-  `NgayLapBang` date NOT NULL
+  `NgayLapBang` date NOT NULL,
+  `NgaySuaDoi` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `chitietluong`
 --
 
-INSERT INTO `chitietluong` (`MaLuong`, `MaNV`, `ThuongPhat`, `HeSoLuong`, `NgayLapBang`) VALUES
-('Luong01', '001', 20000, 1.5, '2022-04-01'),
-('Luong01', '001', 50000, 1.5, '2022-05-19');
+INSERT INTO `chitietluong` (`MaLuong`, `MaNV`, `ThuongPhat`, `HeSoLuong`, `NgayLapBang`, `NgaySuaDoi`) VALUES
+('Luong01', '001', 20000, 1.5, '2022-04-01', '2022-04-01'),
+('Luong01', '001', 50000, 1.5, '2022-05-21', '2022-05-21'),
+('Luong01', '002', -50000, 1.5, '2022-05-21', '2022-05-21');
 
 -- --------------------------------------------------------
 
@@ -87,17 +89,18 @@ CREATE TABLE `khenthuongkyluat` (
   `SoTien` double DEFAULT NULL,
   `NgayQuyetDinh` date DEFAULT NULL,
   `LoaiQuyetDinh` varchar(255) DEFAULT NULL,
-  `NoiDung` varchar(255) DEFAULT NULL
+  `NoiDung` varchar(255) DEFAULT NULL,
+  `NgaySuaDoi` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `khenthuongkyluat`
 --
 
-INSERT INTO `khenthuongkyluat` (`MaKTKL`, `SoTien`, `NgayQuyetDinh`, `LoaiQuyetDinh`, `NoiDung`) VALUES
-('KT01', 100000, '2022-05-19', 'Thưởng', 'Giỏi'),
-('KT02', -50000, '2022-05-19', 'Phạt', 'Trễ'),
-('KT03', 20000, '2022-04-01', 'Thưởng', 'Thưởng tết');
+INSERT INTO `khenthuongkyluat` (`MaKTKL`, `SoTien`, `NgayQuyetDinh`, `LoaiQuyetDinh`, `NoiDung`, `NgaySuaDoi`) VALUES
+('KT01', 100000, '2022-05-21', 'Thưởng', 'Giỏi', '2022-05-21'),
+('KT02', -50000, '2022-05-21', 'Phạt', 'Trễ', '2022-05-21'),
+('KT03', 20000, '2022-04-01', 'Thưởng', 'Thưởng tết', '2022-04-01');
 
 -- --------------------------------------------------------
 
