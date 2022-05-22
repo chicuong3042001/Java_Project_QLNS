@@ -20,6 +20,10 @@ public class ChucVuDAO {
     Connection conn = null;
     PreparedStatement stmt = null;
     ResultSet rs = null;
+    
+    public static final int INDEX_TENCV = 0;
+    public static final int INDEX_GHICHU = 1;
+
 
     public ChucVuDAO() {
     }
@@ -32,7 +36,7 @@ public class ChucVuDAO {
 
             rs = stmt.executeQuery();
             while (rs.next()) {
-                chucvuDAO.add(new ChucVuDTO(rs.getString(1), rs.getString(2), rs.getString(3)));
+                chucvuDAO.add(new ChucVuDTO(rs.getString("MaCV"), rs.getString("TenCV"), rs.getString("GhiChu")));
             }
             return chucvuDAO;
         } catch (SQLException e) {
@@ -104,10 +108,10 @@ public class ChucVuDAO {
 
             for (int i = 0; i < selection.length; i++) {
                 if ((boolean) selection[i]) {
-                    switch (i + 1) {
-                        case 1 ->
+                    switch (i) {
+                        case INDEX_TENCV ->
                             table += "TenCV = ? ,";
-                        case 2 ->
+                        case INDEX_GHICHU ->
                             table += "GhiChu = ? ,";
                     }
                 }
@@ -122,11 +126,11 @@ public class ChucVuDAO {
             int index = 1;
             for (int i = 0; i < selection.length; i++) {
                 if ((boolean) selection[i]) {
-                    switch (i + 1) {
-                        case 1 ->
-                            stmt.setString(index++, chucvu.getTenCV());
-                        case 2 ->
-                            stmt.setString(index++, chucvu.getGhiChu());
+                    switch (i) {
+                        case INDEX_TENCV ->
+                            table += "TenCV = ? ,";
+                        case INDEX_GHICHU ->
+                            table += "GhiChu = ? ,";
                     }
                 }
             }

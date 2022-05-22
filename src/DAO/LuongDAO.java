@@ -32,7 +32,7 @@ public class LuongDAO {
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                luong.add(new LuongDTO(rs.getString("MaLuong"), rs.getString("MaNV")));
+                luong.add(new LuongDTO(rs.getString("MaLuong"), rs.getDouble("LuongCB")));
             }
             return luong;
         } catch (SQLException e) {
@@ -48,7 +48,7 @@ public class LuongDAO {
             stmt = conn.prepareStatement(
                     "INSERT INTO luong (MaLuong, MaNV) VALUES (?, ?)");
             stmt.setString(1, luong.getMaLuong());
-            stmt.setString(2, luong.getMaNV());
+            stmt.setDouble(2, luong.getLuongCoBan());
             stmt.executeUpdate();
 
             return true;
@@ -64,9 +64,9 @@ public class LuongDAO {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "DELETE FROM luong WHERE MaLuong = ? AND MaNV = ?");
+                    "DELETE FROM luong WHERE MaLuong = ?");
             stmt.setString(1, luong.getMaLuong());
-            stmt.setString(2, luong.getMaNV());
+            stmt.setDouble(2, luong.getLuongCoBan());
 
             stmt.executeUpdate();
 
@@ -81,34 +81,11 @@ public class LuongDAO {
 
     public boolean updateLuong(LuongDTO luong) {
         try {
-            Object[] selection = luong.getSelection();
-            
-            String table = "";
-            for (int i = 0; i < selection.length; i++) {
-                if ((boolean) selection[i]) {
-                    switch (i + 1) {
-                        case 1 ->
-                            table += "TienLuong = ? ,";
-                    }
-                }
-            }
-            table = table.substring(0, table.length() - 1);
-
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "UPDATE luong SET " + table + "WHERE MaLuong = ? AND MaNV = ? ");
-
-            int index = 1;
-            for (int i = 0; i < selection.length; i++) {
-                if ((boolean) selection[i]) {
-                    switch (i + 1) {
-
-                    }
-                }
-            }
-
-            stmt.setString(index++, luong.getMaLuong());
-            stmt.setString(index++, luong.getMaNV());
+                    "UPDATE luong SET TienLuong = ? WHERE MaLuong = ?");
+            stmt.setDouble(1, luong.getLuongCoBan());
+            stmt.setString(2, luong.getMaLuong());
             stmt.executeUpdate();
 
             return true;

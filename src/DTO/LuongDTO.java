@@ -13,15 +13,16 @@ import java.util.ArrayList;
 public class LuongDTO {
 
     private String MaLuong;
-    private String MaNV;
+    private double LuongCoBan;
 
     public LuongDTO() {
     }
 
-    public LuongDTO(String MaLuong, String MaNV) {
+    public LuongDTO(String MaLuong, double LuongCoBan) {
         this.MaLuong = MaLuong;
-        this.MaNV = MaNV;
+        this.LuongCoBan = LuongCoBan;
     }
+
 
     public String getMaLuong() {
         return MaLuong;
@@ -31,12 +32,12 @@ public class LuongDTO {
         this.MaLuong = MaLuong;
     }
 
-    public String getMaNV() {
-        return MaNV;
+    public double getLuongCoBan() {
+        return LuongCoBan;
     }
 
-    public void setMaNV(String MaNV) {
-        this.MaNV = MaNV;
+    public void setLuongCoBan(double LuongCoBan) {
+        this.LuongCoBan = LuongCoBan;
     }
 
     public Object[] getSelection() {

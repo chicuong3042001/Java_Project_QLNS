@@ -20,6 +20,10 @@ public class KhenThuongKyLuatDAO{
     Connection conn = null;
     PreparedStatement stmt = null;
     ResultSet rs = null;
+    
+    public static final int INDEX_SOTIEN = 0;
+    public static final int INDEX_LOAIQUYETDINH = 1;
+    public static final int INDEX_NOIDUNG = 2;
 
     public KhenThuongKyLuatDAO() {
     }
@@ -111,12 +115,12 @@ public class KhenThuongKyLuatDAO{
             String table = "NgaySuaDoi = CURRENT_DATE";
             for (int i = 0; i < selection.length; i++) {
                 if ((boolean) selection[i]) {
-                    switch (i + 1) {
-                        case 1 ->
+                    switch (i) {
+                        case INDEX_SOTIEN ->
                             table += "SoTien = ? ,";
-                        case 2 ->
+                        case INDEX_LOAIQUYETDINH ->
                             table += "LoaiQuyetDinh = ? ,";
-                        case 3 ->
+                        case INDEX_NOIDUNG ->
                             table += "NoiDung = ? ,";
                     }
                 }
@@ -131,13 +135,13 @@ public class KhenThuongKyLuatDAO{
             int index = 1;
             for (int i = 0; i < selection.length; i++) {
                 if ((boolean) selection[i]) {
-                    switch (i + 1) {
-                        case 1 ->
-                            stmt.setDouble(index++, khenthuongkiluat.getSoTien());
-                        case 2 ->
-                            stmt.setString(index++, khenthuongkiluat.getLoaiQuyetDinh());
-                        case 3 ->
-                            stmt.setString(index++, khenthuongkiluat.getNoiDung());
+                    switch (i) {
+                        case INDEX_SOTIEN ->
+                            table += "SoTien = ? ,";
+                        case INDEX_LOAIQUYETDINH ->
+                            table += "LoaiQuyetDinh = ? ,";
+                        case INDEX_NOIDUNG ->
+                            table += "NoiDung = ? ,";
                     }
                 }
             }

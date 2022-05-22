@@ -20,6 +20,9 @@ public class PhongBanDAO {
     Connection conn = null;
     PreparedStatement stmt = null;
     ResultSet rs = null;
+    
+    public static final int INDEX_TENPB = 0;
+    public static final int INDEX_SODIENTHOAI = 1;
 
     public PhongBanDAO() {
     }
@@ -32,7 +35,7 @@ public class PhongBanDAO {
 
             rs = stmt.executeQuery();
             while (rs.next()) {
-                phongbanDAO.add(new PhongBanDTO(rs.getString(1), rs.getString(2), rs.getString(3)));
+                phongbanDAO.add(new PhongBanDTO(rs.getString("MaPB"), rs.getString("TenPB"), rs.getString("SoDienThoai")));
             }
             return phongbanDAO;
         } catch (SQLException e) {
@@ -104,10 +107,10 @@ public class PhongBanDAO {
             String table = "";
             for (int i = 0; i < selection.length; i++) {
                 if ((boolean) selection[i]) {
-                    switch (i + 1) {
-                        case 1 ->
+                    switch (i) {
+                        case INDEX_TENPB ->
                             table += "TenPB = ? ,";
-                        case 2 ->
+                        case INDEX_SODIENTHOAI ->
                             table += "SoDienThoai = ? ,";
                     }
                 }
@@ -121,10 +124,10 @@ public class PhongBanDAO {
             int index = 1;
             for (int i = 0; i < selection.length; i++) {
                 if ((boolean) selection[i]) {
-                    switch (i + 1) {
-                        case 1 ->
+                    switch (i) {
+                        case INDEX_TENPB ->
                             stmt.setString(index++, phongban.getTenPB());
-                        case 2 ->
+                        case INDEX_SODIENTHOAI ->
                             stmt.setString(index++, phongban.getSoDienThoai());
                     }
                 }
