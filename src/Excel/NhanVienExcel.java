@@ -24,7 +24,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  *
  * @author HHH
  */
-public class NhanVienExcel {
+public class NhanVienExcel extends Excel {
 
     public static final int COLUMN_INDEX_MANV = 0;
     public static final int COLUMN_INDEX_HINHNV = 1;
@@ -109,7 +109,8 @@ public class NhanVienExcel {
         return true;
     }
 
-    private static void writeHeader(Sheet sheet, int rowIndex) {
+    @Override
+    protected void writeHeader(Sheet sheet, int rowIndex) {
         // Create row
         Row row = sheet.createRow(rowIndex);
 
@@ -151,7 +152,7 @@ public class NhanVienExcel {
         cell.setCellValue("Mã TDHV");
     }
 
-    private static void writeData(NhanVienDTO item, Row row) {
+    protected void writeData(NhanVienDTO item, Row row) {
         Cell cell = row.createCell(COLUMN_INDEX_MANV);
         cell.setCellValue(item.getMaNV());
 
@@ -178,32 +179,5 @@ public class NhanVienExcel {
 
         cell = row.createCell(COLUMN_INDEX_EMAIL);
         cell.setCellValue(item.getEmail());
-    }
-
-    private static Workbook getWorkbook(String excelFilePath) throws IOException {
-        Workbook workbook = null;
-
-        if (excelFilePath.endsWith("xlsx")) {
-            workbook = new XSSFWorkbook();
-        } else if (excelFilePath.endsWith("xls")) {
-            workbook = new HSSFWorkbook();
-        } else {
-            throw new IllegalArgumentException("The specified file is not Excel file");
-        }
-
-        return workbook;
-    }
-
-    private static Workbook getWorkbook(FileInputStream inputStream, String excelFilePath) throws IOException {
-        Workbook workbook = null;
-        if (excelFilePath.endsWith("xlsx")) {
-            workbook = new XSSFWorkbook(inputStream);
-        } else if (excelFilePath.endsWith("xls")) {
-            workbook = new HSSFWorkbook(inputStream);
-        } else {
-            throw new IllegalArgumentException("The specified file is not Excel file");
-        }
-
-        return workbook;
     }
 }

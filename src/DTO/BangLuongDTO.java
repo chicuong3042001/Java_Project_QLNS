@@ -20,6 +20,10 @@ public class BangLuongDTO {
     private double ThuongPhat;
     private double TienLuong;
     private Date NgaySuaDoi;
+    
+    public BangLuongDTO() {
+        
+    }
 
     public BangLuongDTO(String MaNV,String MaLuong, String TenNV, Date NgayLapBang, double LuongCoBan, double HeSoLuong, double ThuongPhat,
             double TienLuong, Date NgaySuaDoi) {

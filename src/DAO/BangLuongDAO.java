@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -28,7 +30,7 @@ public class BangLuongDAO {
         try {
             conn = DBConnection.getConnection();
             String sql
-                    = "SELECT nhanvien.MaNV,chitietluong.MaLuong nhanvien.TenNV,chitietluong.NgayLapBang,luong.LuongCB,chitietluong.HeSoLuong, chitietluong.ThuongPhat, chitietluong.                            HeSoLuong * luong.LuongCB + chitietluong.ThuongPhat as 'TienLuong', chitietluong.NgaySuaDoi "
+                    = "SELECT nhanvien.MaNV,chitietluong.MaLuong, nhanvien.TenNV,chitietluong.NgayLapBang,luong.LuongCB,chitietluong.HeSoLuong, chitietluong.ThuongPhat, chitietluong.                            HeSoLuong * luong.LuongCB + chitietluong.ThuongPhat as 'TienLuong', chitietluong.NgaySuaDoi "
                     + "FROM NhanVien JOIN chitietluong JOIN luong ON nhanvien.MaNV = chitietluong.MaNV AND chitietluong.MaLuong = luong.MaLuong ";
 
             stmt = conn.prepareStatement(sql);
@@ -37,13 +39,13 @@ public class BangLuongDAO {
 
             while (rs.next()) {
                 bangluong.add(new BangLuongDTO(
-                        rs.getString("MaNV"), 
-                        rs.getString("MaLuong"), 
-                        rs.getString("TenNV"), 
-                        rs.getDate("NgayLapBang"), 
-                        rs.getDouble("LuongCB"), 
-                        rs.getDouble("HeSoLuong"), 
-                        rs.getDouble("ThuongPhat"), 
+                        rs.getString("MaNV"),
+                        rs.getString("MaLuong"),
+                        rs.getString("TenNV"),
+                        rs.getDate("NgayLapBang"),
+                        rs.getDouble("LuongCB"),
+                        rs.getDouble("HeSoLuong"),
+                        rs.getDouble("ThuongPhat"),
                         rs.getDouble("TienLuong"),
                         rs.getDate("NgaySuaDoi")
                 ));
@@ -59,7 +61,8 @@ public class BangLuongDAO {
     public boolean addBangLuong(BangLuongDTO bangluong) {
         try {
             conn = DBConnection.getConnection();
-            String sql = "INSERT INTO `chitietluong`(`MaLuong`, `MaNV`, `ThuongPhat`, `HeSoLuong`, `NgayLapBang`, `NgaySuaDoi`) "
+            String sql
+                    = "INSERT INTO `chitietluong`(`MaLuong`, `MaNV`, `ThuongPhat`, `HeSoLuong`, `NgayLapBang`, `NgaySuaDoi`) "
                     + "VALUES ('?,?,"
                     + "(SELECT SUM(khenthuongkyluat.SoTien) "
                     + "FROM chitietktkl JOIN khenthuongkyluat ONchitietktkl.MaKTKL = khenthuongkyluat.MaKTKL "
@@ -81,4 +84,28 @@ public class BangLuongDAO {
         }
     }
 
+    public void addBangLuongInAllNhanVien() {
+        try {
+            ArrayList<String> MaNV = getAllMaNV();
+            for(String item : MaNV) {
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BangLuongDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            DBConnection.closeConnection(conn, stmt);
+        }
+    }
+
+    private ArrayList<String> getAllMaNV() throws SQLException {
+        ArrayList<String> MaNV = new ArrayList();
+
+        stmt = conn.prepareStatement("SELECT MaNV FROM Nhanvien");
+        rs = stmt.executeQuery();
+        while (rs.next()) {
+            MaNV.add(rs.getString("MaNV"));
+        }
+
+        return MaNV;
+    }
 }

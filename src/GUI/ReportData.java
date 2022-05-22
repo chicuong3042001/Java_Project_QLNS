@@ -24,29 +24,18 @@ import net.sf.jasperreports.view.JasperViewer;
 public class ReportData {
 
     public void reportNhanVien() {
-        try {
-            Hashtable map = new Hashtable();
-            Connection conn = DBConnection.getConnection();
-            JasperReport rpt = JasperCompileManager.compileReport("src/Report/reportNhanVien.jrxml");
-            JasperPrint p = JasperFillManager.fillReport(rpt, map, conn);
-            JasperViewer.viewReport(p, false);
-            
-            conn.close();
-
-        } catch (JRException ex) {
-            Logger.getLogger(ReportData.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ReportData.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+         report("src/Report/reportNhanVien.jrxml");
     }
     
     public void reportBangLuong(String maNV) {
+        report("src/Report/reportBangLuong.jrxml");
+    }
+    
+    private void report(String filepath) {
         try {
             Hashtable map = new Hashtable();
-            map.put("maNV", maNV);
             Connection conn = DBConnection.getConnection();
-            JasperReport rpt = JasperCompileManager.compileReport("src/Report/reportNhanVien.jrxml");
+            JasperReport rpt = JasperCompileManager.compileReport(filepath);
             JasperPrint p = JasperFillManager.fillReport(rpt, map, conn);
             JasperViewer.viewReport(p, false);
             
@@ -57,6 +46,5 @@ public class ReportData {
         } catch (SQLException ex) {
             Logger.getLogger(ReportData.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 }
