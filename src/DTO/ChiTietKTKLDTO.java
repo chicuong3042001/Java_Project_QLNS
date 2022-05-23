@@ -11,6 +11,7 @@ import java.util.ArrayList;
  * @author chicu
  */
 public class ChiTietKTKLDTO {
+
     private String MaKTKL;
     private String MaNV;
 
@@ -30,7 +31,6 @@ public class ChiTietKTKLDTO {
         this.MaKTKL = MaKTKL;
     }
 
-
     public String getMaNV() {
         return MaNV;
     }
@@ -38,12 +38,12 @@ public class ChiTietKTKLDTO {
     public void setMaNV(String MaNV) {
         this.MaNV = MaNV;
     }
-    
+
     public Object[] getSelection() {
         ArrayList<Boolean> result = new ArrayList();
 
         Object[] result2 = result.toArray();
         return result2;
     }
-    
+
 }

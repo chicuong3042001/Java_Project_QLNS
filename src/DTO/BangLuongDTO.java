@@ -11,6 +11,7 @@ import java.sql.Date;
  * @author dohung
  */
 public class BangLuongDTO {
+
     private String MaNV;
     private String MaLuong;
     private String TenNV;
@@ -25,7 +26,7 @@ public class BangLuongDTO {
         
     }
 
-    public BangLuongDTO(String MaNV,String MaLuong, String TenNV, Date NgayLapBang, double LuongCoBan, double HeSoLuong, double ThuongPhat,
+    public BangLuongDTO(String MaNV, String MaLuong, String TenNV, Date NgayLapBang, double LuongCoBan, double HeSoLuong, double ThuongPhat,
             double TienLuong, Date NgaySuaDoi) {
         this.MaNV = MaNV;
         this.MaLuong = MaLuong;
@@ -120,5 +121,5 @@ public class BangLuongDTO {
     public void setNgaySuaDoi(Date NgaySuaDoi) {
         this.NgaySuaDoi = NgaySuaDoi;
     }
-    
+
 }

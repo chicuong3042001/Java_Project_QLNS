@@ -20,9 +20,9 @@ public class FrmTTPM extends javax.swing.JPanel {
                 + "từ việc tiếp nhận nhân sự (quản lý hồ sơ nhân sự) cho đến quản lý lương bổng.<br><br>"
                 + "- Phần mềm đầy đủ các chức năng cho việc quản lý nhân sự như:<br>"
                 + "+ Quản lí nhân viên.<br>"
-                + "+ Quản lí chức vụ.<br>" 
-                + "+ Quản lí phòng ban.<br>" 
-                + "+ Quản lí lương bổng.<br>" 
+                + "+ Quản lí chức vụ.<br>"
+                + "+ Quản lí phòng ban.<br>"
+                + "+ Quản lí lương bổng.<br>"
                 + "+ Nhập/Xuất danh sách nhân viên, lương bổng.</html>"
         );
     }
@@ -67,7 +67,6 @@ public class FrmTTPM extends javax.swing.JPanel {
                 .addContainerGap(240, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

@@ -4,24 +4,81 @@
  */
 package GUI;
 
+import BUS.NhanVienBUS;
+import DTO.NhanVienDTO;
+import Excel.NhanVienExcel;
+import static GUI.FrmDSNV.resize;
 import java.awt.Graphics;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
-
-
+import javax.swing.JFileChooser;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author chicu
  */
 public class FrmXuatDSNV extends javax.swing.JPanel {
-   
+
+    public NhanVienDTO nhanVienDTO;
+    public NhanVienBUS nhanVienBUS;
+    public DefaultTableModel defaultTableModel;
+    public NhanVienExcel nvExcel = new NhanVienExcel();
+    public FrmXuatDSNV() {
+        initComponents();
+        nhanVienBUS = new NhanVienBUS();
+        nhanVienDTO = new NhanVienDTO();
+        defaultTableModel = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; //To change body of generated methods, choose Tools | Templates.
+            }
+        };
+        employeeTable.setModel(defaultTableModel);
+        defaultTableModel.addColumn("Mã NV");
+        defaultTableModel.addColumn("Hình NV");
+        defaultTableModel.addColumn("Tên NV");
+        defaultTableModel.addColumn("Ngày sinh");
+        defaultTableModel.addColumn("Giới tính");
+        defaultTableModel.addColumn("Địa chỉ");
+        defaultTableModel.addColumn("Số CMND");
+        defaultTableModel.addColumn("Số điện thoại");
+        defaultTableModel.addColumn("Email");
+        defaultTableModel.addColumn("Mã PB");
+        defaultTableModel.addColumn("Mã CV");
+        defaultTableModel.addColumn("Mã TDHV");
+
+        setEmployeeData(nhanVienBUS.getNhanVien());
+    }
+    
+    public void setEmployeeData(ArrayList<NhanVienDTO> employees) {
+        for (NhanVienDTO employee : employees) {
+            defaultTableModel.addRow(new Object[]{
+                employee.getMaNV(),
+                employee.getHinhNV(),
+                employee.getTenNV(),
+                employee.getNgaySinh(),
+                employee.getGioiTinh(),
+                employee.getDiaChi(),
+                employee.getSoCMND(),
+                employee.getSoDienThoai(),
+                employee.getEmail(),
+                employee.getMaPB(),
+                employee.getMaCV(),
+                employee.getMaTDHV(),
+            });
+        }
+    }
     /**
      * Creates new form FrmExportSalary
      */
-    public FrmXuatDSNV() {
-        initComponents();
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,11 +98,10 @@ public class FrmXuatDSNV extends javax.swing.JPanel {
             } 
         };
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        pathField = new javax.swing.JTextField();
+        exportBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        employeeTable = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel(){    
             public void paintComponent(Graphics g){     
                 ImageIcon icon=new ImageIcon(getClass().getResource("/GUI/Images/bg2.png"));     
@@ -54,21 +110,27 @@ public class FrmXuatDSNV extends javax.swing.JPanel {
                 super.paintComponent(g);     
             } 
         };
-        jLabel4 = new javax.swing.JLabel();
+        showBtn = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel(){    
+            public void paintComponent(Graphics g){     
+                ImageIcon icon=new ImageIcon(getClass().getResource("/GUI/Images/bg2.png"));     
+                g.drawImage(icon.getImage(),0 , 0, jPanel4.getWidth(), jPanel4.getHeight(), null);       
+                setOpaque(false);     
+                super.paintComponent(g);     
+            } 
+        };
 
         jLabel1.setText("Xuất ra:");
         jLabel1.setToolTipText("");
 
-        jTextField1.setText("jTextField1");
-        jTextField1.setEnabled(false);
+        pathField.setText("D:\\Java_Project_QLNS");
+        pathField.setEnabled(false);
 
-        jButton1.setText("...");
-
-        jButton2.setText("Xuất danh sách");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        exportBtn.setText("Xuất danh sách");
+        exportBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                exportBtnActionPerformed(evt);
             }
         });
 
@@ -77,15 +139,13 @@ public class FrmXuatDSNV extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(194, 194, 194)
+                .addGap(17, 17, 17)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pathField, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
-                .addContainerGap(194, Short.MAX_VALUE))
+                .addComponent(exportBtn)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -93,13 +153,12 @@ public class FrmXuatDSNV extends javax.swing.JPanel {
                 .addGap(35, 35, 35)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(pathField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(exportBtn))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        employeeTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -110,18 +169,34 @@ public class FrmXuatDSNV extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(employeeTable);
 
         jPanel3.setMinimumSize(new java.awt.Dimension(100, 100));
         jPanel3.setPreferredSize(new java.awt.Dimension(513, 115));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/xemdanhsach.png"))); // NOI18N
-        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        showBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/xemdanhsach.png"))); // NOI18N
+        showBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        showBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                showBtnMouseClicked(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 0, 0));
         jLabel2.setText("XUẤT DANH SÁCH NHÂN VIÊN");
         jLabel2.setPreferredSize(new java.awt.Dimension(513, 25));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 52, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -130,18 +205,28 @@ public class FrmXuatDSNV extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(showBtn)
+                        .addGap(90, 90, 90)))
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(showBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -151,9 +236,9 @@ public class FrmXuatDSNV extends javax.swing.JPanel {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 769, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 770, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 769, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -179,24 +264,36 @@ public class FrmXuatDSNV extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void showBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showBtnMouseClicked
         // TODO add your handling code here:
-        ReportData rp = new ReportData();
-        rp.reportNhanVien();
-    }//GEN-LAST:event_jButton2ActionPerformed
-   
+        defaultTableModel.setRowCount(0);
+        setEmployeeData(nhanVienBUS.getNhanVien());
+    }//GEN-LAST:event_showBtnMouseClicked
+    
+    
+    
+    private void exportBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportBtnActionPerformed
+        try {
+            // TODO add your handling code here:
+            nvExcel.exportNhanVien("NhanSu.xlsx");
+
+        } catch (IOException ex) {
+            Logger.getLogger(FrmXuatDSNV.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_exportBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JTable employeeTable;
+    private javax.swing.JButton exportBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField pathField;
+    private javax.swing.JLabel showBtn;
     // End of variables declaration//GEN-END:variables
 }

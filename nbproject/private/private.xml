@@ -3,9 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/Users/dohung/NetBeansProjects/Java_Project_QLNS/src/BUS/ChiTietDCLBUS.java</file>
             <file>file:/Users/dohung/NetBeansProjects/Java_Project_QLNS/src/DAO/ChiTietKTKLDAO.java</file>
             <file>file:/Users/dohung/NetBeansProjects/Java_Project_QLNS/src/DAO/ChiTietDCLDAO.java</file>
+=======
+            <file>file:/D:/Java_Project_QLNS/src/GUI/ReportData.java</file>
+            <file>file:/D:/Java_Project_QLNS/src/BUS/LuongBUS.java</file>
+            <file>file:/D:/Java_Project_QLNS/src/DAO/ChiTietKTKLDAO.java</file>
+            <file>file:/D:/Java_Project_QLNS/src/GUI/FrmXuatDSNV.java</file>
+            <file>file:/D:/Java_Project_QLNS/src/DAO/LuongDAO.java</file>
+            <file>file:/D:/Java_Project_QLNS/src/GUI/FrmCalendar.java</file>
+            <file>file:/D:/Java_Project_QLNS/src/GUI/FrmXuatBangLuong.java</file>
+            <file>file:/D:/Java_Project_QLNS/src/GUI/FrmBangLuong.java</file>
+            <file>file:/D:/Java_Project_QLNS/src/GUI/FrmChucVu.java</file>
+>>>>>>> origin/main
         </group>
     </open-files>
 </project-private>

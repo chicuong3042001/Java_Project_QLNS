@@ -11,6 +11,7 @@ import java.util.ArrayList;
  * @author chicu
  */
 public class ChucVuDTO {
+
     private String MaCV;
     private String TenCV;
     private String GhiChu;
@@ -47,7 +48,7 @@ public class ChucVuDTO {
     public void setGhiChu(String GhiChu) {
         this.GhiChu = GhiChu;
     }
-    
+
     public Object[] getSelection() {
         ArrayList<Boolean> result = new ArrayList();
         result.add(this.TenCV != null);
@@ -56,5 +57,5 @@ public class ChucVuDTO {
         Object[] result2 = result.toArray();
         return result2;
     }
-    
+
 }

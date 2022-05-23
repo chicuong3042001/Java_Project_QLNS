@@ -103,7 +103,7 @@ public class FrmMain extends javax.swing.JFrame {
         studyLabel = new javax.swing.JLabel();
         rankLabel = new javax.swing.JLabel();
         awardAndPunishmentLabel = new javax.swing.JLabel();
-        salaryAdjustmentLabel = new javax.swing.JLabel();
+        thongkeLabel = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel(){    
             public void paintComponent(Graphics g){     
                 ImageIcon icon=new ImageIcon(getClass().getResource("/GUI/Images/bg2.png"));     
@@ -288,16 +288,20 @@ public class FrmMain extends javax.swing.JFrame {
             }
         });
 
-        salaryAdjustmentLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        salaryAdjustmentLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/dieuchinhluong.png"))); // NOI18N
-        salaryAdjustmentLabel.setText("<html>Điều chỉnh<br> lương</html>");
-        salaryAdjustmentLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        salaryAdjustmentLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+        thongkeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        thongkeLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/thongke.png"))); // NOI18N
+        thongkeLabel.setText("<html><center>Thống kê</center></html>");
+        thongkeLabel.setToolTipText("");
+        thongkeLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        thongkeLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                thongkeLabelMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                salaryAdjustmentLabelMouseEntered(evt);
+                thongkeLabelMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                salaryAdjustmentLabelMouseExited(evt);
+                thongkeLabelMouseExited(evt);
             }
         });
 
@@ -319,21 +323,21 @@ public class FrmMain extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addComponent(awardAndPunishmentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15)
-                .addComponent(salaryAdjustmentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addComponent(thongkeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(departmentLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
-                    .addComponent(awardAndPunishmentLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(salaryLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(employeeLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(salaryAdjustmentLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(rankLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(studyLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(rankLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(studyLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(thongkeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(awardAndPunishmentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -494,7 +498,7 @@ public class FrmMain extends javax.swing.JFrame {
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 471, Short.MAX_VALUE))
+                .addGap(0, 462, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -590,7 +594,7 @@ public class FrmMain extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(711, Short.MAX_VALUE))
+                .addContainerGap(702, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -608,7 +612,7 @@ public class FrmMain extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(importExportTab, javax.swing.GroupLayout.DEFAULT_SIZE, 993, Short.MAX_VALUE)
+                    .addComponent(importExportTab, javax.swing.GroupLayout.PREFERRED_SIZE, 984, Short.MAX_VALUE)
                     .addComponent(tabmain)
                     .addComponent(jSeparator2))
                 .addContainerGap())
@@ -621,7 +625,7 @@ public class FrmMain extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(3, 3, 3)
-                .addComponent(tabmain, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
+                .addComponent(tabmain, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -714,16 +718,6 @@ public class FrmMain extends javax.swing.JFrame {
         }
         return true;
     }
-
-    private void salaryAdjustmentLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salaryAdjustmentLabelMouseExited
-        // TODO add your handling code here:
-        salaryAdjustmentLabel.setBorder(null);
-    }//GEN-LAST:event_salaryAdjustmentLabelMouseExited
-
-    private void salaryAdjustmentLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salaryAdjustmentLabelMouseEntered
-        // TODO add your handling code here:
-        salaryAdjustmentLabel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 255), 1, true));
-    }//GEN-LAST:event_salaryAdjustmentLabelMouseEntered
 
     private void awardAndPunishmentLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_awardAndPunishmentLabelMouseExited
         // TODO add your handling code here:
@@ -896,6 +890,23 @@ public class FrmMain extends javax.swing.JFrame {
         new ShowDialog(this).Show("Thông tin liên hệ", new FrmLienHe(), 410, 335);
     }//GEN-LAST:event_phoneLabelMouseClicked
 
+    private void thongkeLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_thongkeLabelMouseEntered
+        // TODO add your handling code here:
+        thongkeLabel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 255), 1, true));
+    }//GEN-LAST:event_thongkeLabelMouseEntered
+
+    private void thongkeLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_thongkeLabelMouseExited
+        // TODO add your handling code here:
+        thongkeLabel.setBorder(null);
+    }//GEN-LAST:event_thongkeLabelMouseExited
+
+    private void thongkeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_thongkeLabelMouseClicked
+        // TODO add your handling code here:
+        if (KiemTraTab(7)) {
+            createTab("Thống kê", new FrmThongKe(), 7);
+        }
+    }//GEN-LAST:event_thongkeLabelMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -952,7 +963,6 @@ public class FrmMain extends javax.swing.JFrame {
     private javax.swing.JLabel phoneLabel;
     private javax.swing.JPanel phonePanel;
     private javax.swing.JLabel rankLabel;
-    private javax.swing.JLabel salaryAdjustmentLabel;
     private javax.swing.JLabel salaryExportLabel;
     private javax.swing.JPanel salaryExportPanel;
     private javax.swing.JLabel salaryLabel;
@@ -960,5 +970,6 @@ public class FrmMain extends javax.swing.JFrame {
     private javax.swing.JPanel softwareInfoPanel;
     private javax.swing.JLabel studyLabel;
     private javax.swing.JTabbedPane tabmain;
+    private javax.swing.JLabel thongkeLabel;
     // End of variables declaration//GEN-END:variables
 }

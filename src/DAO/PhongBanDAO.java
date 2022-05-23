@@ -44,6 +44,30 @@ public class PhongBanDAO {
             DBConnection.closeConnection(conn, stmt, rs);
         }
     }
+    
+    public PhongBanDTO findPBByID(String id) {
+        try {
+            conn = DBConnection.getConnection();
+            stmt = conn.prepareStatement("SELECT * FROM phongban WHERE MaPB = ?");
+            stmt.setString(1, id);
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                PhongBanDTO pbdto = new PhongBanDTO();
+                pbdto.setMaPB(rs.getString("MaPB"));
+                pbdto.setTenPB(rs.getString("TenPB"));
+                pbdto.setSoDienThoai(rs.getString("SoDienThoai"));
+                return pbdto;
+            }
+            
+        } catch (SQLException e) {
+            return null;
+        } finally {
+            DBConnection.closeConnection(conn, stmt, rs);
+        }
+        return null;
+    }
 
     public boolean addPhongBan(PhongBanDTO phongban) {
         try {

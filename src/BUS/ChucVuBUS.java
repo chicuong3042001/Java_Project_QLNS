@@ -34,7 +34,11 @@ public class ChucVuBUS {
         }
         return chucvudao.addChucVu(chucvu);
     }
-
+    
+    public ChucVuDTO findCVByID(String id){
+        return chucvudao.findCVByID(id);
+    }
+    
     public boolean deleteChucVu(String id) {
         return chucvudao.deleteChucVu(id);
     }

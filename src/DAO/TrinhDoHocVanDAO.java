@@ -54,10 +54,10 @@ public class TrinhDoHocVanDAO {
                 TrinhDoHocVanDTO tdhvdto = new TrinhDoHocVanDTO();
                 tdhvdto.setMaTDHV(rs.getString("MaTDHV"));
                 tdhvdto.setTenTDHV(rs.getString("TenTDHV"));
-                
+
                 return tdhvdto;
             }
-            
+
         } catch (SQLException e) {
             return null;
         } finally {
@@ -65,7 +65,7 @@ public class TrinhDoHocVanDAO {
         }
         return null;
     }
-    
+
     public boolean addTrinhDoHocVan(TrinhDoHocVanDTO trinhdohocvan) {
         try {
             conn = DBConnection.getConnection();
@@ -128,6 +128,7 @@ public class TrinhDoHocVanDAO {
 
             stmt.setString(1, trinhdohocvan.getTenTDHV());
             stmt.setString(2, trinhdohocvan.getMaTDHV());
+
             stmt.executeUpdate();
 
             return true;

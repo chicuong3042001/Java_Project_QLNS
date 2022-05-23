@@ -14,20 +14,21 @@ import java.util.ArrayList;
  * @author chicu
  */
 public class BangLuongBUS {
+
     BangLuongDAO chitietluongdao = new BangLuongDAO();
-    
+
     public BangLuongBUS() {
     }
-    
+
     public ArrayList<BangLuongDTO> getBangLuong() {
         return chitietluongdao.getBangLuong();
     }
-    
+
     public boolean addBangLuong(BangLuongDTO chitietluong) throws DuplicatedException {
         ArrayList<BangLuongDTO> list = chitietluongdao.getBangLuong();
-        
-        for(BangLuongDTO item : list) {
-            if(item.getMaLuong().equals(chitietluong.getMaLuong()) && item.getMaNV().equals(chitietluong.getMaNV())) {
+
+        for (BangLuongDTO item : list) {
+            if (item.getMaLuong().equals(chitietluong.getMaLuong()) && item.getMaNV().equals(chitietluong.getMaNV())) {
                 throw new DuplicatedException("Mã lương và mã nhân viên bị trùng");
             }
         }

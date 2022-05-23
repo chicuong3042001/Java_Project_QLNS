@@ -1,13 +1,9 @@
-
-
 package GUI;
 
 import java.awt.Graphics;
 import javax.swing.ImageIcon;
 
-
 public class FrmHome extends javax.swing.JPanel {
-
 
     public FrmHome() {
         initComponents();
@@ -172,7 +168,6 @@ public class FrmHome extends javax.swing.JPanel {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

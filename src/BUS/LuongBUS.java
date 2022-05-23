@@ -14,15 +14,16 @@ import java.util.ArrayList;
  * @author chicu
  */
 public class LuongBUS {
+
     LuongDAO luongdao = new LuongDAO();
-    
+
     public LuongBUS() {
     }
-    
+
     public ArrayList<LuongDTO> getLuong() {
         return luongdao.getLuong();
     }
-    
+
     public boolean addLuong(LuongDTO luong) throws DuplicatedException {
         ArrayList<LuongDTO> list = luongdao.getLuong();
         
@@ -33,11 +34,11 @@ public class LuongBUS {
         }
         return luongdao.addLuong(luong);
     }
-    
+
     public boolean deleteLuong(LuongDTO luong) {
         return luongdao.deleteLuong(luong);
     }
-    
+
     public boolean updateLuong(LuongDTO luong) {
         return luongdao.updateLuong(luong);
     }

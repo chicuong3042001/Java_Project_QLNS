@@ -38,7 +38,7 @@ public class ReportData {
             JasperReport rpt = JasperCompileManager.compileReport(filepath);
             JasperPrint p = JasperFillManager.fillReport(rpt, map, conn);
             JasperViewer.viewReport(p, false);
-            
+
             conn.close();
 
         } catch (JRException ex) {

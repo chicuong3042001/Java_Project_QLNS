@@ -90,10 +90,10 @@ public class NhanVienDAO {
                 nvdto.setMaPB(rs.getString("MaPB"));
                 nvdto.setMaCV(rs.getString("MaCV"));
                 nvdto.setMaTDHV(rs.getString("MaTDHV"));
-                
+
                 return nvdto;
             }
-            
+
         } catch (SQLException e) {
             return null;
         } finally {
@@ -101,7 +101,8 @@ public class NhanVienDAO {
         }
         return null;
     }
-    
+
+
     public ArrayList<NhanVienDTO> findNhanVienByFilter(NhanVienDTO nhanvien) {
         try {
             String table = "";
@@ -134,11 +135,10 @@ public class NhanVienDAO {
                     }
                 }
             }
-            table = table.substring(0, table.length() - 1);
+            table = table.substring(0, table.length() - 4);
 
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement("SELECT * FROM nhanvien WHERE " + table);
-
             int index = 1;
             for (int i = 0; i < selection.length; i++) {
                 if ((boolean) selection[i]) {
@@ -165,6 +165,7 @@ public class NhanVienDAO {
                             stmt.setString(index++, nhanvien.getMaCV());
                         case INDEX_MATDHV ->
                             stmt.setString(index++, nhanvien.getMaTDHV());
+
                     }
                 }
             }
@@ -190,6 +191,75 @@ public class NhanVienDAO {
             }
 
             return list;
+        } catch (SQLException e) {
+            return null;
+        } finally {
+            DBConnection.closeConnection(conn, stmt, rs);
+        }
+    }
+
+    public ArrayList<NhanVienDTO> findNhanVienByID(NhanVienDTO nhanvien) {
+        try {
+            conn = DBConnection.getConnection();
+            stmt = conn.prepareStatement("SELECT * FROM nhanvien WHERE MaNV = ?");
+            stmt.setString(1, nhanvien.getMaNV());
+
+            rs = stmt.executeQuery();
+
+            ArrayList<NhanVienDTO> list = new ArrayList();
+            while (rs.next()) {
+                list.add(new NhanVienDTO(
+                        rs.getString("MaNV"), 
+                        rs.getString("HinhNV"), 
+                        rs.getString("TenNV"), 
+                        rs.getString("NgaySinh"), 
+                        rs.getString("GioiTinh"),
+                        rs.getString("DiaChi"), 
+                        rs.getString("SoCMND"), 
+                        rs.getString("SoDienThoai"),
+                        rs.getString("Email"), 
+                        rs.getString("MaPB"), 
+                        rs.getString("MaCV"), 
+                        rs.getString("MaTDHV"))
+                );
+            }
+
+            return list;
+        } catch (SQLException e) {
+            return null;
+        } finally {
+            DBConnection.closeConnection(conn, stmt, rs);
+        }
+    }
+
+    public ArrayList<NhanVienDTO> findNhanVienByName(String TenNV) {
+        try {
+            conn = DBConnection.getConnection();
+            stmt = conn.prepareStatement("SELECT * FROM `nhanvien` WHERE TenNV LIKE ?");
+            stmt.setString(1, "%" + TenNV+"%");
+
+            rs = stmt.executeQuery();
+            ArrayList<NhanVienDTO> list = new ArrayList();
+
+            while (rs.next()) {
+                list.add(new NhanVienDTO(
+                        rs.getString("MaNV"), 
+                        rs.getString("HinhNV"), 
+                        rs.getString("TenNV"), 
+                        rs.getString("NgaySinh"), 
+                        rs.getString("GioiTinh"),
+                        rs.getString("DiaChi"), 
+                        rs.getString("SoCMND"), 
+                        rs.getString("SoDienThoai"),
+                        rs.getString("Email"), 
+                        rs.getString("MaPB"), 
+                        rs.getString("MaCV"), 
+                        rs.getString("MaTDHV"))
+                );
+            }
+
+            return list;
+
         } catch (SQLException e) {
             return null;
         } finally {
@@ -342,7 +412,6 @@ public class NhanVienDAO {
         }
         return false;
     }
-     
-}
 
     
+}

@@ -69,8 +69,8 @@ public class ChiTietKTKLDAO {
             stmt.setString(2, chitietktkl.getMaNV());
 
             stmt.executeUpdate();
-            
-            if(hasBangLuong()) {
+
+            if (hasBangLuong()) {
                 updateBangLuongNhanVien(chitietktkl.getMaNV());
             }
 
@@ -101,7 +101,7 @@ public class ChiTietKTKLDAO {
             DBConnection.closeConnection(conn, stmt);
         }
     }
-    
+
     private boolean hasBangLuong() throws SQLException {
         stmt = conn.prepareStatement("SELECT * FROM khenthuongkyluat JOIN chitietluong "
                 + "WHERE MONTH(khenthuongkyluat.NgayQuyetDinh) = MONTH(chitietluong.NgayLapBang) AND YEAR(khenthuongkyluat.NgayQuyetDinh) = YEAR(chitietluong.NgayLapBang) "
@@ -109,7 +109,7 @@ public class ChiTietKTKLDAO {
         rs = stmt.executeQuery();
         return rs.next();
     }
-    
+
     private void updateBangLuongNhanVien(String MaNV) throws SQLException {
         String sql = "UPDATE chitietktkl JOIN chitietluong"
                 + "	ON AND chitietktkl.MaNV = chitietluong.MaNV AND MONTH(chitietluong.NgayLapBang) = MONTH(CURRENT_DATE)"
