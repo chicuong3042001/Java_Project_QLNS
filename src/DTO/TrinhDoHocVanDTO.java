@@ -11,6 +11,7 @@ import java.util.ArrayList;
  * @author chicu
  */
 public class TrinhDoHocVanDTO {
+
     private String MaTDHV;
     private String TenTDHV;
 
@@ -38,7 +39,6 @@ public class TrinhDoHocVanDTO {
         this.TenTDHV = TenTDHV;
     }
 
-    
     public Object[] getSelection() {
         ArrayList<Boolean> result = new ArrayList();
         result.add(this.TenTDHV != null);

@@ -68,10 +68,10 @@ public class NhanVienDAO {
                 nvdto.setMaPB(rs.getString("MaPB"));
                 nvdto.setMaCV(rs.getString("MaCV"));
                 nvdto.setMaTDHV(rs.getString("MaTDHV"));
-                
+
                 return nvdto;
             }
-            
+
         } catch (SQLException e) {
             return null;
         } finally {
@@ -79,7 +79,8 @@ public class NhanVienDAO {
         }
         return null;
     }
-    
+
+
     public ArrayList<NhanVienDTO> findNhanVienByFilter(NhanVienDTO nhanvien) {
         try {
             String table = "";
@@ -88,61 +89,60 @@ public class NhanVienDAO {
                 if ((boolean) selection[i]) {
                     switch (i + 1) {
                         case 1 ->
-                            table += "HinhNV = ? ,";
+                            table += "HinhNV LIKE ? and ";
                         case 2 ->
-                            table += "TenNV = ? ,";
+                            table += "TenNV LIKE ? and ";
                         case 3 ->
-                            table += "NgaySinh = ? ,";
+                            table += "NgaySinh LIKE ? and ";
                         case 4 ->
-                            table += "GioiTinh = ? ,";
+                            table += "GioiTinh LIKE ? and ";
                         case 5 ->
-                            table += "DiaChi = ? ,";
+                            table += "DiaChi LIKE ? and ";
                         case 6 ->
-                            table += "SoCMND = ? ,";
+                            table += "SoCMND LIKE ? and ";
                         case 7 ->
-                            table += "SoDienThoai = ? ,";
+                            table += "SoDienThoai LIKE ? and ";
                         case 8 ->
-                            table += "Email = ? ,";
+                            table += "Email LIKE ? and ";
                         case 9 ->
-                            table += "MaPB = ? ,";
+                            table += "MaPB LIKE ? and ";
                         case 10 ->
-                            table += "MaCV = ? ,";
+                            table += "MaCV LIKE ? and ";
                         case 11 ->
-                            table += "MaTDHV = ? ,";
+                            table += "MaTDHV LIKE ? and ";
                     }
                 }
             }
-            table = table.substring(0, table.length() - 1);
+            table = table.substring(0, table.length() - 4);
 
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement("SELECT * FROM nhanvien WHERE " + table);
-
             int index = 1;
             for (int i = 0; i < selection.length; i++) {
                 if ((boolean) selection[i]) {
                     switch (i + 1) {
                         case 1 ->
-                            stmt.setString(index++, nhanvien.getHinhNV());
+                            stmt.setString(index++, "%"+nhanvien.getHinhNV()+"%");
                         case 2 ->
-                            stmt.setString(index++, nhanvien.getTenNV());
+                            stmt.setString(index++, "%"+nhanvien.getTenNV()+"%");
                         case 3 ->
-                            stmt.setString(index++, nhanvien.getNgaySinh());
+                            stmt.setString(index++, "%"+nhanvien.getNgaySinh()+"%");
                         case 4 ->
-                            stmt.setString(index++, nhanvien.getGioiTinh());
+                            stmt.setString(index++, "%"+nhanvien.getGioiTinh()+"%");
                         case 5 ->
-                            stmt.setString(index++, nhanvien.getDiaChi());
+                            stmt.setString(index++, "%"+nhanvien.getDiaChi()+"%");
                         case 6 ->
-                            stmt.setString(index++, nhanvien.getSoCMND());
+                            stmt.setString(index++, "%"+nhanvien.getSoCMND()+"%");
                         case 7 ->
-                            stmt.setString(index++, nhanvien.getSoDienThoai());
+                            stmt.setString(index++, "%"+nhanvien.getSoDienThoai()+"%");
                         case 8 ->
-                            stmt.setString(index++, nhanvien.getEmail());
+                            stmt.setString(index++, "%"+nhanvien.getEmail()+"%");
                         case 9 ->
-                            stmt.setString(index++, nhanvien.getMaPB());
+                            stmt.setString(index++, "%"+nhanvien.getMaPB()+"%");
                         case 10 ->
-                            stmt.setString(index++, nhanvien.getMaCV());
+                            stmt.setString(index++, "%"+nhanvien.getMaCV()+"%");
                         case 11 ->
-                            stmt.setString(index++, nhanvien.getMaTDHV());
+                            stmt.setString(index++, "%"+nhanvien.getMaTDHV()+"%");
                     }
                 }
             }
@@ -158,6 +158,55 @@ public class NhanVienDAO {
             }
 
             return list;
+        } catch (SQLException e) {
+            return null;
+        } finally {
+            DBConnection.closeConnection(conn, stmt, rs);
+        }
+    }
+
+    public ArrayList<NhanVienDTO> findNhanVienByID(NhanVienDTO nhanvien) {
+        try {
+            conn = DBConnection.getConnection();
+            stmt = conn.prepareStatement("SELECT * FROM nhanvien WHERE MaNV = ?");
+            stmt.setString(1, nhanvien.getMaNV());
+
+            rs = stmt.executeQuery();
+
+            ArrayList<NhanVienDTO> list = new ArrayList();
+            while (rs.next()) {
+                list.add(new NhanVienDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.
+                        getString(5),
+                        rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.
+                        getString(11), rs.getString(12)));
+            }
+
+            return list;
+        } catch (SQLException e) {
+            return null;
+        } finally {
+            DBConnection.closeConnection(conn, stmt, rs);
+        }
+    }
+
+    public ArrayList<NhanVienDTO> findNhanVienByName(String TenNV) {
+        try {
+            conn = DBConnection.getConnection();
+            stmt = conn.prepareStatement("SELECT * FROM `nhanvien` WHERE TenNV LIKE ?");
+            stmt.setString(1, "%" + TenNV+"%");
+
+            rs = stmt.executeQuery();
+            ArrayList<NhanVienDTO> list = new ArrayList();
+
+            while (rs.next()) {
+                list.add(new NhanVienDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.
+                        getString(5),
+                        rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.
+                        getString(11), rs.getString(12)));
+            }
+
+            return list;
+
         } catch (SQLException e) {
             return null;
         } finally {
@@ -311,7 +360,6 @@ public class NhanVienDAO {
         }
         return false;
     }
-     
-}
 
     
+}

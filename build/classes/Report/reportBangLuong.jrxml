@@ -1,124 +1,124 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="13fd94c7-b59c-4494-a58e-ef703197c217">
-	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
-	<parameter name="MaNV" class="java.lang.String">
-		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
-	</parameter>
-	<queryString>
+    <property name="ireport.zoom" value="1.0"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="0"/>
+    <parameter name="MaNV" class="java.lang.String">
+        <defaultValueExpression><![CDATA[]]></defaultValueExpression>
+    </parameter>
+    <queryString>
 		<![CDATA[SELECT nhanvien.MaNV, nhanvien.TenNV,chitietluong.NgayLapBang,luong.LuongCB,chitietluong.HeSoLuong, chitietluong.ThuongPhat, chitietluong.HeSoLuong * luong.LuongCB + chitietluong.ThuongPhat as 'Tiền lương'
 FROM NhanVien JOIN chitietluong JOIN luong ON nhanvien.MaNV = chitietluong.MaNV AND chitietluong.MaLuong = luong.MaLuong 
 WHERE nhanvien.MaNV = $P{MaNV} AND MONTH(chitietluong.NgayLapBang) = MONTH(CURRENT_DATE);]]>
-	</queryString>
-	<field name="MaNV" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="TenNV" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="NgayLapBang" class="java.sql.Date">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="LuongCB" class="java.lang.Double">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="HeSoLuong" class="java.lang.Double">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="ThuongPhat" class="java.lang.Double">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="Tiền lương" class="java.lang.Double"/>
-	<background>
-		<band splitType="Stretch"/>
-	</background>
-	<title>
-		<band height="40" splitType="Stretch">
-			<staticText>
-				<reportElement x="128" y="0" width="320" height="39" uuid="0eb67c64-065c-423e-81f3-85dc869823b8"/>
-				<textElement>
-					<font size="24" isBold="true"/>
-				</textElement>
-				<text><![CDATA[BẢNG LƯƠNG NHÂN VIÊN]]></text>
-			</staticText>
-		</band>
-	</title>
-	<pageHeader>
-		<band height="70" splitType="Stretch">
-			<staticText>
-				<reportElement x="0" y="17" width="76" height="20" uuid="0b7dead3-e062-4485-b252-455a3047d374"/>
-				<text><![CDATA[Mã Nhân viên: ]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="47" width="76" height="20" uuid="b453b5e1-f93d-4d25-8585-b55dc4ed4557"/>
-				<text><![CDATA[Họ tên:]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="76" y="17" width="178" height="20" uuid="f6481621-ba7e-4bf0-ba57-d087740e0ca1"/>
-				<textFieldExpression><![CDATA[$F{MaNV}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="76" y="47" width="178" height="20" uuid="0c1e3711-ee52-4e6b-b4ad-558216454021"/>
-				<textFieldExpression><![CDATA[$F{TenNV}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="276" y="17" width="76" height="20" uuid="73207067-c9e6-41f8-93a3-e66645dfdbe8"/>
-				<text><![CDATA[Ngày lập bảng:]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="352" y="17" width="158" height="20" uuid="5bd6caa1-7630-4c9a-956b-29215d951850"/>
-				<textFieldExpression><![CDATA[$F{NgayLapBang}]]></textFieldExpression>
-			</textField>
-		</band>
-	</pageHeader>
-	<columnHeader>
-		<band height="34" splitType="Stretch"/>
-	</columnHeader>
-	<detail>
-		<band height="65" splitType="Stretch">
-			<staticText>
-				<reportElement x="52" y="0" width="76" height="20" uuid="e31642ad-d00c-4abe-8415-1e8f48fa6ba4"/>
-				<text><![CDATA[Lương cơ bản:]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="176" y="0" width="126" height="20" uuid="2fb9c18e-90e5-4d83-b07f-7a959dc9e7ce"/>
-				<textFieldExpression><![CDATA[$F{LuongCB}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="52" y="20" width="76" height="20" uuid="6692ef65-8193-4b7e-bda3-b0bc781be3c5"/>
-				<text><![CDATA[Hệ số lương:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="52" y="40" width="76" height="20" uuid="4bdc21d7-ea97-43a1-9ddd-f0d5778c4d97"/>
-				<text><![CDATA[Thưởng phạt:]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="176" y="20" width="100" height="20" uuid="d13dd766-1aa9-42f6-9c34-da981fd94ed1"/>
-				<textFieldExpression><![CDATA[$F{HeSoLuong}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="176" y="40" width="100" height="20" uuid="a99314ba-10ea-4bbe-bed0-780f70cbb725"/>
-				<textFieldExpression><![CDATA[$F{ThuongPhat}]]></textFieldExpression>
-			</textField>
-		</band>
-	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch">
-			<textField>
-				<reportElement x="442" y="25" width="100" height="20" uuid="76284db7-8936-4a7e-80ae-ebf87cae5899"/>
-				<textFieldExpression><![CDATA[$F{Tiền lương}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="366" y="25" width="76" height="20" uuid="95a999f4-bb6f-4dfe-92a4-85f9ef01b35e"/>
-				<text><![CDATA[Tiền Lương]]></text>
-			</staticText>
-		</band>
-	</columnFooter>
-	<pageFooter>
-		<band height="54" splitType="Stretch"/>
-	</pageFooter>
-	<summary>
-		<band height="42" splitType="Stretch"/>
-	</summary>
+    </queryString>
+    <field name="MaNV" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="TenNV" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="NgayLapBang" class="java.sql.Date">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="LuongCB" class="java.lang.Double">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="HeSoLuong" class="java.lang.Double">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="ThuongPhat" class="java.lang.Double">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="Tiền lương" class="java.lang.Double"/>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band height="40" splitType="Stretch">
+            <staticText>
+                <reportElement x="128" y="0" width="320" height="39" uuid="0eb67c64-065c-423e-81f3-85dc869823b8"/>
+                <textElement>
+                    <font size="24" isBold="true"/>
+                </textElement>
+                <text><![CDATA[BẢNG LƯƠNG NHÂN VIÊN]]></text>
+            </staticText>
+        </band>
+    </title>
+    <pageHeader>
+        <band height="70" splitType="Stretch">
+            <staticText>
+                <reportElement x="0" y="17" width="76" height="20" uuid="0b7dead3-e062-4485-b252-455a3047d374"/>
+                <text><![CDATA[Mã Nhân viên: ]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="0" y="47" width="76" height="20" uuid="b453b5e1-f93d-4d25-8585-b55dc4ed4557"/>
+                <text><![CDATA[Họ tên:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="76" y="17" width="178" height="20" uuid="f6481621-ba7e-4bf0-ba57-d087740e0ca1"/>
+                <textFieldExpression><![CDATA[$F{MaNV}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="76" y="47" width="178" height="20" uuid="0c1e3711-ee52-4e6b-b4ad-558216454021"/>
+                <textFieldExpression><![CDATA[$F{TenNV}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="276" y="17" width="76" height="20" uuid="73207067-c9e6-41f8-93a3-e66645dfdbe8"/>
+                <text><![CDATA[Ngày lập bảng:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="352" y="17" width="158" height="20" uuid="5bd6caa1-7630-4c9a-956b-29215d951850"/>
+                <textFieldExpression><![CDATA[$F{NgayLapBang}]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageHeader>
+    <columnHeader>
+        <band height="34" splitType="Stretch"/>
+    </columnHeader>
+    <detail>
+        <band height="65" splitType="Stretch">
+            <staticText>
+                <reportElement x="52" y="0" width="76" height="20" uuid="e31642ad-d00c-4abe-8415-1e8f48fa6ba4"/>
+                <text><![CDATA[Lương cơ bản:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="176" y="0" width="126" height="20" uuid="2fb9c18e-90e5-4d83-b07f-7a959dc9e7ce"/>
+                <textFieldExpression><![CDATA[$F{LuongCB}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="52" y="20" width="76" height="20" uuid="6692ef65-8193-4b7e-bda3-b0bc781be3c5"/>
+                <text><![CDATA[Hệ số lương:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="52" y="40" width="76" height="20" uuid="4bdc21d7-ea97-43a1-9ddd-f0d5778c4d97"/>
+                <text><![CDATA[Thưởng phạt:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="176" y="20" width="100" height="20" uuid="d13dd766-1aa9-42f6-9c34-da981fd94ed1"/>
+                <textFieldExpression><![CDATA[$F{HeSoLuong}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="176" y="40" width="100" height="20" uuid="a99314ba-10ea-4bbe-bed0-780f70cbb725"/>
+                <textFieldExpression><![CDATA[$F{ThuongPhat}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+    <columnFooter>
+        <band height="45" splitType="Stretch">
+            <textField>
+                <reportElement x="442" y="25" width="100" height="20" uuid="76284db7-8936-4a7e-80ae-ebf87cae5899"/>
+                <textFieldExpression><![CDATA[$F{Tiền lương}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="366" y="25" width="76" height="20" uuid="95a999f4-bb6f-4dfe-92a4-85f9ef01b35e"/>
+                <text><![CDATA[Tiền Lương]]></text>
+            </staticText>
+        </band>
+    </columnFooter>
+    <pageFooter>
+        <band height="54" splitType="Stretch"/>
+    </pageFooter>
+    <summary>
+        <band height="42" splitType="Stretch"/>
+    </summary>
 </jasperReport>

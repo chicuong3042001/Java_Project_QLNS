@@ -12,9 +12,7 @@ import DTO.ChucVuDTO;
 import DTO.NhanVienDTO;
 import DTO.PhongBanDTO;
 import DTO.TrinhDoHocVanDTO;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -38,11 +36,11 @@ import javax.swing.table.DefaultTableModel;
 public class FrmDSNV extends javax.swing.JPanel {
 
     public FrmMain frmMain;
-    public JFileChooser fileChooser = new JFileChooser();
+    public JFileChooser fileChooser = new JFileChooser("src/GUI/Avatar/");
     public NhanVienDTO nhanVienDTO;
     public NhanVienBUS nhanVienBUS;
     public DefaultTableModel defaultTableModel;
-    public ArrayList<NhanVienDTO> arrNVDTO;
+
     /**
      * Creates new form FrmDSNV1
      */
@@ -69,28 +67,30 @@ public class FrmDSNV extends javax.swing.JPanel {
         defaultTableModel.addColumn("Mã PB");
         defaultTableModel.addColumn("Mã CV");
         defaultTableModel.addColumn("Mã TDHV");
-        
+
         setEmployeeData(nhanVienBUS.getNhanVien());
-        
+
         getAllCBB();
-                 
+
     }
-    public void getAllCBB(){
-         //Lấy danh sách mã PB
+
+    public void getAllCBB() {
+        //Lấy danh sách mã PB
         PhongBanBUS pbbus = new PhongBanBUS();
         ArrayList<PhongBanDTO> pbdto = pbbus.getPhongBan();
         getPBCBBItem(pbdto);
-        
+
         //Lấy danh sách mã TDHV
         TrinhDoHocVanBUS tdhvbus = new TrinhDoHocVanBUS();
         ArrayList<TrinhDoHocVanDTO> tdhvdto = tdhvbus.getTrinhDoHocVan();
         getTDHVCBBItem(tdhvdto);
-        
+
         //Lấy danh sách mã CV
         ChucVuBUS cvbus = new ChucVuBUS();
         ArrayList<ChucVuDTO> cvdto = cvbus.getChucVu();
         getCVCBBItem(cvdto);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -167,6 +167,7 @@ public class FrmDSNV extends javax.swing.JPanel {
 
         saveBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/sua.png"))); // NOI18N
         saveBtn.setText("Sửa");
+        saveBtn.setEnabled(false);
         saveBtn.setMargin(new java.awt.Insets(0, 0, 0, 0));
         saveBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -293,7 +294,7 @@ public class FrmDSNV extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(searchField)
+                .addComponent(searchField, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(searchBtn)
                 .addContainerGap())
@@ -392,13 +393,7 @@ public class FrmDSNV extends javax.swing.JPanel {
                                     .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TDHVCBB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(CVCBB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(employeeCodeField, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
@@ -415,7 +410,13 @@ public class FrmDSNV extends javax.swing.JPanel {
                                     .addComponent(avatarField))
                                 .addGap(18, 18, 18)
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(PBCBB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(CVCBB, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(PBCBB, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(TDHVCBB, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -439,6 +440,23 @@ public class FrmDSNV extends javax.swing.JPanel {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(3, 3, 3)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(selectBtn, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(filterBtn)
+                                .addComponent(refreshBtn)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel13)
+                            .addComponent(CVCBB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(15, 15, 15)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(TDHVCBB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12))
+                        .addGap(32, 32, 32))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -484,45 +502,26 @@ public class FrmDSNV extends javax.swing.JPanel {
                                     .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel9)))
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(15, 15, 15))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(selectBtn, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(filterBtn)
-                                .addComponent(refreshBtn)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel11)
-                            .addComponent(PBCBB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(15, 15, 15)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel13)
-                            .addComponent(CVCBB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(15, 15, 15)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TDHVCBB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12)))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(118, 118, 118))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel11)
+                                    .addComponent(PBCBB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(43, 43, 43))))
         );
     }// </editor-fold>//GEN-END:initComponents
-    public void showFilterBtn(JButton btn) {
-        JDialog dialog = new JDialog(frmMain, "Lọc nhân viên", true);
-        dialog.setSize(300, 520);
-        dialog.setLocation(btn.getX(), btn.getY() + 100);
-        dialog.add(new FrmLocNhanVien(btn, dialog));
-        dialog.setVisible(true);
-    }
     private void filterBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterBtnActionPerformed
         // TODO add your handling code here:
-        showFilterBtn(filterBtn);
+//        showFilterBtn(filterBtn);
+        FrmLocNhanVien frm = new FrmLocNhanVien(frmMain, employeeTable);
+        frm.setLocation(filterBtn.getX(), filterBtn.getY() + 100);
+        frm.setVisible(true);
     }//GEN-LAST:event_filterBtnActionPerformed
-    
+
     private void uploadBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadBtnActionPerformed
         // TODO add your handling code here:
         try {
@@ -547,7 +546,7 @@ public class FrmDSNV extends javax.swing.JPanel {
         } catch (Exception e) {
         }
     }//GEN-LAST:event_uploadBtnActionPerformed
-    
+
     public static ImageIcon resize(ImageIcon imageIcon, int width, int height) {
         BufferedImage bi = new BufferedImage(width, height, BufferedImage.TRANSLUCENT);
         Graphics2D g2d = (Graphics2D) bi.createGraphics();
@@ -556,45 +555,51 @@ public class FrmDSNV extends javax.swing.JPanel {
         g2d.dispose();
         return new ImageIcon(bi);
     }
-    public void showCalendar(JLabel btn)
-    {
-        JDialog dialog=new JDialog(frmMain,"Calendar",true);
+
+    public void showCalendar(JLabel btn) {
+        JDialog dialog = new JDialog(frmMain, "Calendar", true);
         dialog.setSize(158, 170);
-        dialog.setLocation(birthdayField.getX()+100, birthdayField.getY()+dialog.getHeight()+45);
-        dialog.add(new FrmCalendar(birthdayField,dialog));
+        dialog.setLocation(birthdayField.getX() + 100, birthdayField.getY() + dialog.getHeight() + 45);
+        dialog.add(new FrmCalendar(birthdayField, dialog));
         dialog.setVisible(true);
     }
+//    public void showDataFilter(JButton btn) {
+//        employeeTable
+//    }
     private void calendarBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_calendarBtnMouseClicked
         // TODO add your handling code here:
         showCalendar(calendarBtn);
     }//GEN-LAST:event_calendarBtnMouseClicked
-    
+
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
         // TODO add your handling code here:
         //Nếu bỏ trống các trường thì ngừng thực thi
-        if ("".equals(employeeCodeField.getText().trim()) ||
-            "".equals(avatarField.getText().trim()) ||
-            "".equals(employeeNameField.getText().trim()) ||
-            "".equals(birthdayField.getText().trim()) ||
-            "".equals(gioitinhCBB.getSelectedItem().toString().trim()) ||
-            "".equals(addressField.getText().trim()) ||
-            "".equals(IDNumField.getText().trim()) ||
-            "".equals(emailField.getText().trim()) ) {
-            JOptionPane.showMessageDialog(this, "Không được bỏ trống dữ liệu nhập vào !!!","Lỗi",JOptionPane.ERROR_MESSAGE);
+        if ("".equals(employeeCodeField.getText().trim())
+                || "".equals(avatarField.getText().trim())
+                || "".equals(employeeNameField.getText().trim())
+                || "".equals(birthdayField.getText().trim())
+                || "".equals(gioitinhCBB.getSelectedItem().toString().trim())
+                || "".equals(addressField.getText().trim())
+                || "".equals(IDNumField.getText().trim())
+                || "".equals(emailField.getText().trim())
+                || PBCBB.getSelectedItem() == null
+                || CVCBB.getSelectedItem() == null
+                || TDHVCBB.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(this, "Không được bỏ trống dữ liệu nhập vào !!!", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         try {
-            nhanVienDTO.setMaNV(employeeCodeField.getText());
-            nhanVienDTO.setHinhNV(avatarField.getText());
-            nhanVienDTO.setTenNV(employeeNameField.getText());
-            nhanVienDTO.setNgaySinh(birthdayField.getText());
+            employeeTable.setModel(defaultTableModel);
+            nhanVienDTO.setMaNV(employeeCodeField.getText().trim());
+            nhanVienDTO.setHinhNV(avatarField.getText().trim());
+            nhanVienDTO.setTenNV(employeeNameField.getText().trim());
+            nhanVienDTO.setNgaySinh(birthdayField.getText().trim());
             nhanVienDTO.setGioiTinh(gioitinhCBB.getSelectedItem().toString());
-            nhanVienDTO.setDiaChi(addressField.getText());
-            nhanVienDTO.setSoCMND(IDNumField.getText());
-            nhanVienDTO.setSoDienThoai(phoneNumField.getText());
-            nhanVienDTO.setEmail(emailField.getText());
-            nhanVienDTO.setMaPB(PBCBB.getSelectedItem().toString());
+            nhanVienDTO.setDiaChi(addressField.getText().trim());
+            nhanVienDTO.setSoCMND(IDNumField.getText().trim());
+            nhanVienDTO.setSoDienThoai(phoneNumField.getText().trim());
+            nhanVienDTO.setEmail(emailField.getText().trim());
             nhanVienDTO.setMaCV(CVCBB.getSelectedItem().toString());
             nhanVienDTO.setMaTDHV(TDHVCBB.getSelectedItem().toString());
             nhanVienBUS.addNhanVien(nhanVienDTO);
@@ -602,7 +607,7 @@ public class FrmDSNV extends javax.swing.JPanel {
             defaultTableModel.setRowCount(0);
             setEmployeeData(nhanVienBUS.getNhanVien());
         } catch (Exception ex) {
-           JOptionPane.showMessageDialog(this, ex);
+            JOptionPane.showMessageDialog(this, ex);
         }
     }//GEN-LAST:event_addBtnActionPerformed
 
@@ -618,24 +623,31 @@ public class FrmDSNV extends javax.swing.JPanel {
         phoneNumField.setText("");
         emailField.setText("");
         employeeCodeField.setEnabled(true);
+        saveBtn.setEnabled(false);
     }//GEN-LAST:event_cancelBtnActionPerformed
 
     private void removeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeBtnActionPerformed
         // TODO add your handling code here:
-        int row = employeeTable.getSelectedRow();
-        if (row == -1) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn nhân viên cần xóa !!!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-        } else {
-            int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn xóa không ?");
-            
-            if (confirm == JOptionPane.YES_OPTION) {
-                String employeeCode = String.valueOf(employeeTable.getValueAt(row, 0));
-                
-                nhanVienBUS.deleteNhanVien(employeeCode);
-                defaultTableModel.setRowCount(0);
-                setEmployeeData(nhanVienBUS.getNhanVien());
+        try {
+            int row = employeeTable.getSelectedRow();
+            if (row == -1) {
+                JOptionPane.showMessageDialog(this, "Vui lòng chọn nhân viên cần xóa !!!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            } else {
+                int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn xóa không ?");
+
+                if (confirm == JOptionPane.YES_OPTION) {
+                    employeeTable.setModel(defaultTableModel);
+                    String employeeCode = String.valueOf(employeeTable.getValueAt(row, 0));
+
+                    nhanVienBUS.deleteNhanVien(employeeCode);
+                    defaultTableModel.setRowCount(0);
+                    setEmployeeData(nhanVienBUS.getNhanVien());
+                }
             }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e);
         }
+
     }//GEN-LAST:event_removeBtnActionPerformed
 
     public void showInfo() {
@@ -660,11 +672,11 @@ public class FrmDSNV extends javax.swing.JPanel {
             TDHVCBB.setSelectedItem(nhanVienDTO.getMaTDHV());
             //delay 10ms để lấy được path hình ảnh
             String path = "/GUI/Avatar/" + avatarField.getText();
-            ImageIcon resizedImage = resize(new ImageIcon(getClass().getResource(path)), 165, 168);           
-            setTimeout(() -> avatarLabel.setIcon(resizedImage),10);
+            ImageIcon resizedImage = resize(new ImageIcon(getClass().getResource(path)), 165, 168);
+            setTimeout(() -> avatarLabel.setIcon(resizedImage), 10);
         }
     }
-    
+
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
         // TODO add your handling code here:
 //        showInfo();
@@ -674,14 +686,15 @@ public class FrmDSNV extends javax.swing.JPanel {
             return;
         }
         try {
-            nhanVienDTO.setHinhNV(avatarField.getText());
-            nhanVienDTO.setTenNV(employeeNameField.getText());
-            nhanVienDTO.setNgaySinh(birthdayField.getText());
+            employeeTable.setModel(defaultTableModel);
+            nhanVienDTO.setHinhNV(avatarField.getText().trim());
+            nhanVienDTO.setTenNV(employeeNameField.getText().trim());
+            nhanVienDTO.setNgaySinh(birthdayField.getText().trim());
             nhanVienDTO.setGioiTinh(gioitinhCBB.getSelectedItem().toString());
-            nhanVienDTO.setDiaChi(addressField.getText());
-            nhanVienDTO.setSoCMND(IDNumField.getText());
-            nhanVienDTO.setSoDienThoai(phoneNumField.getText());
-            nhanVienDTO.setEmail(emailField.getText());
+            nhanVienDTO.setDiaChi(addressField.getText().trim());
+            nhanVienDTO.setSoCMND(IDNumField.getText().trim());
+            nhanVienDTO.setSoDienThoai(phoneNumField.getText().trim());
+            nhanVienDTO.setEmail(emailField.getText().trim());
             nhanVienDTO.setMaPB(PBCBB.getSelectedItem().toString());
             nhanVienDTO.setMaCV(CVCBB.getSelectedItem().toString());
             nhanVienDTO.setMaTDHV(TDHVCBB.getSelectedItem().toString());
@@ -693,12 +706,13 @@ public class FrmDSNV extends javax.swing.JPanel {
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex);
         }
-        
+
     }//GEN-LAST:event_saveBtnActionPerformed
 
     private void selectBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectBtnActionPerformed
         // TODO add your handling code here:
         showInfo();
+        saveBtn.setEnabled(true);
     }//GEN-LAST:event_selectBtnActionPerformed
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
@@ -723,54 +737,55 @@ public class FrmDSNV extends javax.swing.JPanel {
             PBCBB.setSelectedItem(nhanVienDTO.getMaPB());
             CVCBB.setSelectedItem(nhanVienDTO.getMaCV());
             TDHVCBB.setSelectedItem(nhanVienDTO.getMaTDHV());
-            String path = "/GUI/Avatar/" + avatarField.getText();
             //delay 10ms để lấy được path hình ảnh
-            setTimeout(() -> avatarLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(path))),10);
+            String path = "/GUI/Avatar/" + avatarField.getText();
+            ImageIcon resizedImage = resize(new ImageIcon(getClass().getResource(path)), 165, 168);
+            setTimeout(() -> avatarLabel.setIcon(resizedImage), 10);
         } else {
             JOptionPane.showMessageDialog(this, "Không tìm thấy nhân viên !!!");
         }
     }//GEN-LAST:event_searchBtnActionPerformed
 
-    public static void setTimeout(Runnable runnable, int delay){
-    new Thread(() -> {
-        try {
-            Thread.sleep(delay);
-            runnable.run();
-        }
-        catch (Exception e){
-            System.err.println(e);
-        }
-    }).start();
-}
-    
+    public static void setTimeout(Runnable runnable, int delay) {
+        new Thread(() -> {
+            try {
+                Thread.sleep(delay);
+                runnable.run();
+            } catch (Exception e) {
+                System.err.println(e);
+            }
+        }).start();
+    }
+
     private void refreshBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshBtnActionPerformed
         // TODO add your handling code here:
+        employeeTable.setModel(defaultTableModel);
         defaultTableModel.setRowCount(0);
         setEmployeeData(nhanVienBUS.getNhanVien());
         getAllCBB();
     }//GEN-LAST:event_refreshBtnActionPerformed
-    
+
     public void getPBCBBItem(ArrayList<PhongBanDTO> CBBItems) {
         PBCBB.removeAllItems();
         for (PhongBanDTO CBBItem : CBBItems) {
             PBCBB.addItem(CBBItem.getMaPB());
         }
     }
-    
+
     public void getTDHVCBBItem(ArrayList<TrinhDoHocVanDTO> CBBItems) {
         TDHVCBB.removeAllItems();
         for (TrinhDoHocVanDTO CBBItem : CBBItems) {
             TDHVCBB.addItem(CBBItem.getMaTDHV());
         }
     }
-    
+
     public void getCVCBBItem(ArrayList<ChucVuDTO> CBBItems) {
         CVCBB.removeAllItems();
         for (ChucVuDTO CBBItem : CBBItems) {
             CVCBB.addItem(CBBItem.getMaCV());
         }
     }
-    
+
     public void setEmployeeData(ArrayList<NhanVienDTO> employees) {
         for (NhanVienDTO employee : employees) {
             defaultTableModel.addRow(new Object[]{
@@ -785,12 +800,10 @@ public class FrmDSNV extends javax.swing.JPanel {
                 employee.getEmail(),
                 employee.getMaPB(),
                 employee.getMaCV(),
-                employee.getMaTDHV(),
-            });
+                employee.getMaTDHV(),});
         }
     }
-    
-   
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox CVCBB;
@@ -837,5 +850,4 @@ public class FrmDSNV extends javax.swing.JPanel {
     private javax.swing.JButton uploadBtn;
     // End of variables declaration//GEN-END:variables
 
-   
 }

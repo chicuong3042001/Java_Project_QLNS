@@ -30,7 +30,7 @@ public class ReportData {
             JasperReport rpt = JasperCompileManager.compileReport("src/Report/reportNhanVien.jrxml");
             JasperPrint p = JasperFillManager.fillReport(rpt, map, conn);
             JasperViewer.viewReport(p, false);
-            
+
             conn.close();
 
         } catch (JRException ex) {
@@ -40,7 +40,7 @@ public class ReportData {
         }
 
     }
-    
+
     public void reportBangLuong(String maNV) {
         try {
             Hashtable map = new Hashtable();
@@ -49,7 +49,7 @@ public class ReportData {
             JasperReport rpt = JasperCompileManager.compileReport("src/Report/reportNhanVien.jrxml");
             JasperPrint p = JasperFillManager.fillReport(rpt, map, conn);
             JasperViewer.viewReport(p, false);
-            
+
             conn.close();
 
         } catch (JRException ex) {

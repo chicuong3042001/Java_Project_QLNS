@@ -13,27 +13,23 @@ import javax.swing.JDialog;
  * @author chicu
  */
 public class ShowDialog {
-    private FrmMain frmmain=null;
-    private JDialog dialog=null;
-    public ShowDialog(){
+
+    private FrmMain frmmain = null;
+    private JDialog dialog = null;
+
+    public ShowDialog() {
     }
-    public ShowDialog(FrmMain frmmain){
-        this.frmmain=frmmain;
+
+    public ShowDialog(FrmMain frmmain) {
+        this.frmmain = frmmain;
     }
-    public void Show(String Title,Component cpt,int width,int height){
-        dialog=new JDialog(frmmain, Title, true);
+
+    public void Show(String Title, Component cpt, int width, int height) {
+        dialog = new JDialog(frmmain, Title, true);
         dialog.add(cpt);
-        dialog.setSize(width,height);
+        dialog.setSize(width, height);
         dialog.setLocationRelativeTo(frmmain);
         dialog.setResizable(false);
-        dialog.setVisible(true);
-    }
-    public void Show(int width,int height){
-        dialog=new JDialog();
-        dialog.setSize(width,height);
-        dialog.setResizable(false);
-        dialog.setUndecorated(true);
-        dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
     }
 }

@@ -61,18 +61,30 @@ public class NhanVienExcel {
                     break;
                 }
                 switch (cell.getColumnIndex() + 1) {
-                    case 1 -> item.setMaNV(cell.getStringCellValue());
-                    case 2 -> item.setHinhNV(cell.getStringCellValue());
-                    case 3 -> item.setTenNV(cell.getStringCellValue());
-                    case 4 -> item.setNgaySinh(cell.getStringCellValue());
-                    case 5 -> item.setGioiTinh(cell.getStringCellValue());
-                    case 6 -> item.setDiaChi(cell.getStringCellValue());
-                    case 7 -> item.setSoCMND(cell.getStringCellValue());
-                    case 8 -> item.setSoDienThoai(cell.getStringCellValue());
-                    case 9 -> item.setEmail(cell.getStringCellValue());
-                    case 10 -> item.setSoCMND(cell.getStringCellValue());
-                    case 11-> item.setSoDienThoai(cell.getStringCellValue());
-                    case 12 -> item.setEmail(cell.getStringCellValue());
+                    case 1 ->
+                        item.setMaNV(cell.getStringCellValue());
+                    case 2 ->
+                        item.setHinhNV(cell.getStringCellValue());
+                    case 3 ->
+                        item.setTenNV(cell.getStringCellValue());
+                    case 4 ->
+                        item.setNgaySinh(cell.getStringCellValue());
+                    case 5 ->
+                        item.setGioiTinh(cell.getStringCellValue());
+                    case 6 ->
+                        item.setDiaChi(cell.getStringCellValue());
+                    case 7 ->
+                        item.setSoCMND(cell.getStringCellValue());
+                    case 8 ->
+                        item.setSoDienThoai(cell.getStringCellValue());
+                    case 9 ->
+                        item.setEmail(cell.getStringCellValue());
+                    case 10 ->
+                        item.setSoCMND(cell.getStringCellValue());
+                    case 11 ->
+                        item.setSoDienThoai(cell.getStringCellValue());
+                    case 12 ->
+                        item.setEmail(cell.getStringCellValue());
                 }
             }
             if (!isFirstRow && !"".equals(item.getMaNV())) {
@@ -140,13 +152,13 @@ public class NhanVienExcel {
 
         cell = row.createCell(COLUMN_INDEX_EMAIL);
         cell.setCellValue("Email");
-        
+
         cell = row.createCell(COLUMN_INDEX_MAPB);
         cell.setCellValue("Mã phòng ban");
 
         cell = row.createCell(COLUMN_INDEX_MACV);
         cell.setCellValue("Mã chức vụ");
-        
+
         cell = row.createCell(COLUMN_INDEX_MATDHV);
         cell.setCellValue("Mã TDHV");
     }

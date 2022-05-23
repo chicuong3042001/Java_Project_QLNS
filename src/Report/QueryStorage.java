@@ -21,11 +21,10 @@ public class QueryStorage {
     //setString(2,getMaNV)
     //setString(3,getMaNV)
     //setString(4,getHeSoLuong)
-    
     String getBangLuong = "SELECT nhanvien.MaNV, nhanvien.TenNV,chitietluong.NgayLapBang,luong.LuongCB,chitietluong.HeSoLuong, chitietluong.ThuongPhat, chitietluong.HeSoLuong * luong.LuongCB + chitietluong.ThuongPhat as 'Tiền lương' "
             + "FROM NhanVien JOIN chitietluong JOIN luong ON nhanvien.MaNV = chitietluong.MaNV AND chitietluong.MaLuong = luong.MaLuong "
             + "WHERE (MaNV = ?) | 1;";
     //BangLuongDTO(String ManV, String tenNV, Date NgayLap, Double LuongCB, Double HSluong,Double ThuongPhat, Double TienLuong )
-    
+
     String updateThongTinKyLuatSauKhiCoBangLuong = "";
 }

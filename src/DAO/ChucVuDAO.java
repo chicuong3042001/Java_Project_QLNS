@@ -42,6 +42,30 @@ public class ChucVuDAO {
         }
     }
 
+    public ChucVuDTO findCVByID(String id) {
+        try {
+            conn = DBConnection.getConnection();
+            stmt = conn.prepareStatement("SELECT * FROM ChucVu WHERE MaCV = ?");
+            stmt.setString(1, id);
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                ChucVuDTO tcvdto = new ChucVuDTO();
+                tcvdto.setMaCV(rs.getString("MaCV"));
+                tcvdto.setTenCV(rs.getString("TenCV"));
+                tcvdto.setGhiChu(rs.getString("GhiChu"));
+                return tcvdto;
+            }
+            
+        } catch (SQLException e) {
+            return null;
+        } finally {
+            DBConnection.closeConnection(conn, stmt, rs);
+        }
+        return null;
+    }
+
     public boolean addChucVu(ChucVuDTO chucvu) {
         try {
             conn = DBConnection.getConnection();

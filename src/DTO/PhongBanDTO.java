@@ -11,6 +11,7 @@ import java.util.ArrayList;
  * @author chicu
  */
 public class PhongBanDTO {
+
     private String MaPB;
     private String TenPB;
     private String SoDienThoai;
@@ -47,7 +48,7 @@ public class PhongBanDTO {
     public void setSoDienThoai(String SoDienThoai) {
         this.SoDienThoai = SoDienThoai;
     }
-    
+
     public Object[] getSelection() {
         ArrayList<Boolean> result = new ArrayList();
         result.add(this.TenPB != null);

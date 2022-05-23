@@ -15,7 +15,7 @@ import java.util.ArrayList;
  *
  * @author chicu
  */
-public class KhenThuongKyLuatDAO{
+public class KhenThuongKyLuatDAO {
 
     Connection conn = null;
     PreparedStatement stmt = null;
@@ -33,11 +33,11 @@ public class KhenThuongKyLuatDAO{
 
             while (rs.next()) {
                 khenthuongkyluat.add(new KhenThuongKyLuatDTO(
-                        rs.getString("MaKTKL"), 
-                        rs.getDouble("SoTien"), 
-                        rs.getDate("NgayQuyetDinh"), 
-                        rs.getString("LoaiQuyetDinh"), 
-                        rs.getString("NoiDung"), 
+                        rs.getString("MaKTKL"),
+                        rs.getDouble("SoTien"),
+                        rs.getDate("NgayQuyetDinh"),
+                        rs.getString("LoaiQuyetDinh"),
+                        rs.getString("NoiDung"),
                         rs.getDate("NgaySuaDoi")
                 ));
             }
@@ -157,7 +157,7 @@ public class KhenThuongKyLuatDAO{
             DBConnection.closeConnection(conn, stmt);
         }
     }
-    
+
     private boolean hasBangLuong() throws SQLException {
         stmt = conn.prepareStatement("SELECT * FROM khenthuongkyluat JOIN chitietluong "
                 + "WHERE MONTH(khenthuongkyluat.NgayQuyetDinh) = MONTH(chitietluong.NgayLapBang) AND YEAR(khenthuongkyluat.NgayQuyetDinh) = YEAR(chitietluong.NgayLapBang) "
@@ -192,7 +192,7 @@ public class KhenThuongKyLuatDAO{
                 + "    chitietluong.NgaySuaDoi = CURRENT_DATE"
                 + "WHERE chitietktkl.MaNV = ?";
         stmt = conn.prepareStatement(sql);
-        
+
         ArrayList<String> MaNhanVien = getMaNhanVien();
         for (String ma : MaNhanVien) {
             stmt.setString(1, ma);

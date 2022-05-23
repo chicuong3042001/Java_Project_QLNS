@@ -37,13 +37,13 @@ public class BangLuongDAO {
 
             while (rs.next()) {
                 bangluong.add(new BangLuongDTO(
-                        rs.getString("MaNV"), 
-                        rs.getString("MaLuong"), 
-                        rs.getString("TenNV"), 
-                        rs.getDate("NgayLapBang"), 
-                        rs.getDouble("LuongCB"), 
-                        rs.getDouble("HeSoLuong"), 
-                        rs.getDouble("ThuongPhat"), 
+                        rs.getString("MaNV"),
+                        rs.getString("MaLuong"),
+                        rs.getString("TenNV"),
+                        rs.getDate("NgayLapBang"),
+                        rs.getDouble("LuongCB"),
+                        rs.getDouble("HeSoLuong"),
+                        rs.getDouble("ThuongPhat"),
                         rs.getDouble("TienLuong"),
                         rs.getDate("NgaySuaDoi")
                 ));

@@ -82,7 +82,7 @@ public class LuongDAO {
     public boolean updateLuong(LuongDTO luong) {
         try {
             Object[] selection = luong.getSelection();
-            
+
             String table = "";
             for (int i = 0; i < selection.length; i++) {
                 if ((boolean) selection[i]) {
