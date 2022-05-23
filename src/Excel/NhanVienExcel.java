@@ -38,6 +38,7 @@ public class NhanVienExcel extends Excel {
     public static final int COLUMN_INDEX_MAPB = 9;
     public static final int COLUMN_INDEX_MACV = 10;
     public static final int COLUMN_INDEX_MATDHV = 11;
+    public static final int COLUMN_INDEX_MAHSL = 12;
 
     NhanVienDAO nhanviendao = new NhanVienDAO();
 
@@ -60,31 +61,33 @@ public class NhanVienExcel extends Excel {
                     isFirstRow = true;
                     break;
                 }
-                switch (cell.getColumnIndex() + 1) {
-                    case 1 ->
+                switch (cell.getColumnIndex()) {
+                    case COLUMN_INDEX_MANV ->
                         item.setMaNV(cell.getStringCellValue());
-                    case 2 ->
+                    case COLUMN_INDEX_HINHNV ->
                         item.setHinhNV(cell.getStringCellValue());
-                    case 3 ->
+                    case COLUMN_INDEX_TENNV ->
                         item.setTenNV(cell.getStringCellValue());
-                    case 4 ->
+                    case COLUMN_INDEX_NGAYSINH ->
                         item.setNgaySinh(cell.getStringCellValue());
-                    case 5 ->
+                    case COLUMN_INDEX_GIOITINH ->
                         item.setGioiTinh(cell.getStringCellValue());
-                    case 6 ->
+                    case COLUMN_INDEX_DIACHI ->
                         item.setDiaChi(cell.getStringCellValue());
-                    case 7 ->
+                    case COLUMN_INDEX_SOCMND ->
                         item.setSoCMND(cell.getStringCellValue());
-                    case 8 ->
+                    case COLUMN_INDEX_SODIENTHOAI ->
                         item.setSoDienThoai(cell.getStringCellValue());
-                    case 9 ->
+                    case COLUMN_INDEX_EMAIL ->
                         item.setEmail(cell.getStringCellValue());
-                    case 10 ->
-                        item.setSoCMND(cell.getStringCellValue());
-                    case 11 ->
-                        item.setSoDienThoai(cell.getStringCellValue());
-                    case 12 ->
-                        item.setEmail(cell.getStringCellValue());
+                    case COLUMN_INDEX_MAPB ->
+                        item.setMaPB(cell.getStringCellValue());
+                    case COLUMN_INDEX_MACV ->
+                        item.setMaCV(cell.getStringCellValue());
+                    case COLUMN_INDEX_MATDHV ->
+                        item.setMaTDHV(cell.getStringCellValue());
+                    case COLUMN_INDEX_MAHSL ->
+                        item.setMaHSL(cell.getStringCellValue());
                 }
             }
             if (!isFirstRow && !"".equals(item.getMaNV())) {
@@ -162,6 +165,9 @@ public class NhanVienExcel extends Excel {
 
         cell = row.createCell(COLUMN_INDEX_MATDHV);
         cell.setCellValue("Mã TDHV");
+        
+        cell = row.createCell(COLUMN_INDEX_MAHSL);
+        cell.setCellValue("Mã HSL");
     }
 
     protected void writeData(NhanVienDTO item, Row row) {
@@ -191,5 +197,17 @@ public class NhanVienExcel extends Excel {
 
         cell = row.createCell(COLUMN_INDEX_EMAIL);
         cell.setCellValue(item.getEmail());
+        
+        cell = row.createCell(COLUMN_INDEX_MAPB);
+        cell.setCellValue(item.getMaPB());
+
+        cell = row.createCell(COLUMN_INDEX_MACV);
+        cell.setCellValue(item.getMaCV());
+
+        cell = row.createCell(COLUMN_INDEX_MATDHV);
+        cell.setCellValue(item.getMaTDHV());
+        
+        cell = row.createCell(COLUMN_INDEX_MAHSL);
+        cell.setCellValue(item.getMaHSL());
     }
 }
