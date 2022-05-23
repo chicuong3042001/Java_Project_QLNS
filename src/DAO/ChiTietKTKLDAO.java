@@ -85,33 +85,12 @@ public class ChiTietKTKLDAO {
 
     public boolean updateChiTietKTKL(ChiTietKTKLDTO chitietktkl) {
         try {
-            Object[] selection = chitietktkl.getSelection();
-            
-            String table = "";
-            for (int i = 0; i < selection.length; i++) {
-                if ((boolean) selection[i]) {
-                    switch (i + 1) {
-                        case 1 ->
-                            table += "SoTien = ? ,";
-                    }
-                }
-            }
-            table = table.substring(0, table.length() - 1);
-
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "UPDATE chitietktkl SET " + table + "WHERE MaKTKL = ? AND MaNV = ?");
+                    "UPDATE chitietktkl SET SoTien = ? WHERE MaKTKL = ? AND MaNV = ?");
 
-            int index = 1;
-            for (int i = 0; i < selection.length; i++) {
-                if ((boolean) selection[i]) {
-                    switch (i + 1) {
-                    }
-                }
-            }
-
-            stmt.setString(index++, chitietktkl.getMaKTKL());
-            stmt.setString(index++, chitietktkl.getMaNV());
+            stmt.setString(1, chitietktkl.getMaKTKL());
+            stmt.setString(2, chitietktkl.getMaNV());
             stmt.executeUpdate();
 
             return true;

@@ -150,7 +150,7 @@ public class KhenThuongKyLuatDAO{
             stmt.executeUpdate();
 
             if (hasBangLuong()) {
-                addLuongAllNhanVien();
+                updateLuongAllNhanVien();
             }
 
             return true;
@@ -173,7 +173,8 @@ public class KhenThuongKyLuatDAO{
     private ArrayList<String> getMaNhanVien() throws SQLException {
         stmt = conn.prepareStatement(
                 "SELECT chitietktkl.MaNV FROM chitietktkl JOIN khenthuongkyluat ON chitietktkl.MaKTKL = khenthuongkyluat.MaKTKL "
-                + "WHERE chitietktkl.MaKTKL = ? AND MONTH(khenthuongkyluat.NgayQuyetDinh) = MONTH(CURRENT_DATE) AND YEAR(khenthuongkyluat.NgayQuyetDinh) = YEAR(CURRENT_DATE);");
+                + "WHERE MONTH(khenthuongkyluat.NgaySuaDoi) = MONTH(CURRENT_DATE) AND YEAR(khenthuongkyluat.NgaySuaDoi) = YEAR(CURRENT_DATE)"
+                + "AND MONTH(khenthuongkyluat.NgayQuyetDinh) = MONTH(CURRENT_DATE) AND YEAR(khenthuongkyluat.NgayQuyetDinh) = YEAR(CURRENT_DATE);");
 
         ArrayList<String> MaNhanVien = new ArrayList();
         rs = stmt.executeQuery();
@@ -185,9 +186,9 @@ public class KhenThuongKyLuatDAO{
         return MaNhanVien;
     }
 
-    private void addLuongAllNhanVien() throws SQLException {
+    private void updateLuongAllNhanVien() throws SQLException {
         String sql = "UPDATE chitietktkl JOIN chitietluong"
-                + "	ON AND chitietktkl.MaNV = chitietluong.MaNV AND MONTH(chitietluong.NgayLapBang) = MONTH(CURRENT_DATE)"
+                + "	ON chitietktkl.MaNV = chitietluong.MaNV AND MONTH(chitietluong.NgayLapBang) = MONTH(CURRENT_DATE) AND YEAR(chitietluong.NgayLapBang) = YEAR(CURRENT_DATE)"
                 + "SET chitietluong.ThuongPhat = (SELECT SUM(khenthuongkyluat.SoTien)"
                 + "                    FROM chitietktkl JOIN khenthuongkyluat ON chitietktkl.MaKTKL = khenthuongkyluat.MaKTKL"
                 + "                    WHERE chitietktkl.MaNV = ?"

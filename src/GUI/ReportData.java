@@ -27,7 +27,7 @@ public class ReportData {
          report("src/Report/reportNhanVien.jrxml");
     }
     
-    public void reportBangLuong(String maNV) {
+    public void reportBangLuong() {
         report("src/Report/reportBangLuong.jrxml");
     }
     

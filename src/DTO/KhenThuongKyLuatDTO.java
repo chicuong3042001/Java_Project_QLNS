@@ -32,6 +32,14 @@ public class KhenThuongKyLuatDTO {
         this.NgaySuaDoi = NgaySuaDoi;
     }
 
+    public KhenThuongKyLuatDTO(String MaKTKL, double SoTien, Date NgayQuyetDinh, String LoaiQuyetDinh, String NoiDung) {
+        this.MaKTKL = MaKTKL;
+        this.SoTien = SoTien;
+        this.NgayQuyetDinh = NgayQuyetDinh;
+        this.LoaiQuyetDinh = LoaiQuyetDinh;
+        this.NoiDung = NoiDung;
+    }
+
     public String getMaKTKL() {
         return MaKTKL;
     }
@@ -70,6 +78,14 @@ public class KhenThuongKyLuatDTO {
 
     public void setNoiDung(String NoiDung) {
         this.NoiDung = NoiDung;
+    }
+
+    public Date getNgaySuaDoi() {
+        return NgaySuaDoi;
+    }
+
+    public void setNgaySuaDoi(Date NgaySuaDoi) {
+        this.NgaySuaDoi = NgaySuaDoi;
     }
 
     public Object[] getSelection() {
