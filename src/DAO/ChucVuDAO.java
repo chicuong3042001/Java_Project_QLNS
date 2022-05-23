@@ -152,9 +152,9 @@ public class ChucVuDAO {
                 if ((boolean) selection[i]) {
                     switch (i) {
                         case INDEX_TENCV ->
-                            table += "TenCV = ? ,";
+                            stmt.setString(index++, chucvu.getTenCV());
                         case INDEX_GHICHU ->
-                            table += "GhiChu = ? ,";
+                            stmt.setString(index++, chucvu.getGhiChu());
                     }
                 }
             }

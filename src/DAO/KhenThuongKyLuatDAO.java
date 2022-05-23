@@ -137,11 +137,11 @@ public class KhenThuongKyLuatDAO {
                 if ((boolean) selection[i]) {
                     switch (i) {
                         case INDEX_SOTIEN ->
-                            table += "SoTien = ? ,";
+                            stmt.setDouble(index++, khenthuongkiluat.getSoTien());
                         case INDEX_LOAIQUYETDINH ->
-                            table += "LoaiQuyetDinh = ? ,";
+                            stmt.setString(index++, khenthuongkiluat.getLoaiQuyetDinh());
                         case INDEX_NOIDUNG ->
-                            table += "NoiDung = ? ,";
+                            stmt.setString(index++, khenthuongkiluat.getNoiDung());
                     }
                 }
             }
