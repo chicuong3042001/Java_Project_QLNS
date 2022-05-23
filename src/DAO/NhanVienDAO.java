@@ -114,29 +114,29 @@ public class NhanVienDAO {
                 if ((boolean) selection[i]) {
                     switch (i) {
                         case INDEX_HINHNV ->
-                            table += "HinhNV = ? ,";
+                            table += "HinhNV = ? and ";
                         case INDEX_TENNV ->
-                            table += "TenNV = ? ,";
+                            table += "TenNV = ? and ";
                         case INDEX_NGAYSINH ->
-                            table += "NgaySinh = ? ,";
+                            table += "NgaySinh = ? and ";
                         case INDEX_GIOITINH ->
-                            table += "GioiTinh = ? ,";
+                            table += "GioiTinh = ? and ";
                         case INDEX_DIACHI ->
-                            table += "DiaChi = ? ,";
+                            table += "DiaChi = ? and ";
                         case INDEX_SOCMND ->
-                            table += "SoCMND = ? ,";
+                            table += "SoCMND = ? and ";
                         case INDEX_SODIENTHOAI ->
-                            table += "SoDienThoai = ? ,";
+                            table += "SoDienThoai = ? and ";
                         case INDEX_EMAIL ->
-                            table += "Email = ? ,";
+                            table += "Email = ? and ";
                         case INDEX_MAPB ->
-                            table += "MaPB = ? ,";
+                            table += "MaPB = ? and ";
                         case INDEX_MACV ->
-                            table += "MaCV = ? ,";
+                            table += "MaCV = ? and ";
                         case INDEX_MATDHV ->
-                            table += "MaTDHV = ? ,";
+                            table += "MaTDHV = ? and ";
                         case INDEX_MAHSL ->
-                            table += "MaHSL = ? ,";
+                            table += "MaHSL = ? and ";
                     }
                 }
             }
