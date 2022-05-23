@@ -2,9 +2,9 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: May 23, 2022 at 09:37 AM
--- Server version: 10.4.21-MariaDB
+-- Host: 127.0.0.1
+-- Generation Time: May 23, 2022 at 07:14 PM
+-- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -20,17 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `quanlynhansu`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `chitietdcl`
---
-
-CREATE TABLE `chitietdcl` (
-  `MaDCL` varchar(255) NOT NULL,
-  `MaNV` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -92,13 +81,12 @@ CREATE TABLE `chucvu` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `dieuchinhluong`
+-- Table structure for table `hesoluong`
 --
 
-CREATE TABLE `dieuchinhluong` (
-  `MaDCL` varchar(255) NOT NULL,
-  `HeSoLuong` double NOT NULL,
-  `NgayDieuChinh` date NOT NULL
+CREATE TABLE `hesoluong` (
+  `MaHSL` varchar(255) NOT NULL,
+  `HeSoLuong` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -162,62 +150,63 @@ CREATE TABLE `nhanvien` (
   `Email` varchar(255) DEFAULT NULL,
   `MaPB` varchar(255) DEFAULT NULL,
   `MaCV` varchar(255) DEFAULT NULL,
-  `MaTDHV` varchar(255) DEFAULT NULL
+  `MaTDHV` varchar(255) DEFAULT NULL,
+  `MaHSL` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `nhanvien`
 --
 
-INSERT INTO `nhanvien` (`MaNV`, `HinhNV`, `TenNV`, `NgaySinh`, `GioiTinh`, `DiaChi`, `SoCMND`, `SoDienThoai`, `Email`, `MaPB`, `MaCV`, `MaTDHV`) VALUES
-('001', 'a', 'Hung', '2003-04-13', 'Nam', 'Quan6', '125', '06423', 'aaa', NULL, NULL, NULL),
-('002', 'b', 'Hung', '2003-04-14', 'Nữ', 'Quan1', '025', '0245', 'bbb', NULL, NULL, NULL),
-('003', 'a', 'Hung', '2003-04-15', 'Nam', 'Quan8', '420', '0576', 'bbb', NULL, NULL, NULL),
-('004', 'a', 'Hung', '2003-04-16', 'Nữ', 'Quan7', '147', '06474', 'bbb', NULL, NULL, NULL),
-('005', 'a', 'Hung', '2003-04-17', 'Nam', 'Quan6', '125', '06423', 'aaa', NULL, NULL, NULL),
-('006', 'b', 'Hung', '2003-04-18', 'Nữ', 'Quan1', '025', '0245', 'bbb', NULL, NULL, NULL),
-('007', 'a', 'Hung', '2003-04-19', 'Nam', 'Quan8', '420', '0576', 'bbb', NULL, NULL, NULL),
-('008', 'a', 'Hung', '2003-04-20', 'Nữ', 'Quan7', '147', '06474', 'bbb', NULL, NULL, NULL),
-('009', 'a', 'Hung', '2003-04-21', 'Nam', 'Quan6', '125', '06423', 'aaa', NULL, NULL, NULL),
-('010', 'b', 'Hung', '2003-04-22', 'Nữ', 'Quan1', '025', '0245', 'bbb', NULL, NULL, NULL),
-('011', 'a', 'Hung', '2003-04-23', 'Nam', 'Quan8', '420', '0576', 'bbb', NULL, NULL, NULL),
-('012', 'a', 'Hung', '2003-04-24', 'Nữ', 'Quan7', '147', '06474', 'bbb', NULL, NULL, NULL),
-('013', 'a', 'Hung', '2003-04-25', 'Nam', 'Quan6', '125', '06423', 'aaa', NULL, NULL, NULL),
-('014', 'b', 'Hung', '2003-04-26', 'Nữ', 'Quan1', '025', '0245', 'bbb', NULL, NULL, NULL),
-('015', 'a', 'Hung', '2003-04-27', 'Nam', 'Quan8', '420', '0576', 'bbb', NULL, NULL, NULL),
-('016', 'a', 'Hung', '2003-04-28', 'Nữ', 'Quan7', '147', '06474', 'bbb', NULL, NULL, NULL),
-('017', 'a', 'Hung', '2003-04-29', 'Nam', 'Quan6', '125', '06423', 'aaa', NULL, NULL, NULL),
-('018', 'b', 'Hung', '2003-04-30', 'Nữ', 'Quan1', '025', '0245', 'bbb', NULL, NULL, NULL),
-('019', 'a', 'Hung', '2003-04-13', 'Nam', 'Quan8', '420', '0576', 'bbb', NULL, NULL, NULL),
-('020', 'a', 'Hung', '2003-04-14', 'Nữ', 'Quan7', '147', '06474', 'bbb', NULL, NULL, NULL),
-('021', 'a', 'Hung', '2003-04-15', 'Nam', 'Quan6', '125', '06423', 'aaa', NULL, NULL, NULL),
-('022', 'b', 'Hung', '2003-04-16', 'Nữ', 'Quan1', '025', '0245', 'bbb', NULL, NULL, NULL),
-('023', 'a', 'Hung', '2003-04-17', 'Nam', 'Quan8', '420', '0576', 'bbb', NULL, NULL, NULL),
-('024', 'a', 'Hung', '2003-04-18', 'Nữ', 'Quan7', '147', '06474', 'bbb', NULL, NULL, NULL),
-('025', 'a', 'Hung', '2003-04-19', 'Nam', 'Quan6', '125', '06423', 'aaa', NULL, NULL, NULL),
-('026', 'b', 'Hung', '2003-04-20', 'Nữ', 'Quan1', '025', '0245', 'bbb', NULL, NULL, NULL),
-('027', 'a', 'Hung', '2003-04-21', 'Nam', 'Quan8', '420', '0576', 'bbb', NULL, NULL, NULL),
-('028', 'a', 'Hung', '2003-04-22', 'Nữ', 'Quan7', '147', '06474', 'bbb', NULL, NULL, NULL),
-('029', 'a', 'Hung', '2003-04-23', 'Nam', 'Quan6', '125', '06423', 'aaa', NULL, NULL, NULL),
-('030', 'b', 'Hung', '2003-04-24', 'Nữ', 'Quan1', '025', '0245', 'bbb', NULL, NULL, NULL),
-('031', 'a', 'Hung', '2003-04-25', 'Nam', 'Quan8', '420', '0576', 'bbb', NULL, NULL, NULL),
-('032', 'a', 'Hung', '2003-04-26', 'Nữ', 'Quan7', '147', '06474', 'bbb', NULL, NULL, NULL),
-('033', 'a', 'Hung', '2003-04-13', 'Nam', 'Quan6', '125', '06423', 'aaa', NULL, NULL, NULL),
-('034', 'b', 'Hung', '2003-04-14', 'Nữ', 'Quan1', '025', '0245', 'bbb', NULL, NULL, NULL),
-('035', 'a', 'Hung', '2003-04-15', 'Nam', 'Quan8', '420', '0576', 'bbb', NULL, NULL, NULL),
-('036', 'a', 'Hung', '2003-04-16', 'Nữ', 'Quan7', '147', '06474', 'bbb', NULL, NULL, NULL),
-('037', 'a', 'Hung', '2003-04-17', 'Nam', 'Quan6', '125', '06423', 'aaa', NULL, NULL, NULL),
-('038', 'b', 'Hung', '2003-04-18', 'Nữ', 'Quan1', '025', '0245', 'bbb', NULL, NULL, NULL),
-('039', 'a', 'Hung', '2003-04-19', 'Nam', 'Quan8', '420', '0576', 'bbb', NULL, NULL, NULL),
-('040', 'a', 'Hung', '2003-04-20', 'Nữ', 'Quan7', '147', '06474', 'bbb', NULL, NULL, NULL),
-('041', 'a', 'Hung', '2003-04-21', 'Nam', 'Quan6', '125', '06423', 'aaa', NULL, NULL, NULL),
-('042', 'b', 'Hung', '2003-04-22', 'Nữ', 'Quan1', '025', '0245', 'bbb', NULL, NULL, NULL),
-('043', 'a', 'Hung', '2003-04-23', 'Nam', 'Quan8', '420', '0576', 'bbb', NULL, NULL, NULL),
-('044', 'a', 'Hung', '2003-04-24', 'Nữ', 'Quan7', '147', '06474', 'bbb', NULL, NULL, NULL),
-('045', 'a', 'Hung', '2003-04-25', 'Nam', 'Quan6', '125', '06423', 'aaa', NULL, NULL, NULL),
-('046', 'b', 'Hung', '2003-04-21', 'Nữ', 'Quan1', '025', '0245', 'bbb', NULL, NULL, NULL),
-('047', 'a', 'Hung', '2003-04-22', 'Nam', 'Quan8', '420', '0576', 'bbb', NULL, NULL, NULL),
-('048', 'a', 'Hung', '2003-04-23', 'Nữ', 'Quan7', '147', '06474', 'bbb', NULL, NULL, NULL);
+INSERT INTO `nhanvien` (`MaNV`, `HinhNV`, `TenNV`, `NgaySinh`, `GioiTinh`, `DiaChi`, `SoCMND`, `SoDienThoai`, `Email`, `MaPB`, `MaCV`, `MaTDHV`, `MaHSL`) VALUES
+('001', 'a', 'Hung', '2003-04-13', 'Nam', 'Quan6', '125', '06423', 'aaa', NULL, NULL, NULL, NULL),
+('002', 'b', 'Hung', '2003-04-14', 'Nữ', 'Quan1', '025', '0245', 'bbb', NULL, NULL, NULL, NULL),
+('003', 'a', 'Hung', '2003-04-15', 'Nam', 'Quan8', '420', '0576', 'bbb', NULL, NULL, NULL, NULL),
+('004', 'a', 'Hung', '2003-04-16', 'Nữ', 'Quan7', '147', '06474', 'bbb', NULL, NULL, NULL, NULL),
+('005', 'a', 'Hung', '2003-04-17', 'Nam', 'Quan6', '125', '06423', 'aaa', NULL, NULL, NULL, NULL),
+('006', 'b', 'Hung', '2003-04-18', 'Nữ', 'Quan1', '025', '0245', 'bbb', NULL, NULL, NULL, NULL),
+('007', 'a', 'Hung', '2003-04-19', 'Nam', 'Quan8', '420', '0576', 'bbb', NULL, NULL, NULL, NULL),
+('008', 'a', 'Hung', '2003-04-20', 'Nữ', 'Quan7', '147', '06474', 'bbb', NULL, NULL, NULL, NULL),
+('009', 'a', 'Hung', '2003-04-21', 'Nam', 'Quan6', '125', '06423', 'aaa', NULL, NULL, NULL, NULL),
+('010', 'b', 'Hung', '2003-04-22', 'Nữ', 'Quan1', '025', '0245', 'bbb', NULL, NULL, NULL, NULL),
+('011', 'a', 'Hung', '2003-04-23', 'Nam', 'Quan8', '420', '0576', 'bbb', NULL, NULL, NULL, NULL),
+('012', 'a', 'Hung', '2003-04-24', 'Nữ', 'Quan7', '147', '06474', 'bbb', NULL, NULL, NULL, NULL),
+('013', 'a', 'Hung', '2003-04-25', 'Nam', 'Quan6', '125', '06423', 'aaa', NULL, NULL, NULL, NULL),
+('014', 'b', 'Hung', '2003-04-26', 'Nữ', 'Quan1', '025', '0245', 'bbb', NULL, NULL, NULL, NULL),
+('015', 'a', 'Hung', '2003-04-27', 'Nam', 'Quan8', '420', '0576', 'bbb', NULL, NULL, NULL, NULL),
+('016', 'a', 'Hung', '2003-04-28', 'Nữ', 'Quan7', '147', '06474', 'bbb', NULL, NULL, NULL, NULL),
+('017', 'a', 'Hung', '2003-04-29', 'Nam', 'Quan6', '125', '06423', 'aaa', NULL, NULL, NULL, NULL),
+('018', 'b', 'Hung', '2003-04-30', 'Nữ', 'Quan1', '025', '0245', 'bbb', NULL, NULL, NULL, NULL),
+('019', 'a', 'Hung', '2003-04-13', 'Nam', 'Quan8', '420', '0576', 'bbb', NULL, NULL, NULL, NULL),
+('020', 'a', 'Hung', '2003-04-14', 'Nữ', 'Quan7', '147', '06474', 'bbb', NULL, NULL, NULL, NULL),
+('021', 'a', 'Hung', '2003-04-15', 'Nam', 'Quan6', '125', '06423', 'aaa', NULL, NULL, NULL, NULL),
+('022', 'b', 'Hung', '2003-04-16', 'Nữ', 'Quan1', '025', '0245', 'bbb', NULL, NULL, NULL, NULL),
+('023', 'a', 'Hung', '2003-04-17', 'Nam', 'Quan8', '420', '0576', 'bbb', NULL, NULL, NULL, NULL),
+('024', 'a', 'Hung', '2003-04-18', 'Nữ', 'Quan7', '147', '06474', 'bbb', NULL, NULL, NULL, NULL),
+('025', 'a', 'Hung', '2003-04-19', 'Nam', 'Quan6', '125', '06423', 'aaa', NULL, NULL, NULL, NULL),
+('026', 'b', 'Hung', '2003-04-20', 'Nữ', 'Quan1', '025', '0245', 'bbb', NULL, NULL, NULL, NULL),
+('027', 'a', 'Hung', '2003-04-21', 'Nam', 'Quan8', '420', '0576', 'bbb', NULL, NULL, NULL, NULL),
+('028', 'a', 'Hung', '2003-04-22', 'Nữ', 'Quan7', '147', '06474', 'bbb', NULL, NULL, NULL, NULL),
+('029', 'a', 'Hung', '2003-04-23', 'Nam', 'Quan6', '125', '06423', 'aaa', NULL, NULL, NULL, NULL),
+('030', 'b', 'Hung', '2003-04-24', 'Nữ', 'Quan1', '025', '0245', 'bbb', NULL, NULL, NULL, NULL),
+('031', 'a', 'Hung', '2003-04-25', 'Nam', 'Quan8', '420', '0576', 'bbb', NULL, NULL, NULL, NULL),
+('032', 'a', 'Hung', '2003-04-26', 'Nữ', 'Quan7', '147', '06474', 'bbb', NULL, NULL, NULL, NULL),
+('033', 'a', 'Hung', '2003-04-13', 'Nam', 'Quan6', '125', '06423', 'aaa', NULL, NULL, NULL, NULL),
+('034', 'b', 'Hung', '2003-04-14', 'Nữ', 'Quan1', '025', '0245', 'bbb', NULL, NULL, NULL, NULL),
+('035', 'a', 'Hung', '2003-04-15', 'Nam', 'Quan8', '420', '0576', 'bbb', NULL, NULL, NULL, NULL),
+('036', 'a', 'Hung', '2003-04-16', 'Nữ', 'Quan7', '147', '06474', 'bbb', NULL, NULL, NULL, NULL),
+('037', 'a', 'Hung', '2003-04-17', 'Nam', 'Quan6', '125', '06423', 'aaa', NULL, NULL, NULL, NULL),
+('038', 'b', 'Hung', '2003-04-18', 'Nữ', 'Quan1', '025', '0245', 'bbb', NULL, NULL, NULL, NULL),
+('039', 'a', 'Hung', '2003-04-19', 'Nam', 'Quan8', '420', '0576', 'bbb', NULL, NULL, NULL, NULL),
+('040', 'a', 'Hung', '2003-04-20', 'Nữ', 'Quan7', '147', '06474', 'bbb', NULL, NULL, NULL, NULL),
+('041', 'a', 'Hung', '2003-04-21', 'Nam', 'Quan6', '125', '06423', 'aaa', NULL, NULL, NULL, NULL),
+('042', 'b', 'Hung', '2003-04-22', 'Nữ', 'Quan1', '025', '0245', 'bbb', NULL, NULL, NULL, NULL),
+('043', 'a', 'Hung', '2003-04-23', 'Nam', 'Quan8', '420', '0576', 'bbb', NULL, NULL, NULL, NULL),
+('044', 'a', 'Hung', '2003-04-24', 'Nữ', 'Quan7', '147', '06474', 'bbb', NULL, NULL, NULL, NULL),
+('045', 'a', 'Hung', '2003-04-25', 'Nam', 'Quan6', '125', '06423', 'aaa', NULL, NULL, NULL, NULL),
+('046', 'b', 'Hung', '2003-04-21', 'Nữ', 'Quan1', '025', '0245', 'bbb', NULL, NULL, NULL, NULL),
+('047', 'a', 'Hung', '2003-04-22', 'Nam', 'Quan8', '420', '0576', 'bbb', NULL, NULL, NULL, NULL),
+('048', 'a', 'Hung', '2003-04-23', 'Nữ', 'Quan7', '147', '06474', 'bbb', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -247,13 +236,6 @@ CREATE TABLE `trinhdohv` (
 --
 
 --
--- Indexes for table `chitietdcl`
---
-ALTER TABLE `chitietdcl`
-  ADD PRIMARY KEY (`MaDCL`,`MaNV`),
-  ADD KEY `MaNV` (`MaNV`);
-
---
 -- Indexes for table `chitietktkl`
 --
 ALTER TABLE `chitietktkl`
@@ -274,10 +256,10 @@ ALTER TABLE `chucvu`
   ADD PRIMARY KEY (`MaCV`);
 
 --
--- Indexes for table `dieuchinhluong`
+-- Indexes for table `hesoluong`
 --
-ALTER TABLE `dieuchinhluong`
-  ADD PRIMARY KEY (`MaDCL`);
+ALTER TABLE `hesoluong`
+  ADD PRIMARY KEY (`MaHSL`);
 
 --
 -- Indexes for table `khenthuongkyluat`
@@ -298,7 +280,8 @@ ALTER TABLE `nhanvien`
   ADD PRIMARY KEY (`MaNV`),
   ADD KEY `MaCV` (`MaCV`),
   ADD KEY `MaPB` (`MaPB`),
-  ADD KEY `MaTDHV` (`MaTDHV`);
+  ADD KEY `MaTDHV` (`MaTDHV`),
+  ADD KEY `MaHSL` (`MaHSL`);
 
 --
 -- Indexes for table `phongban`
@@ -316,13 +299,6 @@ ALTER TABLE `trinhdohv`
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `chitietdcl`
---
-ALTER TABLE `chitietdcl`
-  ADD CONSTRAINT `chitietdcl_ibfk_1` FOREIGN KEY (`MaNV`) REFERENCES `nhanvien` (`MaNV`),
-  ADD CONSTRAINT `chitietdcl_ibfk_2` FOREIGN KEY (`MaDCL`) REFERENCES `dieuchinhluong` (`MaDCL`);
 
 --
 -- Constraints for table `chitietktkl`
@@ -344,7 +320,8 @@ ALTER TABLE `chitietluong`
 ALTER TABLE `nhanvien`
   ADD CONSTRAINT `nhanvien_ibfk_1` FOREIGN KEY (`MaCV`) REFERENCES `chucvu` (`MaCV`),
   ADD CONSTRAINT `nhanvien_ibfk_2` FOREIGN KEY (`MaPB`) REFERENCES `phongban` (`MaPB`),
-  ADD CONSTRAINT `nhanvien_ibfk_3` FOREIGN KEY (`MaTDHV`) REFERENCES `trinhdohv` (`MaTDHV`);
+  ADD CONSTRAINT `nhanvien_ibfk_3` FOREIGN KEY (`MaTDHV`) REFERENCES `trinhdohv` (`MaTDHV`),
+  ADD CONSTRAINT `nhanvien_ibfk_4` FOREIGN KEY (`MaHSL`) REFERENCES `hesoluong` (`MaHSL`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
