@@ -25,12 +25,13 @@ public class NhanVienDTO {
     private String MaPB;
     private String MaCV;
     private String MaTDHV;
+    private String MaHSL;
 
     public NhanVienDTO() {
     }
 
     public NhanVienDTO(String MaNV, String HinhNV, String TenNV, String NgaySinh, String GioiTinh, String DiaChi,
-            String SoCMND, String SoDienThoai, String Email, String MaPB, String MaCV, String MaTDHV) {
+            String SoCMND, String SoDienThoai, String Email, String MaPB, String MaCV, String MaTDHV, String MaHSL) {
         this.MaNV = MaNV;
         this.HinhNV = HinhNV;
         this.TenNV = TenNV;
@@ -43,6 +44,7 @@ public class NhanVienDTO {
         this.MaPB = MaPB;
         this.MaCV = MaCV;
         this.MaTDHV = MaTDHV;
+        this.MaHSL = MaHSL;
     }
 
     public String getMaNV() {
@@ -145,9 +147,12 @@ public class NhanVienDTO {
         this.MaTDHV = MaTDHV;
     }
 
-    @Override
-    public String toString() {
-        return "NhanVienDTO{" + "MaNV=" + MaNV + ", HinhNV=" + HinhNV + ", TenNV=" + TenNV + ", NgaySinh=" + NgaySinh + ", GioiTinh=" + GioiTinh + ", DiaChi=" + DiaChi + ", SoCMND=" + SoCMND + ", SoDienThoai=" + SoDienThoai + ", Email=" + Email + ", MaPB=" + MaPB + ", MaCV=" + MaCV + ", MaTDHV=" + MaTDHV + '}';
+    public String getMaHSL() {
+        return MaHSL;
+    }
+
+    public void setMaHSL(String MaHSL) {
+        this.MaHSL = MaHSL;
     }
 
     public Object[] getSelection() {
@@ -163,6 +168,7 @@ public class NhanVienDTO {
         result.add(this.MaPB != null);
         result.add(this.MaCV != null);
         result.add(this.MaTDHV != null);
+        result.add(this.MaHSL != null);
 
         Object[] result2 = result.toArray();
         return result2;

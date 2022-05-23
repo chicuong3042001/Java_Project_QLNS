@@ -67,12 +67,15 @@ public class BangLuongDAO {
                     + "(SELECT SUM(khenthuongkyluat.SoTien) "
                     + "FROM chitietktkl JOIN khenthuongkyluat ONchitietktkl.MaKTKL = khenthuongkyluat.MaKTKL "
                     + "WHERE chitietktkl.MaNV = ? AND YEAR(khenthuongkyluat.NgayQuyetDinh) = YEAR(CURRENT_DATE) AND MONTH(khenthuongkyluat.NgayQuyetDinh) = MONTH(CURRENT_DATE)),"
-                    + "?,CURRENT_DATE, CURRENT_DATE);";
+                    + "(SELECT hesoluong.HeSoLuong "
+                    + "FROM hesoluong JOIN nhanvien ON hesoluong.MaHSL = nhanvien.MaHSL AND nhanvien.MaNV = ?)"
+                    + ",CURRENT_DATE, CURRENT_DATE);";
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, bangluong.getMaLuong());
             stmt.setString(2, bangluong.getMaNV());
             stmt.setString(3, bangluong.getMaNV());
-            stmt.setDouble(4, bangluong.getHeSoLuong());
+            stmt.setString(4, bangluong.getMaNV());
+           
             stmt.executeUpdate();
 
             return true;

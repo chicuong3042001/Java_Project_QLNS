@@ -32,6 +32,7 @@ public class NhanVienDAO {
     public static final int INDEX_MAPB = 8;
     public static final int INDEX_MACV = 9;
     public static final int INDEX_MATDHV = 10;
+    public static final int INDEX_MAHSL = 11;
 
     public NhanVienDAO() {
     }
@@ -57,7 +58,8 @@ public class NhanVienDAO {
                         rs.getString("Email"), 
                         rs.getString("MaPB"), 
                         rs.getString("MaCV"), 
-                        rs.getString("MaTDHV"))
+                        rs.getString("MaTDHV"),
+                        rs.getString("MaHSL"))
                 );
             }
             return nhanvien;
@@ -90,6 +92,7 @@ public class NhanVienDAO {
                 nvdto.setMaPB(rs.getString("MaPB"));
                 nvdto.setMaCV(rs.getString("MaCV"));
                 nvdto.setMaTDHV(rs.getString("MaTDHV"));
+                nvdto.setMaHSL(rs.getString("MaHSL"));
 
                 return nvdto;
             }
@@ -132,6 +135,8 @@ public class NhanVienDAO {
                             table += "MaCV = ? ,";
                         case INDEX_MATDHV ->
                             table += "MaTDHV = ? ,";
+                        case INDEX_MAHSL ->
+                            table += "MaHSL = ? ,";
                     }
                 }
             }
@@ -165,7 +170,8 @@ public class NhanVienDAO {
                             stmt.setString(index++, nhanvien.getMaCV());
                         case INDEX_MATDHV ->
                             stmt.setString(index++, nhanvien.getMaTDHV());
-
+                        case INDEX_MAHSL ->
+                            stmt.setString(index++, nhanvien.getMaHSL());
                     }
                 }
             }
@@ -186,7 +192,8 @@ public class NhanVienDAO {
                         rs.getString("Email"), 
                         rs.getString("MaPB"), 
                         rs.getString("MaCV"), 
-                        rs.getString("MaTDHV"))
+                        rs.getString("MaTDHV"),
+                        rs.getString("MaHSL"))
                 );
             }
 
@@ -220,7 +227,8 @@ public class NhanVienDAO {
                         rs.getString("Email"), 
                         rs.getString("MaPB"), 
                         rs.getString("MaCV"), 
-                        rs.getString("MaTDHV"))
+                        rs.getString("MaTDHV"),
+                        rs.getString("MaHSL"))
                 );
             }
 
@@ -254,7 +262,8 @@ public class NhanVienDAO {
                         rs.getString("Email"), 
                         rs.getString("MaPB"), 
                         rs.getString("MaCV"), 
-                        rs.getString("MaTDHV"))
+                        rs.getString("MaTDHV"),
+                        rs.getString("MaHSL"))
                 );
             }
 
@@ -284,6 +293,7 @@ public class NhanVienDAO {
             stmt.setString(10, nhanvien.getMaPB());
             stmt.setString(11, nhanvien.getMaCV());
             stmt.setString(12, nhanvien.getMaTDHV());
+            stmt.setString(13, nhanvien.getMaHSL());
             stmt.executeUpdate();
 
             return true;
@@ -361,6 +371,8 @@ public class NhanVienDAO {
                             table += "MaCV = ? ,";
                         case INDEX_MATDHV ->
                             table += "MaTDHV = ? ,";
+                        case INDEX_MAHSL ->
+                            table += "MaHSL = ? ,";
                     }
                 }
             }
@@ -375,27 +387,29 @@ public class NhanVienDAO {
                 if ((boolean) selection[i]) {
                     switch (i) {
                         case INDEX_HINHNV ->
-                            table += "HinhNV = ? ,";
+                            stmt.setString(index++, nhanvien.getHinhNV());
                         case INDEX_TENNV ->
-                            table += "TenNV = ? ,";
+                            stmt.setString(index++, nhanvien.getTenNV());
                         case INDEX_NGAYSINH ->
-                            table += "NgaySinh = ? ,";
+                            stmt.setString(index++, nhanvien.getNgaySinh());
                         case INDEX_GIOITINH ->
-                            table += "GioiTinh = ? ,";
+                            stmt.setString(index++, nhanvien.getGioiTinh());
                         case INDEX_DIACHI ->
-                            table += "DiaChi = ? ,";
+                            stmt.setString(index++, nhanvien.getDiaChi());
                         case INDEX_SOCMND ->
-                            table += "SoCMND = ? ,";
+                            stmt.setString(index++, nhanvien.getSoCMND());
                         case INDEX_SODIENTHOAI ->
-                            table += "SoDienThoai = ? ,";
+                            stmt.setString(index++, nhanvien.getSoDienThoai());
                         case INDEX_EMAIL ->
-                            table += "Email = ? ,";
+                            stmt.setString(index++, nhanvien.getEmail());
                         case INDEX_MAPB ->
-                            table += "MaPB = ? ,";
+                            stmt.setString(index++, nhanvien.getMaPB());
                         case INDEX_MACV ->
-                            table += "MaCV = ? ,";
+                            stmt.setString(index++, nhanvien.getMaCV());
                         case INDEX_MATDHV ->
-                            table += "MaTDHV = ? ,";
+                            stmt.setString(index++, nhanvien.getMaTDHV());
+                        case INDEX_MAHSL ->
+                            stmt.setString(index++, nhanvien.getMaHSL());
                     }
                 }
             }

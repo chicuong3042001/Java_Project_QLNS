@@ -39,13 +39,12 @@ public class BangLuongDTO {
         this.NgaySuaDoi = NgaySuaDoi;
     }
 
-    public BangLuongDTO(String MaNV, String MaLuong, String TenNV, double LuongCoBan, double HeSoLuong,
+    public BangLuongDTO(String MaNV, String MaLuong, String TenNV, double LuongCoBan,
             double ThuongPhat, double TienLuong) {
         this.MaNV = MaNV;
         this.MaLuong = MaLuong;
         this.TenNV = TenNV;
         this.LuongCoBan = LuongCoBan;
-        this.HeSoLuong = HeSoLuong;
         this.ThuongPhat = ThuongPhat;
         this.TienLuong = TienLuong;
     }
