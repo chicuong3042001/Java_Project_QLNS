@@ -2,9 +2,9 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: May 21, 2022 at 05:06 PM
--- Server version: 10.4.22-MariaDB
+-- Host: localhost
+-- Generation Time: May 23, 2022 at 09:37 AM
+-- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -20,6 +20,17 @@ SET time_zone = "+00:00";
 --
 -- Database: `quanlynhansu`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `chitietdcl`
+--
+
+CREATE TABLE `chitietdcl` (
+  `MaDCL` varchar(255) NOT NULL,
+  `MaNV` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -76,6 +87,18 @@ CREATE TABLE `chucvu` (
   `MaCV` varchar(255) NOT NULL,
   `TenCV` varchar(255) DEFAULT NULL,
   `GhiChu` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dieuchinhluong`
+--
+
+CREATE TABLE `dieuchinhluong` (
+  `MaDCL` varchar(255) NOT NULL,
+  `HeSoLuong` double NOT NULL,
+  `NgayDieuChinh` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -224,6 +247,13 @@ CREATE TABLE `trinhdohv` (
 --
 
 --
+-- Indexes for table `chitietdcl`
+--
+ALTER TABLE `chitietdcl`
+  ADD PRIMARY KEY (`MaDCL`,`MaNV`),
+  ADD KEY `MaNV` (`MaNV`);
+
+--
 -- Indexes for table `chitietktkl`
 --
 ALTER TABLE `chitietktkl`
@@ -242,6 +272,12 @@ ALTER TABLE `chitietluong`
 --
 ALTER TABLE `chucvu`
   ADD PRIMARY KEY (`MaCV`);
+
+--
+-- Indexes for table `dieuchinhluong`
+--
+ALTER TABLE `dieuchinhluong`
+  ADD PRIMARY KEY (`MaDCL`);
 
 --
 -- Indexes for table `khenthuongkyluat`
@@ -280,6 +316,13 @@ ALTER TABLE `trinhdohv`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `chitietdcl`
+--
+ALTER TABLE `chitietdcl`
+  ADD CONSTRAINT `chitietdcl_ibfk_1` FOREIGN KEY (`MaNV`) REFERENCES `nhanvien` (`MaNV`),
+  ADD CONSTRAINT `chitietdcl_ibfk_2` FOREIGN KEY (`MaDCL`) REFERENCES `dieuchinhluong` (`MaDCL`);
 
 --
 -- Constraints for table `chitietktkl`
