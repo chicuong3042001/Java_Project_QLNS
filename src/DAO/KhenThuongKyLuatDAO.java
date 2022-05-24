@@ -112,7 +112,7 @@ public class KhenThuongKyLuatDAO {
     public boolean updateKhenThuongKyLuat(KhenThuongKyLuatDTO khenthuongkiluat) {
         try {
             Object[] selection = khenthuongkiluat.getSelection();
-            String table = "NgaySuaDoi = CURRENT_DATE";
+            String table = "NgaySuaDoi = CURRENT_DATE, ";
             for (int i = 0; i < selection.length; i++) {
                 if ((boolean) selection[i]) {
                     switch (i) {
