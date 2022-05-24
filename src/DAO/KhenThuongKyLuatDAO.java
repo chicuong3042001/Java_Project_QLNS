@@ -205,4 +205,31 @@ public class KhenThuongKyLuatDAO {
             stmt.executeUpdate();
         }
     }
+    
+    public KhenThuongKyLuatDTO findKTKLByID(String MaKTKL) {
+        try {
+            conn = DBConnection.getConnection();
+            stmt = conn.prepareStatement("SELECT * FROM Khenthuongkyluat where MaKTKL = ?");
+            stmt.setString(1, MaKTKL);
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                KhenThuongKyLuatDTO ktkldto = new KhenThuongKyLuatDTO();
+                ktkldto.setMaKTKL(rs.getString("MaKTKL"));
+                ktkldto.setSoTien(rs.getDouble("SoTien"));
+                ktkldto.setNgayQuyetDinh(rs.getDate("NgayQuyetDinh"));
+                ktkldto.setLoaiQuyetDinh(rs.getString("LoaiQuyetDinh"));
+                ktkldto.setNoiDung(rs.getString("NoiDung"));
+                ktkldto.setNgaySuaDoi(rs.getDate("NgaySuaDoi"));
+                return ktkldto;
+            }
+
+        } catch (SQLException e) {
+            return null;
+        } finally {
+            DBConnection.closeConnection(conn, stmt, rs);
+        }
+        return null;
+    }
 }
