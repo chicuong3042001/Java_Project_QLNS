@@ -8,6 +8,7 @@ import DAO.BangLuongDAO;
 import DTO.BangLuongDTO;
 import Exception.DuplicatedException;
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 /**
  *
@@ -34,5 +35,17 @@ public class BangLuongBUS {
         }
         return chitietluongdao.addBangLuong(chitietluong);
     }
+    
+    public Hashtable getThongKePhongBan(String MaPB) {
+        return chitietluongdao.getThongKePhongBan(MaPB);
+    }
+    
+    public Hashtable getThongKeThang(int month) {
+        return chitietluongdao.getThongKeThang(month);
+    }
+    
+    public Hashtable getThongKeNam() {
+        return chitietluongdao.getThongKeNam();
+    }  
 
 }

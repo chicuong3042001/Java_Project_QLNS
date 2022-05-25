@@ -94,6 +94,7 @@ public class KhenThuongKyLuatDAO {
     public boolean deleteKhenThuongKyLuat(KhenThuongKyLuatDTO khenthuongkiluat) {
         try {
             conn = DBConnection.getConnection();
+            deleteChiTietKTKLatMaKTKL(khenthuongkiluat.getMaKTKL());
             stmt = conn.prepareStatement(
                     "DELETE FROM khenthuongkyluat WHERE MaKTKL = ?");
             stmt.setString(1, khenthuongkiluat.getMaKTKL());
@@ -231,5 +232,13 @@ public class KhenThuongKyLuatDAO {
             DBConnection.closeConnection(conn, stmt, rs);
         }
         return null;
+    }
+    
+    private boolean deleteChiTietKTKLatMaKTKL(String MaKTKL) throws SQLException {
+        stmt = conn.prepareStatement(
+                "DELETE FROM chitietktkl WHERE MaKTKL = ?");
+        stmt.setString(1, MaKTKL);
+        stmt.executeUpdate();
+        return true;
     }
 }

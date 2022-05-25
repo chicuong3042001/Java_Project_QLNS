@@ -279,7 +279,7 @@ public class NhanVienDAO {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement(
-                    "INSERT INTO nhanvien (MaNV, HinhNV, TenNV, NgaySinh, GioiTinh, DiaChi, SoCMND, SoDienThoai, Email, MaPB, MaCV, MaTDHV) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
+                    "INSERT INTO nhanvien (MaNV, HinhNV, TenNV, NgaySinh, GioiTinh, DiaChi, SoCMND, SoDienThoai, Email, MaPB, MaCV, MaTDHV) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
             stmt.setString(1, nhanvien.getMaNV());
             stmt.setString(2, nhanvien.getHinhNV());
             stmt.setString(3, nhanvien.getTenNV());
