@@ -20,7 +20,7 @@ public class NhanVienDAO {
     Connection conn = null;
     PreparedStatement stmt = null;
     ResultSet rs = null;
-    
+
     public static final int INDEX_HINHNV = 0;
     public static final int INDEX_TENNV = 1;
     public static final int INDEX_NGAYSINH = 2;
@@ -47,17 +47,17 @@ public class NhanVienDAO {
             ArrayList<NhanVienDTO> nhanvien = new ArrayList();
             while (rs.next()) {
                 nhanvien.add(new NhanVienDTO(
-                        rs.getString("MaNV"), 
-                        rs.getString("HinhNV"), 
-                        rs.getString("TenNV"), 
-                        rs.getString("NgaySinh"), 
+                        rs.getString("MaNV"),
+                        rs.getString("HinhNV"),
+                        rs.getString("TenNV"),
+                        rs.getString("NgaySinh"),
                         rs.getString("GioiTinh"),
-                        rs.getString("DiaChi"), 
-                        rs.getString("SoCMND"), 
+                        rs.getString("DiaChi"),
+                        rs.getString("SoCMND"),
                         rs.getString("SoDienThoai"),
-                        rs.getString("Email"), 
-                        rs.getString("MaPB"), 
-                        rs.getString("MaCV"), 
+                        rs.getString("Email"),
+                        rs.getString("MaPB"),
+                        rs.getString("MaCV"),
                         rs.getString("MaTDHV"),
                         rs.getString("MaHSL"))
                 );
@@ -104,7 +104,6 @@ public class NhanVienDAO {
         }
         return null;
     }
-
 
     public ArrayList<NhanVienDTO> findNhanVienByFilter(NhanVienDTO nhanvien) {
         try {
@@ -181,17 +180,17 @@ public class NhanVienDAO {
             ArrayList<NhanVienDTO> list = new ArrayList();
             while (rs.next()) {
                 list.add(new NhanVienDTO(
-                        rs.getString("MaNV"), 
-                        rs.getString("HinhNV"), 
-                        rs.getString("TenNV"), 
-                        rs.getString("NgaySinh"), 
+                        rs.getString("MaNV"),
+                        rs.getString("HinhNV"),
+                        rs.getString("TenNV"),
+                        rs.getString("NgaySinh"),
                         rs.getString("GioiTinh"),
-                        rs.getString("DiaChi"), 
-                        rs.getString("SoCMND"), 
+                        rs.getString("DiaChi"),
+                        rs.getString("SoCMND"),
                         rs.getString("SoDienThoai"),
-                        rs.getString("Email"), 
-                        rs.getString("MaPB"), 
-                        rs.getString("MaCV"), 
+                        rs.getString("Email"),
+                        rs.getString("MaPB"),
+                        rs.getString("MaCV"),
                         rs.getString("MaTDHV"),
                         rs.getString("MaHSL"))
                 );
@@ -216,17 +215,17 @@ public class NhanVienDAO {
             ArrayList<NhanVienDTO> list = new ArrayList();
             while (rs.next()) {
                 list.add(new NhanVienDTO(
-                        rs.getString("MaNV"), 
-                        rs.getString("HinhNV"), 
-                        rs.getString("TenNV"), 
-                        rs.getString("NgaySinh"), 
+                        rs.getString("MaNV"),
+                        rs.getString("HinhNV"),
+                        rs.getString("TenNV"),
+                        rs.getString("NgaySinh"),
                         rs.getString("GioiTinh"),
-                        rs.getString("DiaChi"), 
-                        rs.getString("SoCMND"), 
+                        rs.getString("DiaChi"),
+                        rs.getString("SoCMND"),
                         rs.getString("SoDienThoai"),
-                        rs.getString("Email"), 
-                        rs.getString("MaPB"), 
-                        rs.getString("MaCV"), 
+                        rs.getString("Email"),
+                        rs.getString("MaPB"),
+                        rs.getString("MaCV"),
                         rs.getString("MaTDHV"),
                         rs.getString("MaHSL"))
                 );
@@ -244,24 +243,24 @@ public class NhanVienDAO {
         try {
             conn = DBConnection.getConnection();
             stmt = conn.prepareStatement("SELECT * FROM `nhanvien` WHERE TenNV LIKE ?");
-            stmt.setString(1, "%" + TenNV+"%");
+            stmt.setString(1, "%" + TenNV + "%");
 
             rs = stmt.executeQuery();
             ArrayList<NhanVienDTO> list = new ArrayList();
 
             while (rs.next()) {
                 list.add(new NhanVienDTO(
-                        rs.getString("MaNV"), 
-                        rs.getString("HinhNV"), 
-                        rs.getString("TenNV"), 
-                        rs.getString("NgaySinh"), 
+                        rs.getString("MaNV"),
+                        rs.getString("HinhNV"),
+                        rs.getString("TenNV"),
+                        rs.getString("NgaySinh"),
                         rs.getString("GioiTinh"),
-                        rs.getString("DiaChi"), 
-                        rs.getString("SoCMND"), 
+                        rs.getString("DiaChi"),
+                        rs.getString("SoCMND"),
                         rs.getString("SoDienThoai"),
-                        rs.getString("Email"), 
-                        rs.getString("MaPB"), 
-                        rs.getString("MaCV"), 
+                        rs.getString("Email"),
+                        rs.getString("MaPB"),
+                        rs.getString("MaCV"),
                         rs.getString("MaTDHV"),
                         rs.getString("MaHSL"))
                 );
@@ -309,6 +308,7 @@ public class NhanVienDAO {
     public boolean deleteNhanVien(String id) {
         try {
             conn = DBConnection.getConnection();
+            deleteChiTietKTKLatMaNV(id  );
             stmt = conn.prepareStatement(
                     "DELETE FROM nhanvien WHERE MaNV = ?");
             stmt.setString(1, id);
@@ -327,6 +327,7 @@ public class NhanVienDAO {
     public boolean deleteNhanVien(NhanVienDTO nhanvien) {
         try {
             conn = DBConnection.getConnection();
+            deleteChiTietKTKLatMaNV(nhanvien.getMaNV());
             stmt = conn.prepareStatement(
                     "DELETE FROM nhanvien WHERE MaNV = ?");
             stmt.setString(1, nhanvien.getMaNV());
@@ -427,5 +428,11 @@ public class NhanVienDAO {
         return false;
     }
 
-    
+    private boolean deleteChiTietKTKLatMaNV(String MaNV) throws SQLException {
+        stmt = conn.prepareStatement(
+                "DELETE FROM chitietktkl WHERE MaNV = ?");
+        stmt.setString(1, MaNV);
+        stmt.executeUpdate();
+        return true;
+    }
 }
